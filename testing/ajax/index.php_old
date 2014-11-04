@@ -1,0 +1,84 @@
+<?php
+require '../inc/rb.phar';
+R::setup('mysql:host=qs3505.pair.com;dbname=rtanner2_cpl',
+    'rtanner2_38','BHeFVC7i');
+if(!empty($_POST['carYears']))
+{
+
+    $result = R::getAll( 'SELECT CarlineYear FROM carline group by CarlineYear DESC' );
+//var_dump($result);
+    if($result)
+    {
+        $years = array();
+        foreach($result as $r)
+        {
+            $years[] = $r['CarlineYear'];
+        }
+        //var_dump($result);
+        //var_dump($years);
+        echo json_encode($result, JSON_FORCE_OBJECT);
+    }
+}
+if(!empty($_POST['label']))
+{
+    $result = R::getAll( 'SELECT MfrName FROM carline where CarlineYear='.(int)$_POST['label'].' group by MfrName' );
+    if($result)
+    {
+        $json = array();
+        foreach($result as $r)
+        {
+            $json[] = '{"id":"manuf_' . $r['MfrName'] . '", "label":"' . $r['MfrName'] . '", "items":[{"icon": "jq-widgets/images/folder.png", "label": "Loading..."}]}';
+        }
+    }
+    $json = "[".implode(',',$json)."]";
+        echo $json;//json_encode($result, JSON_FORCE_OBJECT);
+}
+if(!empty($_POST['manufacture']))
+{
+    $result = R::getAll( 'SELECT ModelNm FROM carline where MfrName="'.$_POST['manufacture'].'" group by ModelNm' );
+    if($result)
+    {
+        $json = array();
+        foreach($result as $r)
+        {
+            $json[] = '{"id":"model_' . $r['ModelNm'] . '", "label":"' . $r['ModelNm'] . '", "items":[{"icon": "jq-widgets/images/folder.png", "label": "Loading..."}]}';
+        }
+    }
+    $json = "[".implode(',',$json)."]";
+        echo $json;//json_encode($result, JSON_FORCE_OBJECT);
+}
+if(!empty($_POST['carModel']))
+{
+    $result = R::getAll( 'select distinct ptype.Description as pdesc,indexlist.parttype as ptype from indexlist inner join ptype on ptype.PartType = indexlist.PartType where '.$_POST['year']." between beginyear and endyear and ModelNm = '".$_POST['carModel']."' order by pdesc asc" );
+    if($result)
+    {
+        $json = array();
+        $counter = 0;
+        foreach($result as $r)
+        {
+            $json[] = '{"id":"part_' . $r['ptype'].$counter . '", "label":"'.$r['pdesc'].'" }';
+            $counter++;
+        }
+    }
+    if($json)
+    {
+        $json = "[".implode(',',$json)."]";
+        echo $json;
+    } else echo "[]";
+}
+/*
+    $result = R::getAll( 'select distinct ptype.Description as pdesc,indexlist.parttype as ptype from indexlist inner join ptype on ptype.PartType = indexlist.PartType where 2013'." between beginyear and endyear and ModelNm = 'MDX' order by pdesc asc" );
+    if($result)
+    {
+        $json = array();
+        foreach($result as $r)
+        {
+            $json[] = '{"id":"part_' . $r['ptype'] . '", "label":"'.$r['pdesc'].'" }';
+        }
+    }
+    if($json)
+    {
+        $json = "[".implode(',',$json)."]";
+        echo $json;
+    } else echo "[]";
+    var_dump($json);*/

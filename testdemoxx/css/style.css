@@ -1,0 +1,598 @@
+@charset "utf-8";
+/* CSS Document */
+
+@media (max-width: 480px) { 
+.wrapperheader{
+	background:#FFFFFF;
+	height:40px !important;
+	width:100%;
+	}
+.header-img img{
+	max-width:100%;
+	margin-top:1px !important;
+	}
+.wrapperbody{
+	width:100%;
+	height:100% !important;
+	background:url(../img/content--bg.png) repeat;
+	
+	}		
+.easyPainless{
+	display:none;
+	}
+.contentbar-1{
+	width:100%;
+	float:left;
+	font-family:Arial;
+	font-size:30px !important;
+	display:inline;
+	color:#FFF;
+	text-transform:uppercase;
+	text-align:center;
+	margin-top:2px !important;
+	}
+
+.selection-box{
+	background: #FFF;
+	width:97%;
+	float:left;
+	display:inline;
+	margin-top:4px !important;
+	border-radius:10px;
+	padding-bottom:5px;
+	
+	}
+	.selection-box p {
+	display:inline;
+	font-size:15px;
+	font-family:Arial;
+	color:#AEAEAE;
+	margin-left:39px;
+	float:left;
+	margin-top:23px;
+	}
+	
+.selection-box .carinfo {
+	display: inline;
+	margin-left: -3.4%;
+	margin-top: 10px !important;
+	margin-bottom: 4%;
+	width: 97%;
+	height: 66px !important;
+	background-position: left top;
+	background-image: url(../img/content-img.png);
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	
+}	
+
+.form_part .formTittle img{
+	margin-top:-15px !important;}
+	
+.form_part .small{
+	font-size:25px;
+	margin-top:-65px !important;}
+
+
+.slectBox {
+	width:84.5% !important;
+	background: #dfdfdf url(../img/slecticon.png) 97% center no-repeat;
+	background-size:20px 24px !important;
+	color: #505151;
+	font-size: 20px !important;
+	margin-left: 5%;
+	margin-bottom: 2% !important;
+	font-family: Arial;
+	font-weight: bold;
+	padding: 1% 2% !important;
+   -webkit-appearance: none;
+   -moz-appearance: none;
+    text-indent: 0.01px;
+    text-overflow: '';
+	
+	
+	position: relative;
+    border: solid 1px #BBB;
+    line-height: 1.5;
+    text-decoration: none;
+    text-align: left;
+    
+    outline: none;
+    vertical-align: middle;
+    display: inline-block;
+    cursor: default;
+
+}
+
+.inputbox {
+	width:84.5%;
+	background: url(../img/inputbg.png);
+	border: none;
+	color: #505151;
+	font-size: 20px !important;
+	margin-left: 5%;
+	margin-bottom: 2% !important;
+	font-family: Arial;
+	font-weight: bold;
+	padding: 1% 2% !important;
+
+}
+
+.button{
+	display: inline;
+	width:250px;
+	height:70px !important;
+	background:#c3512d;
+	line-height:75px;
+	text-align:center;
+	font-family: "Arial Black", Gadget, sans-serif;
+	text-transform:uppercase;
+	color:#FFF;
+	font-size:28px;
+	border:none;
+	cursor:pointer;
+	margin-bottom:10px;
+	margin-top:-10px !important;
+	}
+}
+
+
+*{
+	margin:0;
+	padding:0;
+	}
+body{
+	background:url(../img/content--bg.png) repeat;
+	}
+.inwrap{
+	width:100%;
+	max-width:680px;
+	margin:0 auto;
+	}
+
+.wrapperheader{
+	background:#FFFFFF;
+	height:90px;
+	width:100%;
+	}
+.header-img{
+	width:100%;
+	display:block;
+	}
+	
+.header-img img{
+	max-width:100%;
+	margin-top:30px;
+	}
+
+
+.wrapperbody{
+	width:100%;
+	height:911px;
+	background:url(../img/content--bg.png) repeat;
+	}
+
+.contentbar-1{
+	width:100%;
+	float:left;
+	font-family:Arial;
+	font-size:65px;
+	display:inline;
+	color:#FFF;
+	text-transform:uppercase;
+	text-align:center;
+	margin-top:15px;
+	}
+
+.easyPainless{
+	font-family:Arial;
+	font-size:23.73px;
+	font-style:italic;
+	font-weight:bold;
+	text-transform:capitalize;
+	}
+	
+.selection-box{
+	background: #FFF;
+	width:97%;
+	float:left;
+	display:inline;
+	margin-top:44px;
+	border-radius:10px;
+	padding-bottom:5px;
+	
+	}
+
+.selection-box p {
+	display:inline;
+	font-size:15px;
+	font-family:Arial;
+	color:#AEAEAE;
+	margin-left:39px;
+	float:left;
+	margin-top:23px;
+	}
+	
+.selection-box .carinfo {
+	display: inline;
+	margin-left: -3.4%;
+	margin-top: 20px;
+	margin-bottom: 4%;
+	width: 97%;
+	height: 106px;
+	background-position: left top;
+	background-image: url(../img/content-img.png);
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+}	
+
+.inputbox {
+	width:84.5%;
+	background: url(../img/inputbg.png);
+	border: none;
+	color: #505151;
+	font-size: 30px;
+	margin-left: 5%;
+	margin-bottom: 3%;
+	font-family: Arial;
+	font-weight: bold;
+	padding: 3% 2%;
+
+}
+
+.slectBox {
+	width:84.5% !important;
+	background: #dfdfdf url(../img/slecticon.png) 97% center no-repeat;
+	
+	color: #505151;
+	font-size: 30px;
+	margin-left: 5%;
+	margin-bottom: 3%;
+	font-family: Arial;
+	font-weight: bold;
+	padding: 3% 2%;
+   -webkit-appearance: none;
+   -moz-appearance: none;
+    text-indent: 0.01px;
+    text-overflow: '';
+	
+	
+	position: relative;
+    border: solid 1px #BBB;
+    line-height: 1.5;
+    text-decoration: none;
+    text-align: left;
+    
+    outline: none;
+    vertical-align: middle;
+    display: inline-block;
+    cursor: default;
+
+}
+
+.slectBox option {
+    position: absolute;
+    z-index: 999999999999999999999;
+    max-height: 200px;
+    min-height: 1em;
+   
+    background: #FFF;
+    -moz-box-shadow: 0 2px 6px rgba(0, 0, 0, .2);
+    -webkit-box-shadow: 0 2px 6px rgba(0, 0, 0, .2);
+   /* box-shadow: 0 2px 6px rgba(0, 0, 0, .2);*/
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+	padding-left:10px;
+
+}
+
+.slectBox inline {
+    outline: none;
+   
+    display: inline-block;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    overflow: auto;
+}
+
+
+
+
+@media(min-width:560px){
+	
+.selection-box{
+	width:90% !important;
+	margin-left:6% !important;
+	}	
+	
+	
+}
+
+@media(min-width:420px){
+.selection-box{
+	width:90% !important;
+	margin-left:6% !important;
+	
+	}
+	
+	
+	
+}
+
+@media(max-width:325px){
+	
+.form_part .small{
+	font-size:25px;
+	margin-top:-85px;}
+	
+.form_part .formTittle img{
+	margin-top:-18px;}
+	
+.inputbox, .slectBox{
+	font-size:25px;
+	}
+	
+.button{
+	width:240px;}
+	
+	
+}
+
+
+@media(min-width:315px){
+.selection-box{
+	width:90% !important;
+	margin-left:6% !important;
+	font-size:25px;
+	}
+		
+	
+	
+}
+
+@media(min-width:240px){
+.selection-box{
+	width:90% !important;
+	margin-left:6% !important;
+	}	
+	
+	
+}
+
+.form_part{
+	display:none;
+	}
+	
+.form_part:first-child{
+	display:block;
+	}	
+
+.formTittle {
+	display: inline;
+	font-size: 38px;
+	font-family: Arial, Helvetica, sans-serif;
+	color: #FFF;
+	float: left;
+	margin-left: 2%;
+	margin-top: -109px;
+	margin-bottom: 4%;
+	width: 79%;
+	font-weight: bold;
+	position: relative;
+	z-index: 10;
+}
+
+.formTittle img{
+	display: inline;
+	float:left;
+	margin-right:2%;
+	margin-top:-5px;
+	}
+.button{
+	display: inline;
+	width:250px;
+	height:75px;
+	background:#c3512d;
+	line-height:75px;
+	text-align:center;
+	font-family: "Arial Black", Gadget, sans-serif;
+	text-transform:uppercase;
+	color:#FFF;
+	font-size:28px;
+	border:none;
+	cursor:pointer;
+	margin-bottom:10px;
+	}
+	
+.button:hover{
+	background:#ba3a12;
+
+}
+
+
+p.part_3_Para{
+	float:left;
+	display: block;
+	width:100%;
+	margin-left:0;
+	text-align:center;}
+	
+.form_button a{
+	text-indent:-9999999px;
+	display: inline-block;
+	width:15px;
+	height:15px;
+	background:#9CF;
+	margin:4px;
+	border-radius:100%;
+	}
+	
+.form_button a:hover,
+.form_button a.activeicon{
+	background: #969;
+	}
+	
+.go_back:hover{
+	text-decoration:underline;
+	cursor:pointer;}
+	
+	
+		
+
+/* Dropdown control */
+.selectBox-dropdown {
+    min-width: 150px;
+    position: relative;
+    border: solid 1px #BBB;
+    line-height: 1.5;
+    text-decoration: none;
+    text-align: left;
+    color:#505151;
+    outline: none;
+    vertical-align: middle;
+    display: inline-block;
+    cursor: default;
+}
+
+
+.selectBox-dropdown .selectBox-label {
+    padding:5px 8px;
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+	line-height:20px;
+}
+
+.selectBox-dropdown .selectBox-arrow {
+    position: absolute;
+    top: 0;
+    right:3%;
+    width:40px;
+    height: 100%;
+    background: url(../img/slecticon.png) 97% center no-repeat;
+}
+
+/* Dropdown menu */
+.selectBox-dropdown-menu {
+    position: absolute;
+    z-index: 999999999999999999999;
+    max-height: 200px;
+    min-height: 1em;
+    border: solid 1px #BBB; /* should be the same border width as .selectBox-dropdown */
+    background: #FFF;
+    -moz-box-shadow: 0 2px 6px rgba(0, 0, 0, .2);
+    -webkit-box-shadow: 0 2px 6px rgba(0, 0, 0, .2);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, .2);
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Inline control */
+.selectBox-inline {
+    outline: none;
+    border: solid 1px #BBB;
+    display: inline-block;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    overflow: auto;
+}
+
+.selectBox-inline:focus {
+    border-color: #666;
+}
+
+/* Options */
+.selectBox-options,
+.selectBox-options LI,
+.selectBox-options LI A {
+    list-style: none;
+    display: block;
+    cursor: default;
+    padding: 0;
+    margin: 0;
+	color: #505151;
+	font-size: 30px;
+	font-family: Arial;
+	font-weight: bold;
+}
+
+.selectBox-options.selectBox-options-top{
+    border-bottom:none;
+        margin-top:1px;
+        -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+.selectBox-options.selectBox-options-bottom{
+        border-top:none;
+    -moz-border-radius-bottomleft: 5px;
+    -moz-border-radius-bottomright: 5px;
+    -webkit-border-bottom-left-radius: 5px;
+    -webkit-border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.selectBox-options LI A {
+    line-height: 1.5;
+    padding: 0 .5em;
+    white-space: nowrap;
+    overflow: hidden;
+    background: 6px center no-repeat;
+}
+
+.selectBox-options LI.selectBox-hover A {
+    background-color: #EEE;
+}
+
+.selectBox-options LI.selectBox-disabled A {
+    color: #888;
+    background-color: transparent;
+}
+
+.selectBox-options LI.selectBox-selected A {
+    background-color: #C8DEF4;
+}
+
+.selectBox-options .selectBox-optgroup {
+    color: #666;
+    background: #EEE;
+    font-weight: bold;
+    line-height: 1.5;
+    padding: 0 .3em;
+    white-space: nowrap;
+}
+
+/* Disabled state */
+.selectBox.selectBox-disabled {
+    color: #888 !important;
+}
+
+.selectBox-dropdown.selectBox-disabled .selectBox-arrow {
+    opacity: .5;
+    filter: alpha(opacity=50);
+    border-color: #666;
+}
+
+.selectBox-inline.selectBox-disabled {
+    color: #888 !important;
+}
+
+.selectBox-inline.selectBox-disabled .selectBox-options A {
+    background-color: transparent !important;
+}			
+		
+.selectBox-label {width:182px !important;}	
+			
+	
+	
+	
+	
+	
+	
+	

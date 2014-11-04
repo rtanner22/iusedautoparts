@@ -1,0 +1,445 @@
+*{
+	margin:0;
+	padding:0;
+	}
+body{
+	background:url("../img/new-header-small.jpg") no-repeat scroll 45% 0% rgba(0, 0, 0, 0);
+	background-color:#f9f9f7; 
+	}
+.inwrap{
+	width:100%;
+	max-width:680px;
+	margin:0 auto;
+	}
+
+.wrapperheader{
+	background:#f9f9f7;
+	height:90px;
+	width:100%;
+	}
+.header-img{
+	width:100%;
+	display:block;
+	}
+	
+.header-img img{
+	max-width:100%;
+	margin-top:4px;
+	margin-left:-248px;
+	}
+
+
+.wrapperbody{
+	width:100%;
+	height:681px;
+	/*background:url(http://carpartslocator.com/wp-content/uploads/2014/01/new-header-small.jpg) no-repeat;*/
+	}
+
+.contentbar-1 {
+    color: #FFFFFF;
+    display: inline;
+    float: left;
+    font-family: Arial;
+    font-size: 65px;
+    margin-left: 44px;
+    margin-top: 181px;
+    position: absolute;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.easyPainless{
+	font-family:Arial;
+	font-size:23.73px;
+	font-style:italic;
+	font-weight:bold;
+	text-transform:capitalize;
+	}
+	
+.selection-box{
+	background: #FFF;
+	width:97%;
+	float:left;	
+	display:inline;
+	margin-top:44px;
+	border-radius:10px;
+	padding-bottom:5px;
+	
+	}
+	
+	.selection-box {
+    margin-left: 1% !important;
+    width: 90% !important;
+}
+
+	
+
+.inputbox {
+	width:84.5%;
+	 background: linear-gradient(to bottom, #FFFFFF 0%, #F9F9F9 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+	color: #505151;
+	font-size: 1rem;
+	font-family: "Segoe UI",Segoe,"Lucida Grande","Lucida Sans Unicode",Arial,Helvetica,sans-serif;
+	 
+	margin-left: 5%;
+	margin-bottom: 3%;
+	
+	font-weight: bold;
+	padding: 3% 2%;
+	border: 1px solid #E5E5E5;
+
+}
+
+.imgcl{display: inline;
+	margin-left: -3.5%;
+	margin-top: 20px;
+	margin-bottom: 4%;
+	width: 100%;
+	height: 106px;
+	background-position: left top;
+	background-image: url(../img/content-img.png);
+	background-repeat: no-repeat;
+	background-size: 100% 100%;}
+
+.imgco{ float: right;
+    margin-right: 9%;
+    margin-top: 2%;
+	display:none;
+}
+
+
+
+
+.form_part{
+	display:none;
+	}
+	
+.form_part:first-child{
+	display:block;
+	}	
+
+.formTittle {
+	display: inline;
+	font-size: 38px;
+	font-family: Arial, Helvetica, sans-serif;
+	color: #FFF;
+	float: left;
+	margin-left: 2%;
+	margin-top: -121px;
+	margin-bottom: 4%;
+	width: 79%;
+	font-weight: bold;
+	position: relative;
+	z-index: 10;
+}
+
+.formTittle img{
+	display: inline;
+	float:left;
+	margin-right:2%;
+	margin-top:-5px;
+	}
+.button{
+	display: inline;
+	width:250px;
+	height:75px;
+	background:#c3512d;
+	line-height:75px;
+	text-align:center;
+	font-family: "Arial Black", Gadget, sans-serif;
+	text-transform:uppercase;
+	color:#FFF;
+	font-size:28px;
+	border:none;
+	cursor:pointer;
+	margin-bottom:10px;
+	}
+	
+.button:hover{
+	background:#ba3a12;
+
+}
+
+
+p.part_3_Para{
+	float:left;
+	display: block;
+	width:100%;
+	margin-left:0;
+	text-align:center;}
+	
+.form_button a{
+	text-indent:-9999999px;
+	display: inline-block;
+	width:15px;
+	height:15px;
+	background:#9CF;
+	margin:4px;
+	border-radius:100%;
+	}
+	
+.form_button a:hover,
+.form_button a.activeicon{
+	background: #969;
+	}
+	
+
+.go_back{
+	color: #6C933A;
+    cursor: pointer;
+    float: right;
+    font-family: Arial;
+    font-size: 14px;
+    margin-right: 23px;
+    margin-top: -33px;}
+	
+.go_back:hover{
+	text-decoration:underline;
+	cursor:pointer;}
+	
+
+.selection-box ,.select2-results{
+ font-family: "Segoe UI",Segoe,"Lucida Grande","Lucida Sans Unicode",Arial,Helvetica,sans-serif;
+ font-size: 1rem;
+ font-weight: bold;
+}
+
+.select2-container { width:84.5%;}
+select{color: #505151;font-size: 1rem;font-family: "Segoe UI",Segoe,"Lucida Grande","Lucida Sans Unicode",Arial,Helvetica,sans-serif;}
+
+.select2-container .select2-choice { height: 50px !important;
+    line-height: 49px !important;}
+.select2-container .select2-choice .select2-arrow{padding:7px;}
+
+
+.foot {
+    background-color: #333333;
+    color: #FFFFFF;
+    font-family: 'Open Sans','HelveticaNeue','Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-size: 11px;
+    height: 46px;
+    line-height: 35px;
+}
+.foot span{ margin-left:150px;}
+
+
+
+
+
+
+
+
+
+/*------------------------------------*\
+    $IPHONE
+\*------------------------------------*/
+@media only screen 
+and (max-width : 320px) {
+
+
+* {
+    margin: 0;
+    padding: 0;
+}
+body {
+    background: url("../img/new-header-small.jpg") no-repeat scroll 100% 0 #F9F9F7;
+}
+.inwrap {
+    margin: 0 auto;
+    max-width: 680px;
+    width: 100%;
+}
+.wrapperheader {
+    background: none repeat scroll 0 0 #F9F9F7;
+    height: 90px;
+    width: 100%;
+}
+.header-img {
+    display: block;
+    width: 100%;
+}
+.header-img img {
+    margin-left: 3px;
+    margin-top: 4px;
+    max-width: 97%;
+}
+.wrapperbody {
+    height: 467px;
+    width: 100%;
+}
+.contentbar-1 {
+    color: #FFFFFF;
+    display: inline;
+    float: left;
+    font-family: Arial;
+    margin-left: 35px;
+    margin-top: 11px;
+    text-align: center;
+    text-transform: uppercase;
+	position:relative;
+	font-size: 14px;
+}
+.easyPainless {
+    font-family: Arial;
+    font-size: 18.73px;
+    font-style: italic;
+    font-weight: bold;
+    text-transform: capitalize;
+}
+.selection-box {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border-radius: 10px;
+    display: inline;
+    float: left;
+    margin-top: 9px;
+    width: 97%;
+}
+.selection-box {
+    margin-left: 3% !important;
+    width: 95% !important;
+}
+.inputbox {
+    background: linear-gradient(to bottom, #FFFFFF 0%, #F9F9F9 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border: 1px solid #E5E5E5;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+    color: #505151;
+    font-family: "Segoe UI",Segoe,"Lucida Grande","Lucida Sans Unicode",Arial,Helvetica,sans-serif;
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 3%;
+    margin-left: 5%;
+    padding: 3% 2%;
+    width: 84.5%;
+}
+.imgcl {
+    background-image: url("../img/content-img.png");
+    background-position: left top;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    display: inline;
+    height: 69px;
+    margin-bottom: -1%;
+    margin-left: -3.5%;
+    margin-top: 20px;
+    width: 100%;
+}
+.imgco {
+    display: none;
+    float: right;
+    margin-right: 8%;
+    margin-top: -16%;
+}
+.form_part {
+    display: none;
+}
+.form_part:first-child {
+    display: block;
+}
+.formTittle {
+    color: #FFFFFF;
+    display: inline;
+    float: left;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: -11%;
+    margin-left: 2%;
+    margin-top: -64px;
+    position: relative;
+    width: 79%;
+    z-index: 10;
+}
+.formTittle img {
+    display: inline;
+    float: left;
+    margin-right: 2%;
+    margin-top: -9px;
+}
+.button {
+    background: none repeat scroll 0 0 #C3512D;
+    border: medium none;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: inline;
+    font-family: "Arial Black",Gadget,sans-serif;
+    font-size: 28px;
+    height: 75px;
+    line-height: 75px;
+    margin-bottom: 10px;
+    text-align: center;
+    text-transform: uppercase;
+    width: 250px;
+}
+.button:hover {
+    background: none repeat scroll 0 0 #BA3A12;
+}
+p.part_3_Para {
+    display: block;
+    float: left;
+    margin-left: 0;
+    text-align: center;
+    width: 100%;
+}
+.form_button a {
+    background: none repeat scroll 0 0 #99CCFF;
+    border-radius: 100%;
+    display: inline-block;
+    height: 15px;
+    margin: 4px;
+    text-indent: -1e+7px;
+    width: 15px;
+}
+.form_button a:hover, .form_button a.activeicon {
+    background: none repeat scroll 0 0 #996699;
+}
+.go_back {
+    color: #6C933A;
+    cursor: pointer;
+    float: right;
+    font-family: Arial;
+    font-size: 14px;
+    margin-bottom: 11px;
+    margin-right: 23px;
+    margin-top: -5px;
+}
+.go_back:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+.selection-box, .select2-results {
+    font-family: "Segoe UI",Segoe,"Lucida Grande","Lucida Sans Unicode",Arial,Helvetica,sans-serif;
+    font-size: 1rem;
+    font-weight: bold;
+}
+.select2-container {
+    width: 84.5%;
+}
+select {
+    color: #505151;
+    font-family: "Segoe UI",Segoe,"Lucida Grande","Lucida Sans Unicode",Arial,Helvetica,sans-serif;
+    font-size: 1rem;
+}
+.select2-container .select2-choice {
+    height: 50px !important;
+    line-height: 49px !important;
+}
+.select2-container .select2-choice .select2-arrow {
+    padding: 7px;
+}
+.foot {
+    background-color: #333333;
+    color: #FFFFFF;
+    font-family: 'Open Sans','HelveticaNeue','Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-size: 11px;
+    height: 70px;
+    line-height: 35px;
+}
+.foot span {
+    margin-left: 16px;
+}
+
+.select2-input {display:none !important;}
+.select2-search {display:none !important;}
+
+}
