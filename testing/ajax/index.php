@@ -1,4 +1,7 @@
+
+
 <?php
+error_reporting(0);
 require '../inc/rb.phar';
 R::setup('mysql:host=qs3505.pair.com;dbname=rtanner2_cpl',
     'rtanner2_38','e9!R7a03raa');
