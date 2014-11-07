@@ -151,9 +151,8 @@ if(!isset($_REQUEST['order_by'])) $order_by = "quote"; else $order_by = $_REQUES
           <div class="text-right"> <a href="?pg=<?php echo $pg+1; ?>&reqid=<?php echo $_REQUEST['reqid']; ?>" class="btn btn-orange btn-sm"> NEXT PAGE <i class="fa fa-arrow-right"></i></a> </div>
         </div>
         <?php } else { ?>
-            <h1>We're sorry, no matches were found for the part that you requested.</h1>
-            <p>Use the form above to search for another part.</p>
-            <form action="#" method="POST" id="contactlater-form" name = "contactlater-form">
+                <h1>Sorry, no results a found for your query.</h1>
+                <p>Please, provide your contact information and we will contact you as soon as the part you are looking for is available.</p>
                    <div class="row">
                         <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                             <div id="group-zip">
@@ -169,11 +168,10 @@ if(!isset($_REQUEST['order_by'])) $order_by = "quote"; else $order_by = $_REQUES
                         </div>
                     </div>
                     <div class="row">
-                        <div id="group-button" class="form-group text-center mtop10">
-                            <button type="submit" class="btn btn-orange">Submit <i class="fa fa-arrow-right"></i></button>
+                        <div class="text-center mtop10">
+                            <div onclick="updateRequestContactData()" class="btn btn-orange">Submit <i class="fa fa-arrow-right"></i></div>
                         </div>
                     </div>
-            </form>
         <?php } ?>
       </div>
       </div>

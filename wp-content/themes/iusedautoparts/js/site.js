@@ -897,93 +897,105 @@ function LaunchProgressBar() {
     }, 800);
 }
 
+function validateEmail(email) { 
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+}
+
+function validatePhone(phone) { 
+    var re = /^(\([0-9]{3}\)|[0-9]{3}-)[0-9]{3}-[0-9]{4}$/;
+    return re.test(phone);
+} 
+
 function updateRequestContactData() {
-
-    console.log("updateRequestContactData");
-  
-    var params;
-
-    var optvalue = $("#optionvalue").val();
-    var hoption;
-    if (optvalue) {
-        hoption = optvalue.label;
-        if (optvalue.parentElement) {
-
-            var parent = $('#optionvalue').jqxTree('getItem', optvalue.parentElement);
-            hoption += "," + parent.label;
-            if (parent.parentElement) {
-                var grandparent = $('#optionvalue').jqxTree('getItem', parent.parentElement);
-                hoption = grandparent.label + "," + hoption;
-                if (grandparent.parentElement) {
-                    var greatgrandparent = $('#optionvalue').jqxTree('getItem', grandparent.parentElement);
-                    hoption = greatgrandparent.label + "," + hoption;
-                }
-            }
-        }
-    }
-    else
-        hoption = "";
-
-    var optvalue = document.getElementById("hollanderoption").value;
-    if (document.getElementById('preload-partname'))
-        carPartName = document.getElementById('preload-partname').value;
-    else if (document.getElementById('partname').value != "")
-        carPartName = document.getElementById('partname').value;
-    else if (document.getElementById('preload-chpartname'))
-        carPartName = document.getElementById('preload-chpartname').value;
-    if (cars.selectedCarYear && cars.selectedManufacture && cars.selectedModel &&
-            carPartName && optvalue && document.getElementById('zip').value) {
-        //alert("submitting");
-        //continue;
-    } else
-        return false;
-    params = {
-        year: cars.selectedCarYear,
-        make: cars.selectedManufacture,
-        model: cars.selectedModel,
-        partname: carPartName,
-        interchange: optvalue,
-        hollanderoption: hoption,
-        zip: document.getElementById('zip').value};
-    var response;
-    $.ajax({
-        async: false,
-        type: 'post',
-        url: "http://www.iusedautoparts.com/scripts/request.php",
-        data: params,
-        success: function(resp) {
-            if (resp)
-            {
-                response = resp;
-            }
-            else
-                response = false;
-        }
-    });
-    var reqid = response;
-    document.getElementById('reqid').value = reqid;
-
-    var progress = setInterval(function() {
-        var $bar = $('.bar');
-
-        if ($bar.width() > 500) {
-
-            //window.location.href = "/inventory";
-
-            window.searchform.submit();
-            clearInterval(progress);
-            $('.progress').removeClass('active');
-            $('#modal-progress').modal('hide');
-            $bar.width(0);
-
-        } else {
-
-
-            $bar.width($bar.width() + 50);
-        }
-
-        $bar.text($bar.width() / 5 + "%");
-    }, 800);
+        
+    if(!validateEmail($("input[type=email]").val())){alert("Please enter a valid email address");return false;}
+    if(!validatePhone($("input[type=tel]").val())){alert("Please enter a valid phone number");return false;}
+    
+//  
+//    var params;
+//
+//    var optvalue = $("#optionvalue").val();
+//    var hoption;
+//    if (optvalue) {
+//        hoption = optvalue.label;
+//        if (optvalue.parentElement) {
+//
+//            var parent = $('#optionvalue').jqxTree('getItem', optvalue.parentElement);
+//            hoption += "," + parent.label;
+//            if (parent.parentElement) {
+//                var grandparent = $('#optionvalue').jqxTree('getItem', parent.parentElement);
+//                hoption = grandparent.label + "," + hoption;
+//                if (grandparent.parentElement) {
+//                    var greatgrandparent = $('#optionvalue').jqxTree('getItem', grandparent.parentElement);
+//                    hoption = greatgrandparent.label + "," + hoption;
+//                }
+//            }
+//        }
+//    }
+//    else
+//        hoption = "";
+//
+//    var optvalue = document.getElementById("hollanderoption").value;
+//    if (document.getElementById('preload-partname'))
+//        carPartName = document.getElementById('preload-partname').value;
+//    else if (document.getElementById('partname').value != "")
+//        carPartName = document.getElementById('partname').value;
+//    else if (document.getElementById('preload-chpartname'))
+//        carPartName = document.getElementById('preload-chpartname').value;
+//    if (cars.selectedCarYear && cars.selectedManufacture && cars.selectedModel &&
+//            carPartName && optvalue && document.getElementById('zip').value) {
+//        //alert("submitting");
+//        //continue;
+//    } else
+//        return false;
+//    params = {
+//        year: cars.selectedCarYear,
+//        make: cars.selectedManufacture,
+//        model: cars.selectedModel,
+//        partname: carPartName,
+//        interchange: optvalue,
+//        hollanderoption: hoption,
+//        zip: document.getElementById('zip').value};
+//    var response;
+//    $.ajax({
+//        async: false,
+//        type: 'post',
+//        url: "http://www.iusedautoparts.com/scripts/request.php",
+//        data: params,
+//        success: function(resp) {
+//            if (resp)
+//            {
+//                response = resp;
+//            }
+//            else
+//                response = false;
+//        }
+//    });
+//    var reqid = response;
+//    document.getElementById('reqid').value = reqid;
+//
+//    var progress = setInterval(function() {
+//        var $bar = $('.bar');
+//
+//        if ($bar.width() > 500) {
+//
+//            //window.location.href = "/inventory";
+//
+//            window.searchform.submit();
+//            clearInterval(progress);
+//            $('.progress').removeClass('active');
+//            $('#modal-progress').modal('hide');
+//            $bar.width(0);
+//
+//        } else {
+//
+//
+//            $bar.width($bar.width() + 50);
+//        }
+//
+//        $bar.text($bar.width() / 5 + "%");
+//    }, 800);
 }
 
 window.onkeydown = function(e) {

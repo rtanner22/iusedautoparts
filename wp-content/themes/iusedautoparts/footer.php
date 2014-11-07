@@ -55,6 +55,7 @@
     <script type="text/javascript" src="<?php bloginfo('template_url'); ?>/js/jqwidgets/jqwidgets/jqxpanel.js"></script>
     <script type="text/javascript" src="<?php bloginfo('template_url'); ?>/js/jqwidgets/jqwidgets/jqxtree.js"></script>
     <script src="<?php bloginfo('template_url'); ?>/js/select2.js"></script>
+    <script src="<?php bloginfo('template_url'); ?>/js/jquery.validate.min.js"></script>
 <script>
 $(document).ready(function(){
 	$("#box-year").select2({placeholder: "Year",selectOnBlur:false});
