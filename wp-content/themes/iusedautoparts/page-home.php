@@ -84,8 +84,8 @@ Template Name: Page Home
                   <p>Below is a list of the most popular parts searched for. Click <a href="http://www.iusedautoparts.com/partslist/">here</a> for a complete list.</p>
                 </div>
                 <div class="row">
-                	<div class="col-sm-12" >
-                    	<ul>
+                	<div class="col-sm-12">
+                    	<ul><!--
                           <li><a href="http://www.iusedautoparts.com/partslist/engine_assembly/">Engine</a></li>
                           <li><a href="http://www.iusedautoparts.com/partslist/side_view_mirror/">Door Mirror</a></li>
                           <li><a href="http://www.iusedautoparts.com/partslist/transmission/">Transmission</a></li>
@@ -96,7 +96,17 @@ Template Name: Page Home
 						  <li><a href="http://www.iusedautoparts.com/partslist/steering_column/">Steering Column</a></li>
 						  <li><a href="http://www.iusedautoparts.com/partslist/window_regulator/">Window Regulator</a></li>
 						  
-						  
+						  -->
+						  <?php $args = array(	
+						 'authors'      => '',
+						'child_of'     => 2619,
+						'sort_column'  => 'menu_order, post_title',
+						'sort_order'   => '',
+						'title_li'     => __(''), 
+						'walker'       => ''
+						); ?>
+						   <?php wp_list_pages($args); ?>
+						   
                         </ul>
 						</div>
 						 

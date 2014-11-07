@@ -15,15 +15,16 @@
           <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" >
             	<div id="change-search-title">
-
               <h4>You're searching for a(n) <span><?php echo $result[0][part]; ?></span> for a <span><?php echo $result[0][year]; ?> <?php echo $result[0][make]; ?> <?php echo $result[0][model]; ?> </span> <!--with <span>7 OPTIONS SELECTED</span> --></h4>
 				</div>
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">  <a id="btn-change-search" href="#" class="btn btn-orange btn-block btn-sm" data-toggle="collapse" data-target="#search-form"><img class="loading" style="display:none" src="<?php bloginfo('template_url'); ?>/images/SpinningWheel2.gif" width='18px' height='18px'> CHANGE SEARCH <i class="fa fa-chevron-down"></i></a> </div>
+            <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">  <a id="btn-change-search" href="#" class="btn btn-orange btn-block btn-sm" data-toggle="collapse" data-target="#search-form"><span id="loading" style="display:none"><img src="<?php bloginfo('template_url'); ?>/images/SpinningWheel2.gif" width='18px' height='18px'></span> CHANGE SEARCH <i class="fa fa-chevron-down"></i></a> </div>
           </div>
           <div id="search-form" class="collapse">
           <form action="/inventory" method="POST" name="searchform">
           <input type="hidden" name="reqid" id="reqid" value="<?php echo $_REQUEST['reqid']; ?>" />
+          <input type="hidden" name="openyear" id="openyear" value="false" />
+
           <input type="hidden" name="preload-year" id="preload-year" value="<?php echo $result[0][year]; ?>" />
           <input type="hidden" name="preload-make" id="preload-make" value="<?php echo $result[0][make]; ?>" />
           <input type="hidden" name="preload-model" id="preload-model" value="<?php echo $result[0][model]; ?>" />
@@ -117,7 +118,7 @@
     <div class="modal-content">
 
       <div class="modal-body center-block">
-      	<h3>Please wait while we search for inventory from our vendors..</h3>
+      	<h3>Please wait while we search for inventory from our vendor..</h3>
         <div class="progress">
           <div class="progress-bar progress-bar-success bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
 

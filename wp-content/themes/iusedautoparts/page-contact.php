@@ -17,12 +17,13 @@ Template Name: Page Contact
       <?php endif; ?>
       <?php
       	if($_GET['mail']=="true") {
-			$admin_email = "dbmathewes@gmail.com";
-			$admin_email = "rtanner22@gmail.com";
+			//$admin_email = "dbmathewes@gmail.com";
+			$headers = 'From: IUAP Contact Form <noreply@iusedautoparts.com>';
+			$admin_email = "admin@drivetrainleads.com";
 			$subject = "Message from iusedautoparts.com";
-			$body = "Name: " . $_POST['contact_name'] . " \n\nMessage: ";
+			$body = "Name: " . $_POST['contact_name'] . " \n\nEmail: ".$_POST['contact_email']." \n\nMessage: ";
 			$body .= $_POST['contact_message'];
-  			mail($admin_email, $subject, $body);
+  			mail($admin_email, $subject, $body,$headers);
   			echo "Your message has been sent.";
   		}
   ?>
@@ -30,6 +31,9 @@ Template Name: Page Contact
     		<p>
     		<input type="text" name="contact_name" value="" placeholder="Your name" />
     		</p>
+			<p>
+			<input type="text" name="contact_email"  value="" placeholder="Your email" />
+			</p>
     		<p>
     		<textarea name="contact_message" id="message" placeholder="message" cols="70" rows="10"></textarea>
     	</p>

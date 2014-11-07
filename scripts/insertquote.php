@@ -1,7 +1,6 @@
 <?php
 
 date_default_timezone_set('America/Chicago');
-
 header('Cache-Control: no-cache, no-store, must-revalidate'); // HTTP 1.1.
 header('Pragma: no-cache'); // HTTP 1.0.
 header('Expires: 0'); // Proxies.
@@ -11,6 +10,8 @@ header('Expires: 0'); // Proxies.
 //echo "insert data: " . $_POST['sqlinsertdata'];
 // This will capture quotes from lead matches and insert them into the database 'quotes'
 // If token is set it means its a valid response
+//$headers = "From: ronnie@iusedautoparts.com";
+//mail("rtanner22@gmail.com","Error from Lead Check YardId","Test Message",$headers);
 
 if (isset($_POST[token]))
 {
@@ -31,6 +32,13 @@ if (isset($_POST[token]))
 		$lupdate = $_POST['lastupdate'];
 		$lcinsert = $_POST['sqlinsertdata'];
 		$yardid = $_POST['yardid'];
+		
+		$from = "ronnie@iusedautoparts.com";
+		$headers = "From:" . $from;
+		$message = "Error from PartMatch ".$lcinsert;
+		mail("rtanner22@gmail.com","Insert from yardid: ".$yardid,$message,$headers);
+			
+			
 		$lcinsert = "insert into quotes (date,udate,leadid,yardid,stocknumber,year,model,options,rating,quote) VALUES " . $lcinsert ;
 		$lnresult = mysql_query($lcinsert,$mlink);
 		if ($lnresult == true)
