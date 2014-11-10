@@ -1,11 +1,11 @@
-$(function() {
+$(function () {
     window.cars = {
         selectedManufacture: "",
         selectedCarYear: "",
         selectedModel: "",
         selectedPart: "",
         selectedOption: "",
-        init: function() {
+        init: function () {
             var loaded = false;
             //if($("#preload-ppc").val()!="true") {
 
@@ -18,26 +18,23 @@ $(function() {
             else
                 var params = {carYears: 1};
             var data = this.getCarsData(params);
-            if (data)
-            {
+            if (data) {
                 this.carYears(data);
             }
             //}
         },
-        prepareData: function(data, sourceId, name) {
+        prepareData: function (data, sourceId, name) {
             this.source[sourceId].items = [];
             var newData = JSON.parse(data);
             for (var d in newData)
                 this.source[sourceId].items.push({label: "" + newData[d][name]});
             this.render();
         },
-        carYears: function(years)
-        {
+        carYears: function (years) {
             var newYears = JSON.parse(years);
             var yearsList = $('#box-year');
             yearsList.empty();
-            for (var y in newYears)
-            {
+            for (var y in newYears) {
                 if (newYears[y].CarlineYear == $('#preload-year').val())
                     yearsList.append('<option selected="selected"><a href="#">' + newYears[y].CarlineYear + '</a></option>')
                 else
@@ -48,16 +45,14 @@ $(function() {
             }
             document.getElementById("box-year").selectedIndex = -1;
         },
-        carMakes: function() {
+        carMakes: function () {
 
             var makers = this.getCarsData({label: this.selectedCarYear});
-            if (makers)
-            {
+            if (makers) {
                 var makersList = $('#box-make');
                 makersList.empty();
                 makers = JSON.parse(makers);
-                for (var m in makers)
-                {
+                for (var m in makers) {
                     makersList.append('<option><a href="#">' + makers[m].manufacture + '</a></option>')
 
                 }
@@ -79,16 +74,14 @@ $(function() {
                 document.getElementById("box-make").selectedIndex = -1;
             }
         },
-        carModel: function(data) {
+        carModel: function (data) {
             var models = this.getCarsData({manufacture: this.selectedManufacture, year: this.selectedCarYear});
-            if (models)
-            {
+            if (models) {
                 var modelsList = $('#box-model');
                 modelsList.empty();
                 models = JSON.parse(models);
                 //modelsList.append('<option> </option>');
-                for (var m in models)
-                {
+                for (var m in models) {
                     modelsList.append('<option><a href="#">' + models[m].model + '</a></option>')
                 }
                 console.log(models);
@@ -109,18 +102,16 @@ $(function() {
 
             }
         },
-        carPart: function() {
+        carPart: function () {
             console.log(this)
             var parts = this.getCarsData({carModel: this.selectedModel, year: this.selectedCarYear});
-            if (parts)
-            {
+            if (parts) {
                 console.log(parts);
                 var partsList = $('#box-part');
                 partsList.empty();
                 parts = JSON.parse(parts);
                 //partsList.append('<option> </option>');
-                for (var p in parts)
-                {
+                for (var p in parts) {
                     partsList.append('<option value="' + parts[p].part.id + '|' + parts[p].part.desc + '"><a data-part_id="' + parts[p].part.id + '" href="#">' + parts[p].part.desc + '</a></option>');
                 }
                 $("#step1-title").slideDown();
@@ -140,13 +131,17 @@ $(function() {
 
             }
         },
-        getOptions: function() {
+        getOptions: function () {
 
             $("#preload-option").val("");
-            var options = this.getCarsData({partOptions: 1, year: this.selectedCarYear, model: this.selectedModel, part: this.selectedPart});
+            var options = this.getCarsData({
+                partOptions: 1,
+                year: this.selectedCarYear,
+                model: this.selectedModel,
+                part: this.selectedPart
+            });
 
-            if (options)
-            {
+            if (options) {
                 $("#banner #group-options .btn-dropdown .selection").text("Select Options");
                 $("#banner #group-button").slideUp("slow");
 
@@ -160,17 +155,17 @@ $(function() {
                     // show the options tree
                     // prepare the data
                     var source =
-                            {
-                                datatype: "json",
-                                datafields: [
-                                    {name: 'id'},
-                                    {name: 'parentid'},
-                                    {name: 'text'},
-                                    {name: 'value'}
-                                ],
-                                id: 'id',
-                                localdata: options
-                            };
+                    {
+                        datatype: "json",
+                        datafields: [
+                            {name: 'id'},
+                            {name: 'parentid'},
+                            {name: 'text'},
+                            {name: 'value'}
+                        ],
+                        id: 'id',
+                        localdata: options
+                    };
 
                     //$('#optionvalue').jqxTree('destroy');
                     // create data adapter.
@@ -180,11 +175,14 @@ $(function() {
                     // get the tree items. The first parameter is the item's id. The second parameter is the parent item's id. The 'items' parameter represents
                     // the sub items collection name. Each jqxTree item has a 'label' property, but in the JSON data, we have a 'text' field. The last parameter
                     // specifies the mapping between the 'text' and 'label' fields.
-                    var records = dataAdapter.getRecordsHierarchy('id', 'parentid', 'items', [{name: 'text', map: 'label'}]);
+                    var records = dataAdapter.getRecordsHierarchy('id', 'parentid', 'items', [{
+                        name: 'text',
+                        map: 'label'
+                    }]);
 
                     $('#optionvalue').jqxTree({source: records});
 
-                    $(".jqx-tree-item").mouseenter(function(event) {
+                    $(".jqx-tree-item").mouseenter(function (event) {
                         var item = $('#optionvalue').jqxTree('getItem', $(event.target.parentElement)[0]);
                         if (item.hasItems == true) {
                             $(event.target).removeClass("jqx-fill-state-hover");
@@ -237,7 +235,7 @@ $(function() {
                 }
             }
         },
-        getCarsData: function(params) {
+        getCarsData: function (params) {
             var that = this;
             var response = "";
 
@@ -246,9 +244,8 @@ $(function() {
                 type: 'post',
                 url: "http://www.iusedautoparts.com/testing/ajax/index.php",
                 data: params,
-                success: function(resp) {
-                    if (resp)
-                    {
+                success: function (resp) {
+                    if (resp) {
                         response = resp;
                     }
                     else
@@ -260,12 +257,11 @@ $(function() {
     }
     //preload();
 
-    $("#btn-change-search").click(function() { // preloading form values triggered by opening the "CHANGE SEARCH" box on the /inventory page
+    $("#btn-change-search").click(function () { // preloading form values triggered by opening the "CHANGE SEARCH" box on the /inventory page
         $("#loading").show();
         if (cars.loaded == true) {
         }
-        else
-        {
+        else {
             preload_year();
             preload_make();
             preload_model();
@@ -380,7 +376,7 @@ function InitPrimarySearch() {
     }
 
     //Select Year
-    $("#box-year").click(function(e) {
+    $("#box-year").click(function (e) {
         cars.selectedCarYear = $(this).val();
         $("#banner #group-year .btn-dropdown").removeClass("active");
         $("#banner #group-make .btn-dropdown").addClass("active");
@@ -398,7 +394,7 @@ function InitPrimarySearch() {
     });
 
     //Select Make
-    $("#box-make").click(function(e) {
+    $("#box-make").click(function (e) {
         e.preventDefault();
         cars.selectedManufacture = $(this).val();
         $("#banner #group-make .btn-dropdown").removeClass("active");
@@ -408,7 +404,7 @@ function InitPrimarySearch() {
     });
 
     //Select Model
-    $("#box-model").click(function(e) {
+    $("#box-model").click(function (e) {
         e.preventDefault();
         cars.selectedModel = $(this).val();
         console.log("selectedModel");
@@ -422,7 +418,7 @@ function InitPrimarySearch() {
     });
 
     //Select Part
-    $("#box-part").click(function(e) {
+    $("#box-part").click(function (e) {
         e.preventDefault();
         $("#banner #group-part .btn-dropdown").removeClass("active");
         $("#step1-title").slideUp();
@@ -451,7 +447,7 @@ function InitPrimarySearch() {
     //Select Options
 
     var selection = null;
-    $('#optionvalue').on('select', function(e) {
+    $('#optionvalue').on('select', function (e) {
         e.preventDefault();
         var htmlElement = e.args.element;
         var item = $('#optionvalue').jqxTree('getItem', htmlElement);
@@ -503,7 +499,7 @@ function InitPrimarySearch() {
         }
     });
 
-    $("#banner #group-options .btn-dropdown").click(function(e) {
+    $("#banner #group-options .btn-dropdown").click(function (e) {
 
         if ($("#optionvalue").css('display') == "none") {
             //$("#optionvalue").css('display') = "block";
@@ -515,11 +511,11 @@ function InitPrimarySearch() {
 
     });
 
-    $("#zip").focus(function() {
+    $("#zip").focus(function () {
         $("#banner #group-button").slideDown("slow");
     });
 
-    $("#btn-check").click(function(e) {
+    $("#btn-check").click(function (e) {
         e.preventDefault();
         if (document.getElementById('zip').value.length != 5) {
             alert("Please provide a five-digit zip code.");
@@ -530,7 +526,7 @@ function InitPrimarySearch() {
             });
         }
     });
-    $("#btn-new-search").click(function(e) {
+    $("#btn-new-search").click(function (e) {
         e.preventDefault();
         window.location = "http://www.iusedautoparts.com";
 
@@ -543,7 +539,7 @@ function InitSecondarySearch() {
         $("#banner #group-year .btn-dropdown").addClass("active");
     }
     //Select Year
-    $('#box-year').click(function(e) {
+    $('#box-year').click(function (e) {
         cars.selectedCarYear = $(this).val();
         $(this).parents(".btn-group").find('.selection').text($(this).text());
         $(this).parents(".btn-group").find('.selection').val($(this).text());
@@ -557,7 +553,7 @@ function InitSecondarySearch() {
     });
 
     //Select Make
-    $("#box-make").click(function(e) {
+    $("#box-make").click(function (e) {
 
         $(this).parents(".btn-group").find('.selection').text($(this).text());
         $(this).parents(".btn-group").find('.selection').val($(this).text());
@@ -568,7 +564,7 @@ function InitSecondarySearch() {
     });
 
     //Select Model
-    $("#box-model").click(function(e) {
+    $("#box-model").click(function (e) {
 
         $(this).parents(".btn-group").find('.selection').text($(this).text());
         $(this).parents(".btn-group").find('.selection').val($(this).text());
@@ -579,7 +575,7 @@ function InitSecondarySearch() {
     });
 
     //Select Part
-    $("#box-part").click(function(e) {
+    $("#box-part").click(function (e) {
         $(this).parents(".btn-group").find('.selection').text($(this).text());
         $(this).parents(".btn-group").find('.selection').val($(this).text());
         $("#banner.content #group-part .btn-dropdown").removeClass("active");
@@ -589,7 +585,7 @@ function InitSecondarySearch() {
     });
 
 
-    $("#btn-choose").click(function(e) {
+    $("#btn-choose").click(function (e) {
 
         e.preventDefault();
         $(".step1").slideUp("slow");
@@ -598,7 +594,7 @@ function InitSecondarySearch() {
         $("#optionvalue").slideDown("slow");
     });
 
-    $("#btn-go-back").click(function(e) {
+    $("#btn-go-back").click(function (e) {
 
         e.preventDefault();
         $(".step2").slideUp("slow");
@@ -608,7 +604,7 @@ function InitSecondarySearch() {
     });
 
     //Select Options
-    $("#banner.content #group-options .dropdown-menu li a").click(function(e) {
+    $("#banner.content #group-options .dropdown-menu li a").click(function (e) {
         e.preventDefault();
         $(this).parents(".btn-group").find('.selection').text($(this).text());
         $(this).parents(".btn-group").find('.selection').val($(this).text());
@@ -628,7 +624,7 @@ function InitSecondarySearch() {
 
 
 function ResetStates() {
-    $(".btn-dropdown").click(function() {
+    $(".btn-dropdown").click(function () {
 
         //$(".btn-dropdown").removeClass("active");
         //$(this).addClass("active");
@@ -654,8 +650,7 @@ function preload_year() {
     var newYears = JSON.parse(data);
     var yearsList = $('#box-year');
     yearsList.empty();
-    for (var y in newYears)
-    {
+    for (var y in newYears) {
         if (newYears[y].CarlineYear == $('#preload-year').val())
             yearsList.append('<option selected="selected"><a href="#">' + newYears[y].CarlineYear + '</a></option>')
         else
@@ -677,13 +672,11 @@ function preload_make() {
         var makers = cars.getCarsData({makes: 1});
     }
     cars.selectedManufacture = $("#preload-make").val();
-    if (makers != [])
-    {
+    if (makers != []) {
         var makersList = $('#box-make');
         makersList.empty();
         makers = JSON.parse(makers);
-        for (var m in makers)
-        {
+        for (var m in makers) {
             if (makers[m].manufacture == $('#preload-make').val())
                 makersList.append('<option selected="selected"><a href="#">' + makers[m].manufacture + '</a></option>')
             else
@@ -703,13 +696,11 @@ function preload_model() {
     else if (cars.selectedManufacture) {
         var models = cars.getCarsData({models: 1, manufacture: cars.selectedManufacture});
     }
-    if (models != "[]")
-    {
+    if (models != "[]") {
         var modelsList = $('#box-model');
         modelsList.empty();
         models = JSON.parse(models);
-        for (var m in models)
-        {
+        for (var m in models) {
             if (models[m].model == $('#preload-model').val())
                 modelsList.append('<option selected="selected"><a href="#">' + models[m].model + '</a></option>')
             else
@@ -729,15 +720,13 @@ function preload_part() {
         var parts = cars.getCarsData({carModel: cars.selectedModel});
 
 
-    if (parts != "")
-    {
+    if (parts != "") {
         console.log(parts);
         var partsList = $('#box-part');
         partsList.empty();
         parts = JSON.parse(parts);
         var partName = "";
-        for (var p in parts)
-        {
+        for (var p in parts) {
             if (parts[p].part.desc.toUpperCase() == $('#preload-chpartname').val().toUpperCase()) {
                 //partsList.append('<option value="'+parts[p].part.id+'" selected="selected"><a data-part_id="'+parts[p].part.id+'" href="#">'+parts[p].part.desc+'</a></option>');
                 partsList.append('<option value="' + parts[p].part.id + '|' + parts[p].part.desc + '" selected="selected"><a data-part_id="' + parts[p].part.id + '" href="#">' + parts[p].part.desc + '</a></option>');
@@ -764,7 +753,6 @@ function highlight_box(box) {
         $('#box-' + box).addClass("active");
     }
 }
-
 
 
 function create_yearbox() {
@@ -802,7 +790,7 @@ function ShowStep2() {
 
 function ShowProgress() {
 
-    $('#modal-progress').on('shown.bs.modal', function() {
+    $('#modal-progress').on('shown.bs.modal', function () {
 
         LaunchProgressBar();
 
@@ -843,7 +831,7 @@ function LaunchProgressBar() {
     else if (document.getElementById('preload-chpartname'))
         carPartName = document.getElementById('preload-chpartname').value;
     if (cars.selectedCarYear && cars.selectedManufacture && cars.selectedModel &&
-            carPartName && optvalue && document.getElementById('zip').value) {
+        carPartName && optvalue && document.getElementById('zip').value) {
         //alert("submitting");
         //continue;
     } else
@@ -855,16 +843,16 @@ function LaunchProgressBar() {
         partname: carPartName,
         interchange: optvalue,
         hollanderoption: hoption,
-        zip: document.getElementById('zip').value};
+        zip: document.getElementById('zip').value
+    };
     var response;
     $.ajax({
         async: false,
         type: 'post',
         url: "http://www.iusedautoparts.com/scripts/request.php",
         data: params,
-        success: function(resp) {
-            if (resp)
-            {
+        success: function (resp) {
+            if (resp) {
                 response = resp;
             }
             else
@@ -874,7 +862,7 @@ function LaunchProgressBar() {
     var reqid = response;
     document.getElementById('reqid').value = reqid;
 
-    var progress = setInterval(function() {
+    var progress = setInterval(function () {
         var $bar = $('.bar');
 
         if ($bar.width() > 500) {
@@ -895,98 +883,116 @@ function LaunchProgressBar() {
 
         $bar.text($bar.width() / 5 + "%");
     }, 800);
+}
+
+function validateEmail(email) {
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+}
+
+function validatePhone(phone) {
+    var re = /^(\([0-9]{3}\)|[0-9]{3}-)[0-9]{3}-[0-9]{4}$/;
+    return re.test(phone);
 }
 
 function updateRequestContactData() {
 
-    console.log("updateRequestContactData");
-  
-    var params;
-
-    var optvalue = $("#optionvalue").val();
-    var hoption;
-    if (optvalue) {
-        hoption = optvalue.label;
-        if (optvalue.parentElement) {
-
-            var parent = $('#optionvalue').jqxTree('getItem', optvalue.parentElement);
-            hoption += "," + parent.label;
-            if (parent.parentElement) {
-                var grandparent = $('#optionvalue').jqxTree('getItem', parent.parentElement);
-                hoption = grandparent.label + "," + hoption;
-                if (grandparent.parentElement) {
-                    var greatgrandparent = $('#optionvalue').jqxTree('getItem', grandparent.parentElement);
-                    hoption = greatgrandparent.label + "," + hoption;
-                }
-            }
-        }
-    }
-    else
-        hoption = "";
-
-    var optvalue = document.getElementById("hollanderoption").value;
-    if (document.getElementById('preload-partname'))
-        carPartName = document.getElementById('preload-partname').value;
-    else if (document.getElementById('partname').value != "")
-        carPartName = document.getElementById('partname').value;
-    else if (document.getElementById('preload-chpartname'))
-        carPartName = document.getElementById('preload-chpartname').value;
-    if (cars.selectedCarYear && cars.selectedManufacture && cars.selectedModel &&
-            carPartName && optvalue && document.getElementById('zip').value) {
-        //alert("submitting");
-        //continue;
-    } else
+    if (!validateEmail($("input[type=email]").val())) {
+        alert("Please enter a valid email address");
         return false;
-    params = {
-        year: cars.selectedCarYear,
-        make: cars.selectedManufacture,
-        model: cars.selectedModel,
-        partname: carPartName,
-        interchange: optvalue,
-        hollanderoption: hoption,
-        zip: document.getElementById('zip').value};
-    var response;
-    $.ajax({
-        async: false,
-        type: 'post',
-        url: "http://www.iusedautoparts.com/scripts/request.php",
-        data: params,
-        success: function(resp) {
-            if (resp)
-            {
-                response = resp;
-            }
-            else
-                response = false;
-        }
-    });
-    var reqid = response;
-    document.getElementById('reqid').value = reqid;
+    }
+    if (!validatePhone($("input[type=tel]").val())) {
+        alert("Please enter a valid phone number");
+        return false;
+    }
 
-    var progress = setInterval(function() {
-        var $bar = $('.bar');
-
-        if ($bar.width() > 500) {
-
-            //window.location.href = "/inventory";
-
-            window.searchform.submit();
-            clearInterval(progress);
-            $('.progress').removeClass('active');
-            $('#modal-progress').modal('hide');
-            $bar.width(0);
-
-        } else {
-
-
-            $bar.width($bar.width() + 50);
-        }
-
-        $bar.text($bar.width() / 5 + "%");
-    }, 800);
+//  
+//    var params;
+//
+//    var optvalue = $("#optionvalue").val();
+//    var hoption;
+//    if (optvalue) {
+//        hoption = optvalue.label;
+//        if (optvalue.parentElement) {
+//
+//            var parent = $('#optionvalue').jqxTree('getItem', optvalue.parentElement);
+//            hoption += "," + parent.label;
+//            if (parent.parentElement) {
+//                var grandparent = $('#optionvalue').jqxTree('getItem', parent.parentElement);
+//                hoption = grandparent.label + "," + hoption;
+//                if (grandparent.parentElement) {
+//                    var greatgrandparent = $('#optionvalue').jqxTree('getItem', grandparent.parentElement);
+//                    hoption = greatgrandparent.label + "," + hoption;
+//                }
+//            }
+//        }
+//    }
+//    else
+//        hoption = "";
+//
+//    var optvalue = document.getElementById("hollanderoption").value;
+//    if (document.getElementById('preload-partname'))
+//        carPartName = document.getElementById('preload-partname').value;
+//    else if (document.getElementById('partname').value != "")
+//        carPartName = document.getElementById('partname').value;
+//    else if (document.getElementById('preload-chpartname'))
+//        carPartName = document.getElementById('preload-chpartname').value;
+//    if (cars.selectedCarYear && cars.selectedManufacture && cars.selectedModel &&
+//            carPartName && optvalue && document.getElementById('zip').value) {
+//        //alert("submitting");
+//        //continue;
+//    } else
+//        return false;
+//    params = {
+//        year: cars.selectedCarYear,
+//        make: cars.selectedManufacture,
+//        model: cars.selectedModel,
+//        partname: carPartName,
+//        interchange: optvalue,
+//        hollanderoption: hoption,
+//        zip: document.getElementById('zip').value};
+//    var response;
+//    $.ajax({
+//        async: false,
+//        type: 'post',
+//        url: "http://www.iusedautoparts.com/scripts/request.php",
+//        data: params,
+//        success: function(resp) {
+//            if (resp)
+//            {
+//                response = resp;
+//            }
+//            else
+//                response = false;
+//        }
+//    });
+//    var reqid = response;
+//    document.getElementById('reqid').value = reqid;
+//
+//    var progress = setInterval(function() {
+//        var $bar = $('.bar');
+//
+//        if ($bar.width() > 500) {
+//
+//            //window.location.href = "/inventory";
+//
+//            window.searchform.submit();
+//            clearInterval(progress);
+//            $('.progress').removeClass('active');
+//            $('#modal-progress').modal('hide');
+//            $bar.width(0);
+//
+//        } else {
+//
+//
+//            $bar.width($bar.width() + 50);
+//        }
+//
+//        $bar.text($bar.width() / 5 + "%");
+//    }, 800);
 }
 
-window.onkeydown = function(e) {
+window.onkeydown = function (e) {
 
     if (e.keyCode == 9 || e.which == 9) {
         e.preventDefault();
@@ -1007,7 +1013,7 @@ window.onkeydown = function(e) {
         else if (document.getElementById('preload-chpartname'))
             carPartName = document.getElementById('preload-chpartname').value;
         if (cars.selectedCarYear && cars.selectedManufacture && cars.selectedModel &&
-                carPartName && optvalue && document.getElementById('zip').value) {
+            carPartName && optvalue && document.getElementById('zip').value) {
             if (document.getElementById('zip').value.length != 5) {
                 alert("Please provide a five-digit zip code.");
             } else {
@@ -1038,3 +1044,26 @@ window.onkeydown = function(e) {
 
 
 }
+
+////////tairezzzz app
+var app = angular.module('App', []);
+
+app.controller('Controller', ['$scope', '$http', function ($scope, $http) {
+    $scope.submitted = false;
+    $scope.submit = function () {
+        if ($scope.user_form.$valid) {
+            $http.post("/scripts/requestupdatecontactdata.php", {
+                'reqid': $scope.req.id,
+                'email': $scope.req.email,
+                'phone': $scope.req.phone
+            })
+                .success(function (data, status, headers, config) {
+                    if (data) {
+                        $scope.submitted = true;
+                    }
+                });
+        } else {
+            console.log("Form is not valid!");
+        }
+    }
+}]);

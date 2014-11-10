@@ -578,6 +578,10 @@ color: #FFF;
 	background-position: -136px 0;
 }
 
+.tq-validate.ng-invalid {
+    background-color: #FA787E;
+}
+
 /*==============================================
 	MEDIA QUERIES
 ==============================================*

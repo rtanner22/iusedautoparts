@@ -42,7 +42,8 @@
     </section>
   </footer>
 </div>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
     <script src="<?php bloginfo('template_url'); ?>/js/jqwidgets/jqwidgets/jqxcore.js"></script>
     <script src="<?php bloginfo('template_url'); ?>/js/jqwidgets/jqwidgets/jqxtree.js"></script>
     <link rel="stylesheet" href="<?php bloginfo('template_url'); ?>/js/jqwidgets/jqwidgets/styles/jqx.base.css" type="text/css" />
@@ -55,6 +56,7 @@
     <script type="text/javascript" src="<?php bloginfo('template_url'); ?>/js/jqwidgets/jqwidgets/jqxpanel.js"></script>
     <script type="text/javascript" src="<?php bloginfo('template_url'); ?>/js/jqwidgets/jqwidgets/jqxtree.js"></script>
     <script src="<?php bloginfo('template_url'); ?>/js/select2.js"></script>
+    <script src="<?php bloginfo('template_url'); ?>/js/jquery.validate.min.js"></script>
 <script>
 $(document).ready(function(){
 	$("#box-year").select2({placeholder: "Year",selectOnBlur:false});
