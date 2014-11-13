@@ -1041,8 +1041,6 @@ window.onkeydown = function (e) {
         //alert("test");
         //alert("again");
     }
-
-
 }
 
 ////////tairezzzz app
