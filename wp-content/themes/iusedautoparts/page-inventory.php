@@ -205,22 +205,30 @@ $result = R::getAll("select yards.yard,yards.warranty,yards.address,yards.city,y
                                             <input hidden ng-model="req.id" ng-init="req.id=<?php echo $_REQUEST['reqid']; ?>">
 
                                             <div class="row">
-                                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+<!--                                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                                                     <label>Phone</label>
                                                     <input type="tel" class="form-control input-lg"
                                                            ng-model="req.phone" required=""
                                                            placeholder="Enter a phone number"/>
-                                                </div>
+                                                </div>-->
                                                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                                                     <label>E-mail</label>
                                                     <input type="email" class="form-control input-lg" ng-model="req.email"
                                                            placeholder="Enter a valid email address" required=""/>
                                                 </div>
+                                                
+                                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 padding-center">
+                                                        <div ng-show="user_form.$valid" ng-click="submit()" class="btn btn-orange">
+                                                            Submit <i class="fa fa-arrow-right"></i>
+                                                        </div>
+                                                </div>
+                                                
+                                                
                                             </div>
                                             <div class="row mtop10 text-center">
-                                                <div ng-show="user_form.$valid" ng-click="submit()" class="btn btn-orange">
+<!--                                                <div ng-show="user_form.$valid" ng-click="submit()" class="btn btn-orange">
                                                     Submit <i class="fa fa-arrow-right"></i>
-                                                </div>
+                                                </div>-->
                                             </div>
                                         </ng-form>
                                     </div>
