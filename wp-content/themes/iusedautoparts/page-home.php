@@ -26,7 +26,7 @@ Template Name: Page Home
                 <div class="text-center">
                   <p><img src="<?php bloginfo('template_url'); ?>/images/vehicle.png" alt="POPULAR VEHICLES"/></p>
                   <p><a href="#" class="btn btn-custom">POPULAR VEHICLES</a></p>
-                  <p>Specify your part, select year, make, model & name the autopart., model and name of the autopart</p>
+                  <p>View our most popular Makes and Models</p>
                 </div>
                 <div class="row">
                 	<div class="col-sm-4">

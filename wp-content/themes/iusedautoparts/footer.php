@@ -8,17 +8,17 @@
               <li><a href="<?php bloginfo('url'); ?>/">HOME</a></li>
               <li><a href="<?php bloginfo('url'); ?>/about">ABOUT US</a></li>
               <li><a href="<?php bloginfo('url'); ?>/partslist">PARTS LIST</a></li>
-              <li><a href="<?php bloginfo('url'); ?>/">BLOG</a></li>
+              <!--<li><a href="<?php bloginfo('url'); ?>/">BLOG</a></li>-->
               <li><a href="<?php bloginfo('url'); ?>/contact">CONTACT</a></li>
             </ul>
           </div>
           <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
             <ul class="footer-socials pull-right">
-              <li><a href="https://www.facebook.com/" class="facebook" target="_blank">FACEBOOK</a></li>
+              <li><a href="https://www.facebook.com/iusedautoparts/" class="facebook" target="_blank">FACEBOOK</a></li>
               <li><a href="https://twitter.com/" class="twitter" target="_blank">TWITTER</a></li>
-              <li><a href="https://plus.google.com/" class="google" target="_blank">GOOGLE+</a></li>
+             <!-- <li><a href="https://plus.google.com/" class="google" target="_blank">GOOGLE+</a></li>
               <li><a href="https://www.pinterest.com/" class="pinterest" target="_blank">PINTEREST</a></li>
-              <li><a href="http://instagram.com/" class="instagram" target="_blank">INSTAGRAM</a></li>
+              <li><a href="http://instagram.com/" class="instagram" target="_blank">INSTAGRAM</a></li>-->
             </ul>
           </div>
         </div>
@@ -42,12 +42,13 @@
     </section>
   </footer>
 </div>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="<?php bloginfo('template_url'); ?>/js/jqwidgets/scripts/jquery-2.0.2.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
     <script src="<?php bloginfo('template_url'); ?>/js/jqwidgets/jqwidgets/jqxcore.js"></script>
     <script src="<?php bloginfo('template_url'); ?>/js/jqwidgets/jqwidgets/jqxtree.js"></script>
     <link rel="stylesheet" href="<?php bloginfo('template_url'); ?>/js/jqwidgets/jqwidgets/styles/jqx.base.css" type="text/css" />
-    <script type="text/javascript" src="<?php bloginfo('template_url'); ?>/js/jqwidgets/scripts/jquery-1.10.2.min.js"></script>
+<script src="<?php bloginfo('template_url'); ?>/js/jquery.loader.js"></script>
+<link href="<?php bloginfo('template_url'); ?>/js/jquery.loader.css" rel="stylesheet" />
     <script type="text/javascript" src="<?php bloginfo('template_url'); ?>/js/jqwidgets/scripts/demos.js"></script>
     <script type="text/javascript" src="<?php bloginfo('template_url'); ?>/js/jqwidgets/jqwidgets/jqxcore.js"></script>
     <script type="text/javascript" src="<?php bloginfo('template_url'); ?>/js/jqwidgets/jqwidgets/jqxdata.js"></script>
@@ -56,6 +57,7 @@
     <script type="text/javascript" src="<?php bloginfo('template_url'); ?>/js/jqwidgets/jqwidgets/jqxpanel.js"></script>
     <script type="text/javascript" src="<?php bloginfo('template_url'); ?>/js/jqwidgets/jqwidgets/jqxtree.js"></script>
     <script src="<?php bloginfo('template_url'); ?>/js/select2.js"></script>
+    
 <script>
 $(document).ready(function(){
 	$("#box-year").select2({placeholder: "Year",selectOnBlur:false});
@@ -72,5 +74,15 @@ $(document).ready(function(){
 </script>
 <script src="<?php bloginfo('template_url'); ?>/js/bootstrap.min.js"></script>
 <script src="<?php bloginfo('template_url'); ?>/js/site.js"></script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-2096092-53', 'auto');
+  ga('send', 'pageview');
+
+</script>
 </body>
 </html>

@@ -478,9 +478,9 @@ function getoption(obj,type,uno)
 
 <div class="selection-box">
     <form method="post" action="" name="form1" id="form1">
-    <div class="part_1 form_part" >
-    <img src="img/content-img.png" class="imgcl">
-    <h1 class="formTittle small" ><img src="img/carInfo.png" >Car Info</h1>
+    <div class="part_1 form_part" style="padding-top: 20px;">
+    <img src="img/content-img.png" class="imgcl" style="display:none;">
+    <!-- <h1 class="formTittle small" ><img src="img/carInfo.png" >Car Info</h1> -->
 
 
 <?php if($dtype==1)
@@ -1346,7 +1346,7 @@ function getoption(obj,type,uno)
     </div>
 
     <div class="foot"><span> &copy; Copyright - Car Parts Locator - Enfold Theme by Kriesi</span>
-    <span style="float: right;margin-right: 35px;">FAQ | Terms & Conditions | Privacy Policy | Contact</span></div>
+    <span style="float: right;margin-right: 35px;">FAQ | Terms & Conditions | Privacy Policy | <a href="http://www.iusedautoparts.com/search/contactus.php">Contact</a></span></div>
 </body>
 
 

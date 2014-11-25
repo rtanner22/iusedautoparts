@@ -632,3 +632,27 @@ body {
 .level3{margin-left: 30px;}
 .level4{margin-left: 45px;}
 .level5{margin-left: 60px;}
+
+
+/* input zip margin for  "Step 2: Choose Options" */
+
+#zip {
+    margin-bottom: 15px;
+}
+
+.padding-center {padding-top: 21px;}
+.modal-lg {
+	width: 450px;
+}
+@media (min-width: 992px)
+.modal-lg {
+	width: 450px;
+}
+@media (min-width: 768px)
+.modal-dialog {
+	width: 450px;
+	margin: 30px auto;
+}
+ng-form h2{
+	text-align:center;
+}

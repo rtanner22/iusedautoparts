@@ -1259,6 +1259,7 @@ the specific language governing permissions and limitations under the Apache Lic
          */
         // abstract
         open: function () {
+
             if (!this.shouldOpen()) return false;
 
             this.opening();
@@ -1869,11 +1870,6 @@ the specific language governing permissions and limitations under the Apache Lic
             this.focusser.prop("disabled", true).val("");
             this.updateResults(true);
             this.opts.element.trigger($.Event("select2-open"));
-            $("#banner #group-year .btn-dropdown").removeClass("active");
-            $("#banner #group-make .btn-dropdown").removeClass("active");
-            $("#banner #group-model .btn-dropdown").removeClass("active");
-            $("#banner #group-part .btn-dropdown").removeClass("active");
-
         },
 
         // single
@@ -1963,7 +1959,8 @@ the specific language governing permissions and limitations under the Apache Lic
                         killEvent(e);
                         return;
                     case KEY.TAB:
-                        this.selectHighlighted({noFocus: true});
+                         this.selectHighlighted();
+                        killEvent(e);
                         return;
                     case KEY.ESC:
                         this.cancel(e);
@@ -1985,7 +1982,7 @@ the specific language governing permissions and limitations under the Apache Lic
             this.focusser.on("keydown", this.bind(function (e) {
                 if (!this.isInterfaceEnabled()) return;
 
-                if (e.which === KEY.TAB || KEY.isControl(e) || KEY.isFunctionKey(e) || e.which === KEY.ESC) {
+                if (KEY.isControl(e) || KEY.isFunctionKey(e) || e.which === KEY.ESC) {
                     return;
                 }
 
@@ -1993,9 +1990,14 @@ the specific language governing permissions and limitations under the Apache Lic
                     killEvent(e);
                     return;
                 }
+				if (this.opts.openOnEnter === false && e.which === KEY.TAB) {
+                    killEvent(e);
+                    return;
+                }
 
                 if (e.which == KEY.DOWN || e.which == KEY.UP
-                    || (e.which == KEY.ENTER && this.opts.openOnEnter)) {
+                    || (e.which == KEY.ENTER && this.opts.openOnEnter)
+					|| (e.which == KEY.TAB && this.opts.openOnEnter)) {
 
                     if (e.altKey || e.ctrlKey || e.shiftKey || e.metaKey) return;
 
@@ -2078,7 +2080,6 @@ the specific language governing permissions and limitations under the Apache Lic
 
         // single
         clear: function(triggerChange) {
-
             var data=this.selection.data("select2-data");
             if (data) { // guard against queued quick consecutive clicks
                 var evt = $.Event("select2-clearing");
@@ -2514,7 +2515,7 @@ the specific language governing permissions and limitations under the Apache Lic
                 var pos = getCursorInfo(this.search);
 
                 if (selected.length &&
-                    (e.which == KEY.LEFT || e.which == KEY.RIGHT || e.which == KEY.BACKSPACE || e.which == KEY.DELETE || e.which == KEY.ENTER)) {
+                    (e.which == KEY.LEFT || e.which == KEY.RIGHT || e.which == KEY.BACKSPACE || e.which == KEY.DELETE || e.which == KEY.ENTER || e.which == KEY.TAB)) {
                     var selectedChoice = selected;
                     if (e.which == KEY.LEFT && prev.length) {
                         selectedChoice = prev;
@@ -2531,6 +2532,8 @@ the specific language governing permissions and limitations under the Apache Lic
                         this.search.width(10);
                         selectedChoice = next.length ? next : null;
                     } else if (e.which == KEY.ENTER) {
+                        selectedChoice = null;
+                    } else if (e.which == KEY.TAB) {
                         selectedChoice = null;
                     }
 
@@ -2562,8 +2565,8 @@ the specific language governing permissions and limitations under the Apache Lic
                         killEvent(e);
                         return;
                     case KEY.TAB:
-                        this.selectHighlighted({noFocus:true});
-                        this.close();
+                         this.selectHighlighted();
+                        killEvent(e);
                         return;
                     case KEY.ESC:
                         this.cancel(e);
@@ -2572,12 +2575,12 @@ the specific language governing permissions and limitations under the Apache Lic
                     }
                 }
 
-                if (e.which === KEY.TAB || KEY.isControl(e) || KEY.isFunctionKey(e)
+                if (KEY.isControl(e) || KEY.isFunctionKey(e)
                  || e.which === KEY.BACKSPACE || e.which === KEY.ESC) {
                     return;
                 }
 
-                if (e.which === KEY.ENTER) {
+                if (e.which === KEY.ENTER || e.which === KEY.TAB) {
                     if (this.opts.openOnEnter === false) {
                         return;
                     } else if (e.altKey || e.ctrlKey || e.shiftKey || e.metaKey) {
@@ -2592,7 +2595,7 @@ the specific language governing permissions and limitations under the Apache Lic
                     killEvent(e);
                 }
 
-                if (e.which === KEY.ENTER) {
+                if (e.which === KEY.ENTER || e.which === KEY.TAB) {
                     // prevent form from being submitted
                     killEvent(e);
                 }

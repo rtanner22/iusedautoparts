@@ -1,3 +1,20 @@
+$(document).on('click', '.jqx-item', function(){
+    $('input[name=zipcode]').focus();
+});
+$(document).on('keydown', '.form-control', function(event){
+	if(event.keyCode === 9){$('#btn-check').focus();}
+});
+$( document ).ready(function() {
+	if($('.bs-example-modal-lg').css('display','block')){
+		$('.form-control').focus();
+	}
+	if($('#getvalue')	){
+		var el = $('#getvalue').text();
+		$('title').text(el);
+	}
+});
+
+
 $(function () {
     window.cars = {
         selectedManufacture: "",
@@ -364,7 +381,7 @@ $(function () {
     cars.init();
     InitSecondarySearch();
     InitPrimarySearch();
-    ShowProgress();
+    ShowProgresss();
     ResetStates();
 
 });
@@ -520,10 +537,7 @@ function InitPrimarySearch() {
         if (document.getElementById('zip').value.length != 5) {
             alert("Please provide a five-digit zip code.");
         } else {
-            $('#modal-progress').modal({
-                backdrop: 'static',
-                show: true
-            });
+        	ShowProgress();
         }
     });
     $("#btn-new-search").click(function (e) {
@@ -789,8 +803,16 @@ function ShowStep2() {
 }
 
 function ShowProgress() {
+$.loader({
+        className:"blue-with-image-12",
+        content:'Please wait while we search for inventory from our vendors..'
+    });
 
-    $('#modal-progress').on('shown.bs.modal', function () {
+       LaunchProgressBar();
+
+}
+function     ShowProgresss(){
+ $('#modal-progress').on('shown.bs.modal', function () {
 
         LaunchProgressBar();
 
@@ -872,7 +894,7 @@ function LaunchProgressBar() {
             window.searchform.submit();
             clearInterval(progress);
             $('.progress').removeClass('active');
-            $('#modal-progress').modal('hide');
+            $.loader('close');
             $bar.width(0);
 
         } else {

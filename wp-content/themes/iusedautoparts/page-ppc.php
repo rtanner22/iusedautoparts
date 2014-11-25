@@ -25,8 +25,7 @@ R::setup('mysql:host=qs3505.pair.com;dbname=rtanner2_cpl',
 <section id="content">
   <div class="wrap alt">
     <div class="container">
-    	<h1><?php echo $_REQUEST['make'] . " " . $_REQUEST['model'] . " " .  $part[0]['pdesc'];
-		?></h1><br>
+    	<h1 id="getvalue"><?php echo $_REQUEST['make'] . " " . $_REQUEST['model'] . " " .  $part[0]['pdesc'];?></h1><br>
 		<p>
 		<?php echo $part[0]['pdesclong']; ?><br><br><br>
 		<img src="<?php echo $part[0]['image']; ?>"/>

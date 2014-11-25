@@ -121,7 +121,7 @@ $result = R::getAll("select yards.yard,yards.warranty,yards.address,yards.city,y
             echo "<a href='$row[directory]' target=_BLANK>";
         }
         ?>
-                                            <?php echo $row[yard]; ?>
+                                            <?php echo "<font color=\"#55565B\">".$row[yard]."</font>"; ?>
                                             <?php
                                             if ($row[directory] != "") {
                                                 echo "</a>";
@@ -129,7 +129,7 @@ $result = R::getAll("select yards.yard,yards.warranty,yards.address,yards.city,y
                                             ?><br>
                                             <?php echo $row[address]; ?>, <?php echo $row[city]; ?>
                                             , <?php echo $row[state]; ?> <?php echo $row[zip]; ?>
-                                            <br><?php echo $row[phone]; ?>&nbsp;&nbsp;
+                                            <br><font color="red"><?php echo $row[phone]; ?></font>&nbsp;&nbsp;
                                             <?php
                                             if ($row[facebook] != "") {
                                                 echo '<a href="' . $row[facebook] . '" target="_blank"><img src="http://www.iusedautoparts.com/images/facebook.png"></a>';
@@ -205,34 +205,41 @@ $result = R::getAll("select yards.yard,yards.warranty,yards.address,yards.city,y
                             </script>
                             <!-- Large modal -->
                             <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-lg">
-                                    <div class="modal-content">
-                                        <div ng-app="App">
-                                            <div class = "modal-body" ng-controller="Controller">
-                                                <h1 ng-show="submitted">Thanks!! We will contact you soon.<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button></h1>
-                                                <ng-form  ng-show="!submitted" class="css-form" name="user_form">
-                                                    <h1>Sorry, no results a found for your query.</h1>
-                                                    <p>Please, provide your contact information and we will contact you as soon as the part you are looking for is available.</p>
-                                                    <input hidden ng-model="req.id" ng-init="req.id =<?php echo $_REQUEST['reqid']; ?>">
-                                                    <div class="row">
-                                                        <!--<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                                                            <label>Phone</label>
-                                                            <input type="tel" class="form-control input-lg"
-                                                                   ng-model="req.phone" required=""
-                                                                   placeholder="Enter a phone number"/>
-                                                                                                        </div>-->
-                                                        <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
-                                                            <label>E-mail</label>
-                                                            <input type="email" class="form-control input-lg" ng-model="req.email"
-                                                                   placeholder="Enter a valid email address" required=""/>
+                              <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                  <div ng-app="App">
+                                      <div class = "modal-body" ng-controller="Controller">
+                                        <h1 ng-show="submitted">Thanks!! We will contact you soon.<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button></h1>
+                                        <ng-form  ng-show="!submitted" class="css-form" name="user_form">
+                                            <!--<h1>Almost finished! Please provide your email address to receive your quote.</h1>-->
+                                            <h2>Almost finished! Please provide your email address to receive your quote.</h2>
+                                            <input hidden ng-model="req.id" ng-init="req.id=<?php echo $_REQUEST['reqid']; ?>">
+
+                                            <div class="row">
+<!--                                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                                    <label>Phone</label>
+                                                    <input type="tel" class="form-control input-lg"
+                                                           ng-model="req.phone" required=""
+                                                           placeholder="Enter a phone number"/>
+                                                </div>-->
+                                                <div class="col-xs-12">
+                                                    <!--<label>E-mail</label>-->
+                                                    <input type="email" class="form-control input-lg" ng-model="req.email"
+                                                           placeholder="Enter a valid email address" required=""/>
+                                                </div>
+                                                
+                                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 padding-center" style="text-align:center;">
+                                                        <div ng-show="user_form.$valid" ng-click="submit()" class="btn btn-orange" style="display: inline-block !important;">
+                                                            Submit <i class="fa fa-arrow-right"></i>
                                                         </div>
-                                                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
-                                                            <div ng-show="user_form.$valid" ng-click="submit()" class="btn btn-orange btn-contactlater">
-                                                                Submit <i class="fa fa-arrow-right"></i>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </ng-form>
+                                                </div>
+                                                
+                                                
+                                            </div>
+                                            <div class="row mtop10 text-center">
+<!--                                                <div ng-show="user_form.$valid" ng-click="submit()" class="btn btn-orange">
+                                                    Submit <i class="fa fa-arrow-right"></i>
+                                                </div>-->
                                             </div>
                                         </div>
                                     </div>

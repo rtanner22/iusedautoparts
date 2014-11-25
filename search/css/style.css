@@ -132,6 +132,7 @@ body{
 	font-weight: bold;
 	position: relative;
 	z-index: 10;
+    line-height: 56px;
 }
 
 .formTittle img{
@@ -174,16 +175,18 @@ p.part_3_Para{
 	display: inline-block;
 	width:15px;
 	height:15px;
-	background:#9CF;
+	background:#8AB6C3;
 	margin:4px;
 	border-radius:100%;
 	}
 	
-.form_button a:hover,
-.form_button a.activeicon{
-	background: #969;
+.form_button a:hover{
+	background: #6BB137;
 	}
-	
+
+.form_button a.activeicon{
+    background: #6BB137;
+    }	
 
 .go_back{
 	color: #6C933A;
@@ -222,7 +225,10 @@ select{color: #505151;font-size: 1rem;font-family: "Segoe UI",Segoe,"Lucida Gran
     line-height: 35px;
 }
 .foot span{ margin-left:150px;}
-
+.foot a{
+    color: #ffffff;
+    text-decoration: blink;
+}
 
 
 
@@ -382,7 +388,7 @@ p.part_3_Para {
     width: 100%;
 }
 .form_button a {
-    background: none repeat scroll 0 0 #99CCFF;
+    background: none repeat scroll 0 0 #8AB6C3;
     border-radius: 100%;
     display: inline-block;
     height: 15px;
@@ -391,7 +397,7 @@ p.part_3_Para {
     width: 15px;
 }
 .form_button a:hover, .form_button a.activeicon {
-    background: none repeat scroll 0 0 #996699;
+    background: none repeat scroll 0 0 #6BB137;
 }
 .go_back {
     color: #6C933A;
@@ -443,3 +449,57 @@ select {
 .select2-search {display:none !important;}
 
 }
+
+.about{
+    margin-top: 12px;
+}
+
+.about p{
+    font-weight: lighter;
+    line-height: 22px;
+}
+
+.wrap-about h1{
+    font-family: 'bariol_bold', sans-serif;
+    color: #355f79;
+    font-size: 34px;
+    font-weight: bold;
+}
+
+.wrap-contact h1{
+    font-family: 'bariol_bold', sans-serif;
+    color: #355f79;
+    font-size: 34px;
+    font-weight: bold;
+}
+
+.wrap-contact p{
+    font-weight: lighter;
+    line-height: 22px;
+}
+
+.wrap-contact input{
+    margin: 4px 0px;
+    height: 25px;
+    font-size: 18px;
+    padding: 1px;
+}
+
+.wrap-contact textarea{
+    font-size: 18px;
+    margin: 4px 0px;
+    width: 99%;
+    padding: 3px;
+    height: 150px;
+}
+
+.btn-sub-cont {
+    padding: 10px 50px;
+    background: #EE773D;
+    border-width: 0 1px 4px 1px;
+    border-color: #E65726;
+    color: #FFF;
+    font-family: 'bariol_bold', sans-serif;
+    font-size: 20px;
+    cursor: pointer;
+}   

@@ -37,9 +37,10 @@ session_start();
         <p class="easyPainless">It's quick, easy, and painless!</p>
     </div>-->
 
-<div class="selection-box" style="background-color:#FFF; color:#333; padding:10px;">
-
-Thank you for your part request. We will be sending you an email shortly with a list of active inventory with prices.<br/><br/><br/><br/><br/><br/><br/>
+<div class="selection-box" style="background-color:#FFF; color:#333;">
+  <div style="padding:10px;">
+    Thank you for your part request. We will be sending you an email shortly with a list of active inventory with prices.<br/><br/><br/>
+  </div>
     
             </div>
         </div>

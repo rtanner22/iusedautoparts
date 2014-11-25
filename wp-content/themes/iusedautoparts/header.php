@@ -4,7 +4,8 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-<title><?php if(is_home()) { echo bloginfo("name"); echo " - "; echo bloginfo("description"); } else { echo wp_title(" - ", false, right); echo " iUsedAutoParts.com" ; } ?></title>
+<title><?php if(is_home()) { echo bloginfo("name"); echo " - "; echo bloginfo("description"); } else { echo wp_title(" - ", false, right); echo bloginfo("name"); } ?></title>
+
 
 
 <link href='//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800' rel='stylesheet' type='text/css'>
@@ -15,6 +16,12 @@
 <link href="<?php bloginfo('template_url'); ?>/css/select2-bootstrap.css" rel="stylesheet" type="text/css">
 <link href="<?php bloginfo('stylesheet_url'); ?>" rel="stylesheet" type="text/css" />
 <link href="<?php bloginfo('template_url'); ?>/css/site.css" rel="stylesheet" type="text/css" >
+<script src="<?php bloginfo('template_url'); ?>/js/detect.js"></script>
+<script>
+ SA.redirection_mobile ({
+    mobile_url : "www.iusedautoparts.com/search/",
+  });
+</script>
 <!--[if lt IE 9]>
   <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
   <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -66,8 +73,8 @@
         <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
           <ul class="nav nav-pills nav-justified">
             <li><a href="<?php bloginfo('url'); ?>/contact">CONTACT</a></li>
-            <li><a href="https://www.facebook.com/" target="_blank"><i class="fa fa-twitter fa-lg"></i></a></li>
-            <li><a href="https://twitter.com/" target="_blank"><i class="fa fa-facebook fa-lg"></i></a></li>
+            <li><a href="https://www.twitter.com/" target="_blank"><i class="fa fa-twitter fa-lg"></i></a></li>
+            <li><a href="https://www.facebook.com/iusedautoparts" target="_blank"><i class="fa fa-facebook fa-lg"></i></a></li>
           </ul>
         </div>
       </div>
