@@ -1,7 +1,7 @@
 <?php
 require '../inc/rb.phar';
-R::setup('mysql:host=qs3505.pair.com;dbname=rtanner2_cpl',
-    'rtanner2_38','BHeFVC7i');
+R::setup('mysql:host=192.168.200.100;dbname=iusedparts',
+    'iusedparts','5huYvRDH');
 if(!empty($_POST['carYears']))
 {
 

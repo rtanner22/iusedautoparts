@@ -26,23 +26,23 @@ session_start();
 <?php
       if($_GET['mail']=="true") {
     //$admin_email = "dbmathewes@gmail.com";
-    $headers = 'From: IUAP Contact Form <noreply@iusedautoparts.com>';
+    $headers = 'From: IUAP Contact Form <noreply@autorecyclersonline.com>';
     $admin_email = "admin@drivetrainleads.com";
-    $subject = "Message from iusedautoparts.com";
+    $subject = "Message from autorecyclersonline.com";
     $body = "Name: " . $_POST['contact_name'] . " \n\nEmail: ".$_POST['contact_email']." \n\nMessage: ";
     $body .= $_POST['contact_message'];
       mail($admin_email, $subject, $body,$headers);
       echo "Your message has been sent.";
     }
 ?>
-<div class="wrapperbody">
+<div class="wrapperbody" style="display: table;">
   <div class="inwrap">
     <div class="selection-box" style="background-color:#FFF; color:#333; padding:10px;">
       <div class="wrap alt">
         <div class="container wrap-contact">
           <h1>Contact</h1>
 
-          <p>iUsedAutoParts.com<br />
+          <p>autorecyclersonline.com<br />
           4513 Old Shell Road<br />
           Suite 202<br />
           Mobile, AL 36608</p>
@@ -62,8 +62,8 @@ session_start();
     </div>
   </div>
 </div>
-<div class="foot"><span> &copy; Copyright - Car Parts Locator - Enfold Theme by Kriesi</span>
-  <span style="float: right;margin-right: 35px;">FAQ | Terms & Conditions | Privacy Policy | <a href="http://www.iusedautoparts.com/search/contactus.php">Contact</a></span>
+<div class="foot" style="text-align:center;margin-top:40px;"><p style="margin-left:0;"> &copy; Copyright - autorecyclersonline.com</p>
+    <p style="position: relative;display: inline-block;text-align: center;margin-left:0;">FAQ | Terms & Conditions | Privacy Policy | <a href="http://www.autorecyclersonline.com/search/contactus.php">Contact | <a href="http://www.autorecyclersonline.com/search/aboutus.php">About</a></p]></div>
 </div>
 
  <script type="text/javascript">

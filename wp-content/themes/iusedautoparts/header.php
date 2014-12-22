@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-<title><?php if(is_home()) { echo bloginfo("name"); echo " - "; echo bloginfo("description"); } else { echo wp_title(" - ", false, right); echo bloginfo("name"); } ?></title>
-
+<!--<title><?php if(is_home()) { echo bloginfo("name"); echo " - "; echo bloginfo("description"); } else { echo wp_title(" - ", false, right); echo bloginfo("name"); } ?></title>-->
+<title><?php wp_title( '|', true, 'right' )  ?></title>
 
 
 <link href='//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800' rel='stylesheet' type='text/css'>
@@ -19,7 +19,7 @@
 <script src="<?php bloginfo('template_url'); ?>/js/detect.js"></script>
 <script>
  SA.redirection_mobile ({
-    mobile_url : "www.iusedautoparts.com/search/",
+    mobile_url : "m.autorecyclersonline.com",
   });
 </script>
 <!--[if lt IE 9]>
@@ -35,7 +35,7 @@
 
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-          <a class="navbar-brand" href="#"><img src="<?php bloginfo('template_url'); ?>/images/logo.png" alt="iUsedAutoParts"/></a> </div>
+          <a class="navbar-brand" href="#"><img src="<?php bloginfo('template_url'); ?>/images/logo.png" alt="AutoRecyclersOnline.com"/></a> </div>
 
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -48,6 +48,7 @@
               </ul>
             </li>
             <li><a href="<?php bloginfo('url'); ?>/contact">CONTACT</a></li>
+			
           </ul>
 
 
@@ -62,7 +63,7 @@
           <ul class="nav nav-pills nav-justified">
             <li><a href="<?php bloginfo('url'); ?>/about-us">ABOUT US</a></li>
             <li>
-            	<a href="/partslist">PARTS LIST</a>
+              <a href="/partslist">PARTS LIST</a>
 
             </li>
           </ul>

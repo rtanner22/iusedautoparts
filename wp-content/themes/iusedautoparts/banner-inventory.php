@@ -2,9 +2,9 @@
 //if(file_exists('testing/inc/rb.phar'))
 //	require 'testing/inc/rb.phar';
 
-//R::setup('mysql:host=qs3505.pair.com;dbname=rtanner2_cpl',    'rtanner2_38','BHeFVC7i');
-    $result = R::getAll("select * from requests where id = '".$_REQUEST['reqid']."' ");
-    $zipcode = $result[0][zip];
+    global $mainresult;
+	$mainresult = R::getAll("select * from requests where id = '".$_REQUEST['reqid']."' ");
+    $zipcode = $mainresult[0][zip];
 ?>
 <section id="banner" class="inventory">
 <div class="mascot">
@@ -15,7 +15,7 @@
           <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" >
             	<div id="change-search-title">
-              <h4>You're searching for a(n) <span><?php echo $result[0][part]; ?></span> for a <span><?php echo $result[0][year]; ?> <?php echo $result[0][make]; ?> <?php echo $result[0][model]; ?> </span> <!--with <span>7 OPTIONS SELECTED</span> --></h4>
+              <h4>You're searching for a(n) <span><?php echo $mainresult[0][part]; ?></span> for a <span><?php echo $mainresult[0][year]; ?> <?php echo $mainresult[0][make]; ?> <?php echo $mainresult[0][model]; ?> </span> <!--with <span>7 OPTIONS SELECTED</span> --></h4>
 				</div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">  <a id="btn-change-search" href="#" class="btn btn-orange btn-block btn-sm" data-toggle="collapse" data-target="#search-form"><span id="loading" style="display:none"><img src="<?php bloginfo('template_url'); ?>/images/SpinningWheel2.gif" width='18px' height='18px'></span> CHANGE SEARCH <i class="fa fa-chevron-down"></i></a> </div>
@@ -25,12 +25,12 @@
           <input type="hidden" name="reqid" id="reqid" value="<?php echo $_REQUEST['reqid']; ?>" />
           <input type="hidden" name="openyear" id="openyear" value="false" />
 
-          <input type="hidden" name="preload-year" id="preload-year" value="<?php echo $result[0][year]; ?>" />
-          <input type="hidden" name="preload-make" id="preload-make" value="<?php echo $result[0][make]; ?>" />
-          <input type="hidden" name="preload-model" id="preload-model" value="<?php echo $result[0][model]; ?>" />
-          <input type="hidden" name="preload-part" id="preload-part" value="<?php echo substr($result[0][hnumber], 0,3); ?>" />
-          <input type="hidden" name="preload-part" id="preload-chpartname" value="<?php echo $result[0][part]; ?>" />
-          <input type="hidden" name="preload-option" id="preload-option" value="<?php echo $result[0][hollanderoption]; ?>" />
+          <input type="hidden" name="preload-year" id="preload-year" value="<?php echo $mainresult[0][year]; ?>" />
+          <input type="hidden" name="preload-make" id="preload-make" value="<?php echo $mainresult[0][make]; ?>" />
+          <input type="hidden" name="preload-model" id="preload-model" value="<?php echo $mainresult[0][model]; ?>" />
+          <input type="hidden" name="preload-part" id="preload-part" value="<?php echo substr($mainresult[0][hnumber], 0,3); ?>" />
+          <input type="hidden" name="preload-part" id="preload-chpartname" value="<?php echo $mainresult[0][part]; ?>" />
+          <input type="hidden" name="preload-option" id="preload-option" value="<?php echo $mainresult[0][hollanderoption]; ?>" />
           <div id="group-form" class="row">
             <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
               <div id="group-year" class="btn-group btn-group-justified">
@@ -38,7 +38,7 @@
 <!--                  <button type="button" class="btn btn-dropdown btn-lg dropdown-toggle" name="box-year" data-toggle="dropdown"> <span class="selection">Year</span> <span class="caret"></span> </button>-->
                  <!-- <div class="dropdown-menu">-->
 				<select class="btn btn-dropdown btn-lg dropdown-toggle" name="box-year" id="box-year" role="menu" >
-				<option value="<?php echo $result[0][year]; ?>" selected="selected"><?php echo $result[0][year]; ?></option> </select>
+				<option value="<?php echo $mainresult[0][year]; ?>" selected="selected"><?php echo $mainresult[0][year]; ?></option> </select>
 
                  <!-- </div> -->
                 </div>
@@ -49,7 +49,7 @@
                 <div class="btn-group">
      <!--             <button type="button" class="btn btn-dropdown btn-lg dropdown-toggle" data-toggle="dropdown"> <span class="selection">Make</span> <span class="caret"></span> </button>-->
                   <select id="box-make" class="btn btn-dropdown btn-lg dropdown-toggle"  role="menu" name="carmake">
-					<option value="<?php echo $result[0][make]; ?>" selected="selected"><?php echo $result[0][make]; ?></option>
+					<option value="<?php echo $mainresult[0][make]; ?>" selected="selected"><?php echo $mainresult[0][make]; ?></option>
                  </select>
                 </div>
               </div>
@@ -59,7 +59,7 @@
                 <div class="btn-group">
         <!--          <button type="button" class="btn btn-dropdown btn-lg dropdown-toggle" data-toggle="dropdown"> <span class="selection">Model</span> <span class="caret"></span> </button>-->
                   <select id="box-model" class="btn btn-dropdown btn-lg dropdown-toggle" role="menu" name="carmodel">
-					<option value="<?php echo $result[0][model]; ?>" selected="selected"><?php echo $result[0][model]; ?></option>
+					<option value="<?php echo $mainresult[0][model]; ?>" selected="selected"><?php echo $mainresult[0][model]; ?></option>
                   </select>
                 </div>
               </div>
@@ -69,7 +69,7 @@
                 <div class="btn-group">
         <!--          <button type="button" class="btn btn-dropdown btn-lg dropdown-toggle" data-toggle="dropdown" id="part-name"> <span class="selection">Part</span> <span class="caret"></span> </button>-->
                   <select id="box-part" class="btn btn-dropdown btn-lg dropdown-toggle"  role="menu"  name="carpart">
-					<option value="<?php echo $result[0][part]; ?>" selected="selected"><?php echo $result[0][part]; ?></option>
+					<option value="<?php echo $mainresult[0][part]; ?>" selected="selected"><?php echo $mainresult[0][part]; ?></option>
                   </select>
                   <input type="hidden" id="partname" name="partname" />
                 </div>
@@ -84,7 +84,7 @@
                 </div>
                   <button type="button" class="btn btn-dropdown btn-lg dropdown-toggle active" data-toggle="dropdown"> <span class="selection">Select Options</span> <span class="caret"></span> </button>
                   <div class="menu select2-drop" size="10" role="menu" name="optionvalue" id="optionvalue" ></div>
-                  <input type="hidden" name="hollanderoption" id="hollanderoption" value="<?php echo $result[0]['hnumber']; ?>" />
+                  <input type="hidden" name="hollanderoption" id="hollanderoption" value="<?php echo $mainresult[0]['hnumber']; ?>" />
               </div>
 <!--              <div class="btn-group btn-group-justified">
                 <div class="btn-group">
@@ -97,7 +97,7 @@
             <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" id="zipbox">
               <div id="group-zip" style="display: none;">
                 <label>Enter your Zip Code so we can find stock near you:</label>
-                <input id="zip" type="text" class="form-control input-lg" placeholder="e.g. 10003" name="zipcode" value="<?php echo $result[0][zip]; ?>" />
+                <input id="zip" type="text" class="form-control input-lg" placeholder="e.g. 10003" name="zipcode" value="<?php echo $mainresult[0][zip]; ?>" />
               </div>
             </div>
           </div>

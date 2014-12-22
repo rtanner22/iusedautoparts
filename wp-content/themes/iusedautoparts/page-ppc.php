@@ -5,8 +5,8 @@ Template Name: Page PPC
 
 if(file_exists('testing/inc/rb.phar'))
 	require 'testing/inc/rb.phar';
-R::setup('mysql:host=qs3505.pair.com;dbname=rtanner2_cpl',
-    'rtanner2_38','e9!R7a03raa');
+R::setup('mysql:host=192.168.200.100;dbname=iusedparts',
+    'iusedparts','5huYvRDH');
 ?>
 <?php get_header(); ?>
 <?php get_template_part( 'banner', 'ppc' ); ?>

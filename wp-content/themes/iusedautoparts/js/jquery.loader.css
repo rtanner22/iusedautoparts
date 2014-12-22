@@ -39,3 +39,22 @@ width: 260px !important;
 height: 160px !important;
 padding-top: 80px;
 }
+#jquery-loader.blue-with-image-13{
+background-color: #fff;
+    border: 1px solid rgba(0,0,0,0.2);
+    border-radius: 6px;
+    background-image: url(images/ajax-loader.gif);
+    background-clip: padding-box;
+    background-position: 107px 10px;
+    background-repeat: no-repeat;
+    outline: none;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    width: 260px !important;
+    height: 70px !important;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    color: #55565b;
+    line-height: 1.5em;
+    padding-top: 80px;
+}

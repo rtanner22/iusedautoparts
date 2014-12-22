@@ -1,10 +1,11 @@
 <?php
-error_reporting(0);
+
 session_start();
-$mdb_username = "rtanner2_38";
-$mdb_password = "e9!R7a03raa";
-$mdb_database = "rtanner2_cpl";
-$mdb_host="localhost" ;
+date_default_timezone_set('America/Chicago');
+$mdb_username = "iusedparts";
+$mdb_password = "5huYvRDH";
+$mdb_database = "iusedparts";
+$mdb_host="192.168.200.100" ;
 $mlink = mysql_connect($mdb_host,$mdb_username,$mdb_password);
 mysql_select_db("$mdb_database", $mlink);
 
@@ -27,6 +28,15 @@ $hollanderoption = "[" . implode(",", $hollanderoption) . "]";
 		$wantsrepair=0;
 	}
 
+	$sql_inventory = "insert into inventory_r 
+		(yardid,inventoryid,inventorynumber,quantityavailable,
+		stockticketnumber,modelyear,modelname,conditionsandoptions,
+		mileage,conditioncode,partrating,wholesaleprice,retailprice) 
+	select (yardid,inventoryid,inventorynumber,quantityavailable,
+		stockticketnumber,modelyear,modelname,conditionsandoptions,
+		mileage,conditioncode,partrating,wholesaleprice,retailprice)
+	from inventory where inventorynumber = $interchange[2]";
+    
     $sql = "insert into requests (date,udate,year,make,model,part,hnumber,hollanderoption,phone,zip,email,source,referrer,kw,se,ip,wantsrepair) values('$date',unix_timestamp(),'$year','$make','$model','$partname','$interchange[2]','".mysql_real_escape_string($hollanderoption)."','$phone','$zip','$email','$source','$_SESSION[referrer]','$_SESSION[kw]','$_SESSION[se]','$ip','$wantsrepair')";
 	$que=mysql_query($sql) or die(mysql_error());
 	if($que)

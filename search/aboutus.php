@@ -30,7 +30,7 @@ session_start();
     </div>
 </div>-->
 
-<div class="wrapperbody">
+<div class="wrapperbody" style="display:table;">
   <div class="inwrap">
   <!--    <div class="contentbar-1">
           <p>Find Parts Now.</p>
@@ -41,24 +41,24 @@ session_start();
        
         <h1>About Us</h1>
         <div class="row about">
-          <p>iUsedAutoParts.com was formed in 2013 with the sole intent of helping people find OEM recycled auto parts directly from the parts suppliers themselves.  Our service is simple. It&#8217;s free to use for customers looking for parts and recyclers that want to join just pay a small monthly fee. No middle men, no markups and no searching multiple websites to find what you are looking for.  We use the Hollander Interchange so your part searches match the format used by automotive recyclers which means quicker part searches and less mistakes.</p>
+          <p>AutoRecyclersOnline.com was formed in 2013 with the sole intent of helping people find OEM recycled auto parts directly from the parts suppliers themselves.  Our service is simple. It&#8217;s free to use for customers looking for parts and recyclers that want to join just pay a small monthly fee. No middle men, no markups and no searching multiple websites to find what you are looking for.  We use the Hollander Interchange so your part searches match the format used by automotive recyclers which means quicker part searches and less mistakes.</p>
           <p>&nbsp;</p>
           <p>If you&#8217;d like to mail us use the address below.</p>
           <p>&nbsp;</p>
-          <p>iUsedAutoParts.com</p>
+          <p>AutoRecyclersOnline.com</p>
           <p>4513 Old Shell Road Suite 202</p>
           <p>Mobile, AL 36608</p>
           <p>&nbsp;</p>
           <p>If you are a recycler and would like to become a member please <a href="http://www.autorecyclersonline.com">click here.</a></p>
           <p>&nbsp;</p>
-          <p>If you&#8217;d like to send us an email <a href="http://www.iusedautoparts.com/search/contactus.php">go here</a>.</p>
+          <p>If you&#8217;d like to send us an email <a href="http://www.AutoRecyclersOnline.com/search/contactus.php">go here</a>.</p>
         </div>
               
     </div>
   </div>
 </div>
-<div class="foot"><span> &copy; Copyright - Car Parts Locator - Enfold Theme by Kriesi</span>
-  <span style="float: right;margin-right: 35px;">FAQ | Terms & Conditions | Privacy Policy | <a href="http://www.iusedautoparts.com/search/contactus.php">Contact</a></span>
+<div class="foot" style="text-align:center;margin-top:40px;"><p style="margin-left:0;"> &copy; Copyright - AutoRecyclersOnline.com</p>
+    <p style="position: relative;display: inline-block;text-align: center;margin-left:0;">FAQ | Terms & Conditions | Privacy Policy | <a href="http://www.iusedautoparts.com/search/contactus.php">Contact | <a href="http://www.AutoRecyclersOnline.com/search/aboutus.php">About</a></p]></div>
 </div>
 
  <script type="text/javascript">

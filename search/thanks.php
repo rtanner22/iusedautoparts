@@ -7,7 +7,7 @@ session_start();
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Car parts locator</title>
+<title>AutoRecyclersOnline.com</title>
 <link href="css/style.css" rel="stylesheet" type="text/css" />
 
 

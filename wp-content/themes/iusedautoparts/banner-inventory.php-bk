@@ -2,7 +2,6 @@
 //if(file_exists('testing/inc/rb.phar'))
 //	require 'testing/inc/rb.phar';
 
-//R::setup('mysql:host=qs3505.pair.com;dbname=rtanner2_cpl',    'rtanner2_38','BHeFVC7i');
     $result = R::getAll("select * from requests where id = '".$_REQUEST['reqid']."' ");
 ?>
 <section id="banner" class="inventory">

@@ -1,18 +1,18 @@
 <?php
 session_start();
-$mdb_username = "rtanner2_38";
-$mdb_password = "e9!R7a03raa";
-$mdb_database = "rtanner2_cpl";
-$mdb_host="localhost" ;
+$mdb_username = "iusedparts";
+$mdb_password = "5huYvRDH";
+$mdb_database = "iusedparts";
+$mdb_host="192.168.200.100" ;
 $mlink = mysql_connect($mdb_host,$mdb_username,$mdb_password);
 mysql_select_db("$mdb_database", $mlink);
 
 function modelxref($cplmodel)
 {
-	$lcsql = "select distinct HModel from hmodelxref where cplmodel = '$cplmodel' limit 1";
-	$result = mysql_query($lcsql);
-	$row = mysql_fetch_array($result);
-	return $row['HModel'];
+  $lcsql = "select distinct HModel from hmodelxref where cplmodel = '$cplmodel' limit 1";
+  $result = mysql_query($lcsql);
+  $row = mysql_fetch_array($result);
+  return $row['HModel'];
 
 }
 
@@ -26,85 +26,90 @@ $part= mysql_real_escape_string(@$_GET['part']);
 
 
 
+
+
+
+
+
 if($keys=='make~model~part')
 {
-	$dtype=1;
-	$query=1;
+  $dtype=1;
+  $query=1;
 
 }
 else if($keys=='model~make~part')
 {
-	$dtype=2;
-	$query=1;
+  $dtype=2;
+  $query=1;
 
 }
 else if($keys=='model~part~make')
 {
-	$dtype=3;
-	$query=1;
+  $dtype=3;
+  $query=1;
 
 }
 
 else if($keys=='make~part~model')
 {
-	$dtype=4;
-	$query=1;
+  $dtype=4;
+  $query=1;
 
 }
 else if($keys=='part~make~model')
 {
-	$dtype=5;
-	$query=1;
+  $dtype=5;
+  $query=1;
 
 }
 else if($keys=='part~model~make')
 {
-	$dtype=6;
-	$query=1;
+  $dtype=6;
+  $query=1;
 
 }
 
 else if($keys=='make~part')
 {
-	$dtype=7;
-	$query=1;
+  $dtype=7;
+  $query=1;
 
 }
 else if($keys=='part~make')
 {
-	$dtype=8;
-	$query=1;
+  $dtype=8;
+  $query=1;
 
 }
 else if($keys=='make')
 {
-	$dtype=9;
-	$query=0;
+  $dtype=9;
+  $query=0;
 }
 
 else
 {
-	$dtype=0;
-	$query=0;
+  $dtype=0;
+  $query=0;
 }
 
 
 
 if(is_numeric($part))
 {
-	 $sqlpart ="select * from `ptype` where `PartType` ='$part' ";
-	 $sqlpartq=mysql_query($sqlpart);
-	 $sqlpartr=mysql_fetch_array($sqlpartq);
-	 $part=$sqlpartr['Description'];
+   $sqlpart ="select * from `ptype` where `PartType` ='$part' ";
+   $sqlpartq=mysql_query($sqlpart);
+   $sqlpartr=mysql_fetch_array($sqlpartq);
+   $part=$sqlpartr['Description'];
 
 }
 else
 {
 
-	 $sqlpart ="select * from `ptype` where `Description` ='$part' ";
-	 $sqlpartq=mysql_query($sqlpart);
-	 $sqlpartr=mysql_fetch_array($sqlpartq);
-	 $part=$sqlpartr['Description'];
+   $sqlpart ="select * from `ptype` where `Description` ='$part' ";
+   $sqlpartq=mysql_query($sqlpart);
+   $sqlpartr=mysql_fetch_array($sqlpartq);
+   $part=$sqlpartr['Description'];
 
 }
 
@@ -123,7 +128,7 @@ if(mysql_num_rows($sqlpartq)!=0)
   }
   if(trim($model)!='')
   {
-	  $modelnew=modelxref($model);
+    $modelnew=modelxref($model);
 
   $sql .=" and indexlist.ModelNm='$modelnew'";
   }
@@ -135,14 +140,14 @@ if(mysql_num_rows($sqlpartq)!=0)
   $lowval = $row['BeginYear'];
   $highval = $row['EndYear'];
 
-	  if($lowval=='')
-	  {
-	  $sql = "select max(CarlineYear) as high,min(CarLineYear) as low from carline";
-	  $result = mysql_query($sql);
-	  $row = mysql_fetch_array($result);
-	  $lowval = $row['low'];
-	  $highval = $row['high'];
-	  }
+    if($lowval=='')
+    {
+    $sql = "select max(CarlineYear) as high,min(CarLineYear) as low from carline";
+    $result = mysql_query($sql);
+    $row = mysql_fetch_array($result);
+    $lowval = $row['low'];
+    $highval = $row['high'];
+    }
 
 
 
@@ -174,29 +179,29 @@ else
 
 if(isset($_POST['fs']))
 {
-	extract($_POST);
-	$ip=$_SERVER['REMOTE_ADDR'];
-	$date = date('Y-m-d H:i:s');
-	$source = "";
+  extract($_POST);
+  $ip=$_SERVER['REMOTE_ADDR'];
+  $date = date('Y-m-d H:i:s');
+  $source = "";
 
-	//print_r($_POST);
+  //print_r($_POST);
 
-	if(isset($_POST['mechanics']))
-	{
-		$wantsrepair=1;
-	}
-	else
-	{
-		$wantsrepair=0;
-	}
+  if(isset($_POST['mechanics']))
+  {
+    $wantsrepair=1;
+  }
+  else
+  {
+    $wantsrepair=0;
+  }
 
     $sql = "insert into requests (date,udate,year,make,model,part,hnumber,hollanderoption,phone,zip,email,source,referrer,kw,se,ip,wantsrepair) values('$date',unix_timestamp(),$year,'$make','$model','$partname','$interchange','$application','$phone','$zip','$email','$source','$_SESSION[referrer]','$_SESSION[kw]','$_SESSION[se]','$ip','$wantsrepair')";
-	$que=mysql_query($sql);
-	if($que)
-	{
-		/*echo "<script>alert('Thanks!! We will contact you soon.')</script>";*/
-		echo "<script>window.location.href='thanks.php'</script>";
-	}
+  $que=mysql_query($sql);
+  if($que)
+  {
+    /*echo "<script>alert('Thanks!! We will contact you soon.')</script>";*/
+    echo "<script>window.location.href='thanks.php'</script>";
+  }
 
 }
 
@@ -210,30 +215,32 @@ if(isset($_POST['fs']))
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="apple-mobile-web-app-capable" content="yes" />
-<title>Car parts locator</title>
+<title>AutoRecyclersOnline.com - The Used Auto Parts Marketplace</title>
 <link href="css/style.css" rel="stylesheet" type="text/css" />
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+<script src="http://www.autorecyclersonline.com/wp-content/themes/iusedautoparts/js/jquery.loader.js"></script>
+<link href="http://www.autorecyclersonline.com/wp-content/themes/iusedautoparts/js/jquery.loader.css" rel="stylesheet">
 <link href="js/select2.css" rel="stylesheet"/>
 <script src="js/select2.js"></script>
 <script>
 $(document).ready(function(){
-	$("#year").select2({placeholder: "Select Year"});
-	$("#make").select2({placeholder: "Select Make"});
-	$("#model").select2({placeholder: "Select Model"});
-	$("#part").select2({placeholder: "Select Part"});
-	$("#partoption0").select2({placeholder: "Part Option"});
-	for(a=1; a<12; a++)
-	{
-	  $("#partoption"+a).select2({placeholder: "Part Option " +a});
-	}
+  $("#year").select2({placeholder: "Select Year"});
+  $("#make").select2({placeholder: "Select Make"});
+  $("#model").select2({placeholder: "Select Model"});
+  $("#part").select2({placeholder: "Select Part"});
+  $("#partoption0").select2({placeholder: "Part Option"});
+  for(a=1; a<12; a++)
+  {
+    $("#partoption"+a).select2({placeholder: "Part Option " +a});
+  }
 });
 
 /*function goback()
 {
-	document.getElementById('part1').click();
-	document.location.hash= '#1';
-	document.getElementById('part1').className = 'activeicon showp';
+  document.getElementById('part1').click();
+  document.location.hash= '#1';
+  document.getElementById('part1').className = 'activeicon showp';
 }*/
 iam=0;
 function getoption(obj,type,uno)
@@ -241,30 +248,30 @@ function getoption(obj,type,uno)
 
   if(uno<5)
   {
-	document.getElementById("partoption0").innerHTML='<option value=""></option>';
-	$('#s2id_partoption0 span.select2-chosen').html('Part Option');
-	for(a=1; a<11; a++)
-	{
-		ccc=a+5
-	  document.getElementById("s"+ccc).style.display='none';
-	  document.getElementById("partoption"+a).innerHTML= "<option value=''>Select Part Option</option>"
-	  $('#s2id_partoption'+a+' span.select2-chosen').html('Part Option');
-	}
+  document.getElementById("partoption0").innerHTML='<option value=""></option>';
+  $('#s2id_partoption0 span.select2-chosen').html('Part Option');
+  for(a=1; a<11; a++)
+  {
+    ccc=a+5
+    document.getElementById("s"+ccc).style.display='none';
+    document.getElementById("partoption"+a).innerHTML= "<option value=''>Select Part Option</option>"
+    $('#s2id_partoption'+a+' span.select2-chosen').html('Part Option');
+  }
   }
 
 
   if(uno>=5)
   {
-	  bno=uno-4;
+    bno=uno-4;
 
 
-	for(a=bno; a<11; a++)
-	{
-	  ccc=a+5
-	  document.getElementById("s"+ccc).style.display='none';
-	  document.getElementById("partoption"+a).innerHTML= "<option value=''>Select Part Option</option>"
-	  $('#s2id_partoption'+a+' span.select2-chosen').html('Part Option');
-	}
+  for(a=bno; a<11; a++)
+  {
+    ccc=a+5
+    document.getElementById("s"+ccc).style.display='none';
+    document.getElementById("partoption"+a).innerHTML= "<option value=''>Select Part Option</option>"
+    $('#s2id_partoption'+a+' span.select2-chosen').html('Part Option');
+  }
   }
 
   nuno=uno+1;
@@ -280,34 +287,34 @@ function getoption(obj,type,uno)
 
   if(type=='partoption1')
   {
-	  if(obj=='0')
-	  {
-	  document.getElementById("part3").className = "blockp";
-	  }
+    if(obj=='0')
+    {
+    document.getElementById("part3").className = "blockp";
+    }
   }
 
   if(obj==0)
   {
- 	document.getElementById(uno+'c').style.display='none';
-  	return false;
+   document.getElementById(uno+'c').style.display='none';
+    return false;
   }
 
   if(uno==4)
   {
-	  if(obj!='0')
-	  {
-	  document.getElementById('go_back').innerHTML= '< '+cyear+' '+make+' '+model+' '+document.form1.part.options[document.form1.part.selectedIndex].text;
-	  document.getElementById('go_back1').innerHTML= '< '+cyear+' '+make+' '+model+' '+document.form1.part.options[document.form1.part.selectedIndex].text;
-	  document.getElementById('part2').click();
-	  document.location.hash= '#2';
-	  document.getElementById('part2').className = 'activeicon showp';
-	  }
+    if(obj!='0')
+    {
+    document.getElementById('go_back').innerHTML= '< '+cyear+' '+make+' '+model+' '+document.form1.part.options[document.form1.part.selectedIndex].text;
+    document.getElementById('go_back1').innerHTML= '< '+cyear+' '+make+' '+model+' '+document.form1.part.options[document.form1.part.selectedIndex].text;
+    document.getElementById('part2').click();
+    document.location.hash= '#2';
+    document.getElementById('part2').className = 'activeicon showp';
+    }
   }
 
   if(obj!='0')
   {
-	  document.getElementById(uno+'c').src='img/correct.png';
-	  document.getElementById(uno+'c').style.display='block';
+    document.getElementById(uno+'c').src='img/correct.png';
+    document.getElementById(uno+'c').style.display='block';
   }
 
 
@@ -317,134 +324,185 @@ function getoption(obj,type,uno)
   var xmlhttp;
   if (window.XMLHttpRequest)
   {// code for IE7+, Firefox, Chrome, Opera, Safari
-  	xmlhttp=new XMLHttpRequest();
+    xmlhttp=new XMLHttpRequest();
   }
   else
   {// code for IE6, IE5
-  	xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
   }
   xmlhttp.onreadystatechange=function()
   {
-	  if(xmlhttp.readyState==4 && xmlhttp.status==200)
-	  {
-		  var coptions = obj.split("|");
-	   	  var interchange = coptions.slice(2,3);
- 		  if (interchange != "")
- 		  {
-	 	  document.getElementById('interchange').value=interchange;
-	 	  alert(interchange);
-			alert(obj + " " + type + " " + uno);
- 		  }
-		  //alert(xmlhttp.responseText);
-		  document.getElementById(nuno+'c').style.display='none';
-		  returnxml=xmlhttp.responseText
-		  if(returnxml=="<option value='0'>Select Part Option 1</option>")
-		  {
+    if(xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+      var coptions = obj.split("|");
+         var interchange = coptions.slice(2,3);
+       if (interchange != "")
+       {
+       document.getElementById('interchange').value=interchange;
+       
+        alert(interchange);
+      alert(obj + " " + type + " " + uno);
 
-			  document.getElementById('part3').click();
-			  document.location.hash= '#3';
-			  document.getElementById('part3').className = 'activeicon showp';
-			  return false;
-		  }
-		 else if(returnxml=="<option value='0'>Select Part Option 2</option>")
-		  {
+       }
+      //alert(xmlhttp.responseText);
+      document.getElementById(nuno+'c').style.display='none';
+      returnxml=xmlhttp.responseText
+      if(returnxml=="<option value='0'>Select Part Option 1</option>")
+      {
 
-			  document.getElementById('part3').click();
-			  document.location.hash= '#3';
-			  document.getElementById('part3').className = 'activeicon showp';
-			  return false;
-		  }
-		  else if(returnxml=="<option value='0'>Select Part Option 3</option>")
-		  {
+        document.getElementById('part3').click();
+        document.location.hash= '#3';
+        document.getElementById('part3').className = 'activeicon showp';
+        return false;
+      }
+     else if(returnxml=="<option value='0'>Select Part Option 2</option>")
+      {
 
-			  document.getElementById('part3').click();
-			  document.location.hash= '#3';
-			  document.getElementById('part3').className = 'activeicon showp';
-			  return false;
-		  }
-		 else if(returnxml=="<option value='0'>Select Part Option 4</option>")
-		  {
+        document.getElementById('part3').click();
+        document.location.hash= '#3';
+        document.getElementById('part3').className = 'activeicon showp';
+        return false;
+      }
+      else if(returnxml=="<option value='0'>Select Part Option 3</option>")
+      {
 
-			  document.getElementById('part3').click();
-			  document.location.hash= '#3';
-			  document.getElementById('part3').className = 'activeicon showp';
-			  return false;
-		  }
-		 else if(returnxml=="<option value='0'>Select Part Option 5</option>")
-		  {
+        document.getElementById('part3').click();
+        document.location.hash= '#3';
+        document.getElementById('part3').className = 'activeicon showp';
+        return false;
+      }
+     else if(returnxml=="<option value='0'>Select Part Option 4</option>")
+      {
 
-			  document.getElementById('part3').click();
-			  document.location.hash= '#3';
-			  document.getElementById('part3').className = 'activeicon showp';
-			  return false;
-		  }
-		 else if(returnxml=="<option value='0'>Select Part Option 6</option>")
-		  {
+        document.getElementById('part3').click();
+        document.location.hash= '#3';
+        document.getElementById('part3').className = 'activeicon showp';
+        return false;
+      }
+     else if(returnxml=="<option value='0'>Select Part Option 5</option>")
+      {
 
-			  document.getElementById('part3').click();
-			  document.location.hash= '#3';
-			  document.getElementById('part3').className = 'activeicon showp';
-			  return false;
-		  }
-		 else if(returnxml=="<option value='0'>Select Part Option 7</option>")
-		  {
+        document.getElementById('part3').click();
+        document.location.hash= '#3';
+        document.getElementById('part3').className = 'activeicon showp';
+        return false;
+      }
+     else if(returnxml=="<option value='0'>Select Part Option 6</option>")
+      {
 
-			  document.getElementById('part3').click();
-			  document.location.hash= '#3';
-			  document.getElementById('part3').className = 'activeicon showp';
-			  return false;
-		  }
-		 else if(returnxml=="<option value='0'>Select Part Option 8</option>")
-		  {
+        document.getElementById('part3').click();
+        document.location.hash= '#3';
+        document.getElementById('part3').className = 'activeicon showp';
+        return false;
+      }
+     else if(returnxml=="<option value='0'>Select Part Option 7</option>")
+      {
 
-			  document.getElementById('part3').click();
-			  document.location.hash= '#3';
-			  document.getElementById('part3').className = 'activeicon showp';
-			  return false;
-		  }
-		 else if(returnxml=="<option value='0'>Select Part Option 9</option>")
-		  {
+        document.getElementById('part3').click();
+        document.location.hash= '#3';
+        document.getElementById('part3').className = 'activeicon showp';
+        return false;
+      }
+     else if(returnxml=="<option value='0'>Select Part Option 8</option>")
+      {
 
-			  document.getElementById('part3').click();
-			  document.location.hash= '#3';
-			  document.getElementById('part3').className = 'activeicon showp';
-			  return false;
-		  }
-		 else if(returnxml=="<option value='0'>Select Part Option 10</option>")
-		  {
+        document.getElementById('part3').click();
+        document.location.hash= '#3';
+        document.getElementById('part3').className = 'activeicon showp';
+        return false;
+      }
+     else if(returnxml=="<option value='0'>Select Part Option 9</option>")
+      {
 
-			  document.getElementById('part3').click();
-			  document.location.hash= '#3';
-			  document.getElementById('part3').className = 'activeicon showp';
-			  return false;
-		  }
-		 else if(returnxml=="<option value='0'>Select Part Option 11</option>")
-		  {
+        document.getElementById('part3').click();
+        document.location.hash= '#3';
+        document.getElementById('part3').className = 'activeicon showp';
+        return false;
+      }
+     else if(returnxml=="<option value='0'>Select Part Option 10</option>")
+      {
 
-			  document.getElementById('part3').click();
-			  document.location.hash= '#3';
-			  document.getElementById('part3').className = 'activeicon showp';
-			  return false;
-		  }
-		 else
-		  {
-			  if(uno>=5)
-			  {
-				unn=uno+1;
-				document.getElementById('s'+unn).style.display='block';
-			  }
-	  }
+        document.getElementById('part3').click();
+        document.location.hash= '#3';
+        document.getElementById('part3').className = 'activeicon showp';
+        return false;
+      }
+     else if(returnxml=="<option value='0'>Select Part Option 11</option>")
+      {
+
+        document.getElementById('part3').click();
+        document.location.hash= '#3';
+        document.getElementById('part3').className = 'activeicon showp';
+        return false;
+      }
+     else
+      {
+        if(uno>=5)
+        {
+        unn=uno+1;
+        document.getElementById('s'+unn).style.display='block';
+        }
+    }
 
 
-	 // document.getElementById(type).innerHTML=xmlhttp.responseText;
-	 $('#'+type).html(xmlhttp.responseText);
-	  $("#"+type).select2("open");
-	  }
+   // document.getElementById(type).innerHTML=xmlhttp.responseText;
+   $('#'+type).html(xmlhttp.responseText);
+    $("#"+type).select2("open");
+    }
   }
 
   xmlhttp.open("GET","getdetail.php?obj="+obj+'&type='+type+'&dtype='+<?php echo $dtype;?>+'&cyear='+cyear+'&make='+make+'&model='+model+'&part='+part,true);
   xmlhttp.send();
 
+
+}
+
+
+function LaunchProgressBar() {
+  
+  var code = $('#zip').val();
+  var hoption = "";
+  var year = $('#s2id_year span').eq('0').text();
+  var make = $('#s2id_make span').eq('0').text();
+  var model = $('#s2id_model span').eq('0').text();
+  var partname = $('#s2id_part span').eq('0').text();
+  var inter = $('#interchange').val();
+  
+
+    var params;
+
+        params = {
+        year: year,
+        make: make,
+        model: model,
+        partname: partname,
+        interchange: inter,
+        hollanderoption: hoption,
+        zip: code
+    };
+    var response;
+    $.ajax({
+        async: false,
+        type: 'post',
+        url: "http://m.autorecyclersonline.com/scripts/request_mob.php",
+        data: params,
+        success: function (resp) {
+            if (resp) {
+                response = resp;
+                $('#resp').val(response);
+                
+                setTimeout(function(){
+$.loader("close");
+                $('#form1').submit();  
+                },10000);
+                
+            }
+            else
+                response = false;
+        }
+    });
+// console.log(params);
+    
 
 }
 </script>
@@ -464,7 +522,7 @@ function getoption(obj,type,uno)
 <div class="wrapperheader">
     <div class="inwrap">
         <div class="header-img">
-            <img src="img/logo7.png" alt="img"  />
+            <img src="http://www.autorecyclersonline.com/wp-content/themes/iusedautoparts/images/logo.png" alt="img"  />
         </div>
     </div>
 </div>
@@ -477,7 +535,7 @@ function getoption(obj,type,uno)
     </div>
 
 <div class="selection-box">
-    <form method="post" action="" name="form1" id="form1">
+    <form method="post" action="inventory.php" name="form1" id="form1">
     <div class="part_1 form_part" style="padding-top: 20px;">
     <img src="img/content-img.png" class="imgcl" style="display:none;">
     <!-- <h1 class="formTittle small" ><img src="img/carInfo.png" >Car Info</h1> -->
@@ -512,15 +570,15 @@ function getoption(obj,type,uno)
     $sql = "select distinct hmodelxref.cplmodel as model from carline inner join hmodelxref on hmodelxref.Hmodel = carline.ModelNm where hmodelxref.cplmake = '$make'  order by Model" ;
     $result = mysql_query($sql,$mlink);
     if(mysql_num_rows($result)>0)
-	{
-		while ($row = mysql_fetch_array($result))
-		{
-		$rmodel = trim($row['model']);
-		?>
-		<option value="<?php echo $rmodel; ?>" <?php if($rmodel==$model){?> selected <?php }?> ><?php echo $rmodel;?></option>
-		<?php
-		}
-	}
+  {
+    while ($row = mysql_fetch_array($result))
+    {
+    $rmodel = trim($row['model']);
+    ?>
+    <option value="<?php echo $rmodel; ?>" <?php if($rmodel==$model){?> selected <?php }?> ><?php echo $rmodel;?></option>
+    <?php
+    }
+  }
     ?>
     </select> <img src="img/correct.png" class="imgco" id="2c" <?php if($model!=''){?> style="display:block;" <?php } ?>>
 </p>
@@ -531,18 +589,18 @@ function getoption(obj,type,uno)
     $sql = "select distinct ptype.Description as pdesc,indexlist.parttype as ptype from indexlist inner join ptype on ptype.PartType = indexlist.PartType where  ModelNm = '".modelxref($model)."' order by pdesc asc" ;
 
     $result = mysql_query($sql,$mlink);
-	if(mysql_num_rows($result)>0)
-	{
-		while ($row = mysql_fetch_array($result))
-		{
-		$ptype = trim($row['ptype']);
-		$pdesc =  trim($row['pdesc']);
-		?>
-		<option value="<?php echo $ptype; ?>" <?php if($pdesc==$part){?> selected <?php }?> ><?php echo $pdesc;?></option>
-		<?php
-		 }
-	}
-	?>
+  if(mysql_num_rows($result)>0)
+  {
+    while ($row = mysql_fetch_array($result))
+    {
+    $ptype = trim($row['ptype']);
+    $pdesc =  trim($row['pdesc']);
+    ?>
+    <option value="<?php echo $ptype; ?>" <?php if($pdesc==$part){?> selected <?php }?> ><?php echo $pdesc;?></option>
+    <?php
+     }
+  }
+  ?>
     </select> <img src="img/correct.png" class="imgco" id="3c" <?php if($part!=''){?> style="display:block;" <?php } ?>>
 </p>
 
@@ -573,16 +631,16 @@ function getoption(obj,type,uno)
     $sql = "select distinct hmodelxref.cplmodel as model from carline inner join hmodelxref on hmodelxref.Hmodel = carline.ModelNm where hmodelxref.cplmake = '$make'  order by Model" ;
     $result = mysql_query($sql,$mlink);
     if(mysql_num_rows($result)>0)
-	{
-		while ($row = mysql_fetch_array($result))
-		{
-		$rmodel = trim($row['model']);
-		?>
-		<option value="<?php echo $rmodel; ?>" <?php if($rmodel==$model){?> selected <?php }?> ><?php echo $rmodel;?></option>
-		<?php
-		}
-	}
-	?>
+  {
+    while ($row = mysql_fetch_array($result))
+    {
+    $rmodel = trim($row['model']);
+    ?>
+    <option value="<?php echo $rmodel; ?>" <?php if($rmodel==$model){?> selected <?php }?> ><?php echo $rmodel;?></option>
+    <?php
+    }
+  }
+  ?>
     </select> <img src="img/correct.png" class="imgco" id="1c" <?php if($model!=''){?> style="display:block;" <?php } ?>>
 </p>
 
@@ -611,17 +669,17 @@ function getoption(obj,type,uno)
     <option value=""></option> <?php
     $sql = "select distinct ptype.Description as pdesc,indexlist.parttype as ptype from indexlist inner join ptype on ptype.PartType = indexlist.PartType where  ModelNm = '".modelxref($model)."' order by pdesc asc" ;
     $result = mysql_query($sql,$mlink);
-	if(mysql_num_rows($result)>0)
-	{
-		while ($row = mysql_fetch_array($result))
-		{
-		$ptype = trim($row['ptype']);
-		$pdesc =  trim($row['pdesc']);
-		?>
-		<option value="<?php echo $ptype; ?>" <?php if($pdesc==$part){?> selected <?php }?> ><?php echo $pdesc;?></option>
-		<?php
+  if(mysql_num_rows($result)>0)
+  {
+    while ($row = mysql_fetch_array($result))
+    {
+    $ptype = trim($row['ptype']);
+    $pdesc =  trim($row['pdesc']);
+    ?>
+    <option value="<?php echo $ptype; ?>" <?php if($pdesc==$part){?> selected <?php }?> ><?php echo $pdesc;?></option>
+    <?php
         }
-	}
+  }
     ?>
     </select> <img src="img/correct.png" class="imgco" id="3c" <?php if($part!=''){?> style="display:block;" <?php } ?>>
 </p>
@@ -654,15 +712,15 @@ function getoption(obj,type,uno)
     $sql = "select distinct hmodelxref.cplmodel as model from carline inner join hmodelxref on hmodelxref.Hmodel = carline.ModelNm where hmodelxref.cplmake = '$make'  order by Model" ;
     $result = mysql_query($sql,$mlink);
     if(mysql_num_rows($result)>0)
-	{
-		while ($row = mysql_fetch_array($result))
-		{
-		$rmodel = trim($row['model']);
-		?>
-		<option value="<?php echo $rmodel; ?>" <?php if($rmodel==$model){?> selected <?php }?> ><?php echo $rmodel;?></option>
-		<?php
-		}
-	}
+  {
+    while ($row = mysql_fetch_array($result))
+    {
+    $rmodel = trim($row['model']);
+    ?>
+    <option value="<?php echo $rmodel; ?>" <?php if($rmodel==$model){?> selected <?php }?> ><?php echo $rmodel;?></option>
+    <?php
+    }
+  }
     ?>
     </select> <img src="img/correct.png" class="imgco" id="1c" <?php if($model!=''){?> style="display:block;" <?php } ?>>
 </p>
@@ -673,18 +731,18 @@ function getoption(obj,type,uno)
     <option value=""></option> <?php
     $sql = "select distinct ptype.Description as pdesc,indexlist.parttype as ptype from indexlist inner join ptype on ptype.PartType = indexlist.PartType where  ModelNm = '".modelxref($model)."' order by pdesc asc" ;
     $result = mysql_query($sql,$mlink);
-	if(mysql_num_rows($result)>0)
-	{
-		while ($row = mysql_fetch_array($result))
-		{
-		$ptype = trim($row['ptype']);
-		$pdesc =  trim($row['pdesc']);
-		?>
-		<option value="<?php echo $ptype; ?>" <?php if($pdesc==$part){?> selected <?php }?> ><?php echo $pdesc;?></option>
-		<?php
-		 }
-	}
-	?>
+  if(mysql_num_rows($result)>0)
+  {
+    while ($row = mysql_fetch_array($result))
+    {
+    $ptype = trim($row['ptype']);
+    $pdesc =  trim($row['pdesc']);
+    ?>
+    <option value="<?php echo $ptype; ?>" <?php if($pdesc==$part){?> selected <?php }?> ><?php echo $pdesc;?></option>
+    <?php
+     }
+  }
+  ?>
     </select> <img src="img/correct.png" class="imgco" id="2c" <?php if($part!=''){?> style="display:block;" <?php } ?>>
 </p>
 
@@ -752,17 +810,17 @@ function getoption(obj,type,uno)
     <option value=""></option> <?php
     $sql = "select distinct ptype.Description as pdesc,indexlist.parttype as ptype from indexlist inner join ptype on ptype.PartType = indexlist.PartType where  ModelNm = '".modelxref($model)."' order by pdesc asc" ;
     $result = mysql_query($sql,$mlink);
-	if(mysql_num_rows($result)>0)
-	{
-		while ($row = mysql_fetch_array($result))
-		{
-		$ptype = trim($row['ptype']);
-		$pdesc =  trim($row['pdesc']);
-		?>
-		<option value="<?php echo $ptype; ?>" <?php if($pdesc==$part){?> selected <?php }?> ><?php echo $pdesc;?></option>
-		<?php
-		}
-	}
+  if(mysql_num_rows($result)>0)
+  {
+    while ($row = mysql_fetch_array($result))
+    {
+    $ptype = trim($row['ptype']);
+    $pdesc =  trim($row['pdesc']);
+    ?>
+    <option value="<?php echo $ptype; ?>" <?php if($pdesc==$part){?> selected <?php }?> ><?php echo $pdesc;?></option>
+    <?php
+    }
+  }
     ?>
     </select> <img src="img/correct.png" class="imgco" id="2c" <?php if($part!=''){?> style="display:block;" <?php } ?>>
 </p>
@@ -774,15 +832,15 @@ function getoption(obj,type,uno)
     $sql = "select distinct hmodelxref.cplmodel as model from carline inner join hmodelxref on hmodelxref.Hmodel = carline.ModelNm where hmodelxref.cplmake = '$make'  order by Model" ;
     $result = mysql_query($sql,$mlink);
     if(mysql_num_rows($result)>0)
-	{
-		while ($row = mysql_fetch_array($result))
-		{
-		$rmodel = trim($row['model']);
-		?>
-		<option value="<?php echo $rmodel; ?>" <?php if($rmodel==$model){?> selected <?php }?> ><?php echo $rmodel;?></option>
-		<?php
-		}
-	}
+  {
+    while ($row = mysql_fetch_array($result))
+    {
+    $rmodel = trim($row['model']);
+    ?>
+    <option value="<?php echo $rmodel; ?>" <?php if($rmodel==$model){?> selected <?php }?> ><?php echo $rmodel;?></option>
+    <?php
+    }
+  }
     ?>
     </select> <img src="img/correct.png" class="imgco" id="3c" <?php if($model!=''){?> style="display:block;" <?php } ?>>
 </p>
@@ -814,17 +872,17 @@ function getoption(obj,type,uno)
     <option value=""></option> <?php
     $sql = "select distinct ptype.Description as pdesc,indexlist.parttype as ptype from indexlist inner join ptype on ptype.PartType = indexlist.PartType where  ModelNm = '".modelxref($model)."' order by pdesc asc" ;
     $result = mysql_query($sql,$mlink);
-	if(mysql_num_rows($result)>0)
-	{
-		while ($row = mysql_fetch_array($result))
-		{
-		$ptype = trim($row['ptype']);
-		$pdesc =  trim($row['pdesc']);
-		?>
-		<option value="<?php echo $ptype; ?>" <?php if($pdesc==$part){?> selected <?php }?> ><?php echo $pdesc;?></option>
-		<?php
+  if(mysql_num_rows($result)>0)
+  {
+    while ($row = mysql_fetch_array($result))
+    {
+    $ptype = trim($row['ptype']);
+    $pdesc =  trim($row['pdesc']);
+    ?>
+    <option value="<?php echo $ptype; ?>" <?php if($pdesc==$part){?> selected <?php }?> ><?php echo $pdesc;?></option>
+    <?php
         }
-	}
+  }
     ?>
     </select> <img src="img/correct.png" class="imgco" id="1c" <?php if($part!=''){?> style="display:block;" <?php } ?>>
 </p>
@@ -855,15 +913,15 @@ function getoption(obj,type,uno)
     $sql = "select distinct hmodelxref.cplmodel as model from carline inner join hmodelxref on hmodelxref.Hmodel = carline.ModelNm where hmodelxref.cplmake = '$make'  order by Model" ;
     $result = mysql_query($sql,$mlink);
     if(mysql_num_rows($result)>0)
-	{
-		while ($row = mysql_fetch_array($result))
-		{
-		$rmodel = trim($row['model']);
-		?>
-		<option value="<?php echo $rmodel; ?>" <?php if($rmodel==$model){?> selected <?php }?> ><?php echo $rmodel;?></option>
-		<?php
-		}
-	}
+  {
+    while ($row = mysql_fetch_array($result))
+    {
+    $rmodel = trim($row['model']);
+    ?>
+    <option value="<?php echo $rmodel; ?>" <?php if($rmodel==$model){?> selected <?php }?> ><?php echo $rmodel;?></option>
+    <?php
+    }
+  }
     ?>
     </select> <img src="img/correct.png" class="imgco" id="3c" <?php if($model!=''){?> style="display:block;" <?php } ?>>
 </p>
@@ -896,17 +954,17 @@ function getoption(obj,type,uno)
     <option value=""></option> <?php
     $sql = "select distinct ptype.Description as pdesc,indexlist.parttype as ptype from indexlist inner join ptype on ptype.PartType = indexlist.PartType where  ModelNm = '".modelxref($model)."' order by pdesc asc" ;
     $result = mysql_query($sql,$mlink);
-	if(mysql_num_rows($result)>0)
-	{
-		while ($row = mysql_fetch_array($result))
-		{
-		$ptype = trim($row['ptype']);
-		$pdesc =  trim($row['pdesc']);
-		?>
-		<option value="<?php echo $ptype; ?>" <?php if($pdesc==$part){?> selected <?php }?> ><?php echo $pdesc;?></option>
-		<?php
-		}
-	}
+  if(mysql_num_rows($result)>0)
+  {
+    while ($row = mysql_fetch_array($result))
+    {
+    $ptype = trim($row['ptype']);
+    $pdesc =  trim($row['pdesc']);
+    ?>
+    <option value="<?php echo $ptype; ?>" <?php if($pdesc==$part){?> selected <?php }?> ><?php echo $pdesc;?></option>
+    <?php
+    }
+  }
     ?>
     </select> <img src="img/correct.png" class="imgco" id="1c" <?php if($part!=''){?> style="display:block;" <?php } ?>>
 </p>
@@ -918,15 +976,15 @@ function getoption(obj,type,uno)
     $sql = "select distinct hmodelxref.cplmodel as model from carline inner join hmodelxref on hmodelxref.Hmodel = carline.ModelNm where hmodelxref.cplmake = '$make'  order by Model" ;
     $result = mysql_query($sql,$mlink);
     if(mysql_num_rows($result)>0)
-	{
-		while ($row = mysql_fetch_array($result))
-		{
-		$rmodel = trim($row['model']);
-		?>
-		<option value="<?php echo $rmodel; ?>" <?php if($rmodel==$model){?> selected <?php }?> ><?php echo $rmodel;?></option>
-		<?php
-		}
-	}
+  {
+    while ($row = mysql_fetch_array($result))
+    {
+    $rmodel = trim($row['model']);
+    ?>
+    <option value="<?php echo $rmodel; ?>" <?php if($rmodel==$model){?> selected <?php }?> ><?php echo $rmodel;?></option>
+    <?php
+    }
+  }
     ?>
     </select> <img src="img/correct.png" class="imgco" id="2c" <?php if($model!=''){?> style="display:block;" <?php } ?>>
 </p>
@@ -1017,15 +1075,15 @@ function getoption(obj,type,uno)
     $sql = "select distinct hmodelxref.cplmodel as model from carline inner join hmodelxref on hmodelxref.Hmodel = carline.ModelNm where hmodelxref.cplmake = '$make'  order by Model" ;
     $result = mysql_query($sql,$mlink);
     if(mysql_num_rows($result)>0)
-	{
-		while ($row = mysql_fetch_array($result))
-		{
-		$rmodel = trim($row['model']);
-		?>
-		<option value="<?php echo $rmodel; ?>" <?php if($rmodel==$model){?> selected <?php }?> ><?php echo $rmodel;?></option>
-		<?php
-		}
-	}
+  {
+    while ($row = mysql_fetch_array($result))
+    {
+    $rmodel = trim($row['model']);
+    ?>
+    <option value="<?php echo $rmodel; ?>" <?php if($rmodel==$model){?> selected <?php }?> ><?php echo $rmodel;?></option>
+    <?php
+    }
+  }
     ?>
     </select> <img src="img/correct.png" class="imgco" id="3c" <?php if($model!=''){?> style="display:block;" <?php } ?>>
 </p>
@@ -1098,16 +1156,16 @@ function getoption(obj,type,uno)
     $sql = "select distinct hmodelxref.cplmodel as model from carline inner join hmodelxref on hmodelxref.Hmodel = carline.ModelNm where hmodelxref.cplmake = '$make'  order by Model" ;
     $result = mysql_query($sql,$mlink);
     if(mysql_num_rows($result)>0)
-	{
-		while ($row = mysql_fetch_array($result))
-		{
-		$rmodel = trim($row['model']);
-		?>
-		<option value="<?php echo $rmodel; ?>" <?php if($rmodel==$model){?> selected <?php }?> ><?php echo $rmodel;?></option>
-		<?php
-		}
-	}
-	?>
+  {
+    while ($row = mysql_fetch_array($result))
+    {
+    $rmodel = trim($row['model']);
+    ?>
+    <option value="<?php echo $rmodel; ?>" <?php if($rmodel==$model){?> selected <?php }?> ><?php echo $rmodel;?></option>
+    <?php
+    }
+  }
+  ?>
     </select> <img src="img/correct.png" class="imgco" id="3c" <?php if($model!=''){?> style="display:block;" <?php } ?>>
 </p>
 
@@ -1141,7 +1199,7 @@ function getoption(obj,type,uno)
    $result = mysql_query($sql,$mlink);
    while ($row = mysql_fetch_array($result))
    {
-	   $rmake = trim($row['make']);
+     $rmake = trim($row['make']);
    ?>
    <option value="<?php echo $rmake;?>" <?php if($make==$rmake){?> selected <?php }?> ><?php echo $rmake ?></option>
    <?php
@@ -1153,23 +1211,23 @@ function getoption(obj,type,uno)
 
 
 <p style="margin-left:13%;margin-top:3%;">
-	<select class="slectBox select_box" name="model" id="model" onChange="getoption(this.value,'part',2)">
-	<option value=""></option>
-	<?php
-	$sql = "select distinct hmodelxref.cplmodel as model from carline inner join hmodelxref on hmodelxref.Hmodel = carline.ModelNm where hmodelxref.cplmake = '$make'  order by Model" ;
-	$result = mysql_query($sql,$mlink);
-	if(mysql_num_rows($result)>0)
-	{
-		while ($row = mysql_fetch_array($result))
-		{
-		$rmodel = trim($row['model']);
-		?>
-		<option value="<?php echo $rmodel; ?>" <?php if($rmodel==$model){?> selected <?php }?> ><?php echo $rmodel;?></option>
-	   <?php
-		}
-	}
-	?>
-	</select> <img src="img/correct.png" class="imgco" id="2c" <?php if($model!=''){?> style="display:block;" <?php } ?>>
+  <select class="slectBox select_box" name="model" id="model" onChange="getoption(this.value,'part',2)">
+  <option value=""></option>
+  <?php
+  $sql = "select distinct hmodelxref.cplmodel as model from carline inner join hmodelxref on hmodelxref.Hmodel = carline.ModelNm where hmodelxref.cplmake = '$make'  order by Model" ;
+  $result = mysql_query($sql,$mlink);
+  if(mysql_num_rows($result)>0)
+  {
+    while ($row = mysql_fetch_array($result))
+    {
+    $rmodel = trim($row['model']);
+    ?>
+    <option value="<?php echo $rmodel; ?>" <?php if($rmodel==$model){?> selected <?php }?> ><?php echo $rmodel;?></option>
+     <?php
+    }
+  }
+  ?>
+  </select> <img src="img/correct.png" class="imgco" id="2c" <?php if($model!=''){?> style="display:block;" <?php } ?>>
 </p>
 
 
@@ -1249,15 +1307,15 @@ function getoption(obj,type,uno)
      $sql = "select distinct hmodelxref.cplmodel as model from carline inner join hmodelxref on hmodelxref.Hmodel = carline.ModelNm where hmodelxref.cplmake = '$make1' and carline.CarLineYear = '$year1' order by Model" ;
      $result = mysql_query($sql,$mlink);
      if(mysql_num_rows($result)>0)
-	 {
-		 while ($row = mysql_fetch_array($result))
-		 {
-		 $rmodel = trim($row['model']);
-		 ?>
-		<option value="<?php echo $rmodel; ?>" <?php if($rmodel==$model1){?> selected <?php }?> ><?php echo $rmodel;?></option>
-		<?php
-		 }
-	 }
+   {
+     while ($row = mysql_fetch_array($result))
+     {
+     $rmodel = trim($row['model']);
+     ?>
+    <option value="<?php echo $rmodel; ?>" <?php if($rmodel==$model1){?> selected <?php }?> ><?php echo $rmodel;?></option>
+    <?php
+     }
+   }
      ?>
      </select> <img src="img/correct.png" class="imgco" id="3c">
  </p>
@@ -1268,17 +1326,17 @@ function getoption(obj,type,uno)
      <?php
      $sql = "select distinct ptype.Description as pdesc,indexlist.parttype as ptype from indexlist inner join ptype on ptype.PartType = indexlist.PartType where $year1 between beginyear and endyear and ModelNm = '".modelxref($model1)."' order by pdesc asc" ;
      $result = mysql_query($sql,$mlink);
-	 if(mysql_num_rows($result)>0)
-	 {
-		 while ($row = mysql_fetch_array($result))
-		 {
-		  $ptype = trim($row['ptype']);
-		  $pdesc =  trim($row['pdesc']);
-		 ?>
-		 <option value="<?php echo $ptype; ?>" <?php if($ptype==$part1){?> selected <?php }?> ><?php echo $pdesc;?></option>
-		 <?php
-		 }
-	 }
+   if(mysql_num_rows($result)>0)
+   {
+     while ($row = mysql_fetch_array($result))
+     {
+      $ptype = trim($row['ptype']);
+      $pdesc =  trim($row['pdesc']);
+     ?>
+     <option value="<?php echo $ptype; ?>" <?php if($ptype==$part1){?> selected <?php }?> ><?php echo $pdesc;?></option>
+     <?php
+     }
+   }
      ?>
      </select><img src="img/correct.png" class="imgco" id="4c">
  </p>
@@ -1293,7 +1351,7 @@ function getoption(obj,type,uno)
                     <div class="part_2 form_part">
 
                      <img src="img/content-img.png" class="imgcl">
-					<h1 class="formTittle small"><img src="img/selectpart.png" >Part option</h1>
+          <h1 class="formTittle small"><img src="img/selectpart.png" >Part option</h1>
                     <p class="go_back" id="go_back"></p>
                     <p style="margin-left:13%;"> <select class="slectBox select_box"  name="partoption0" id="partoption0" onChange="getoption(this.value,'partoption1',5)">
                      <option value=''>Select Part Option</option>
@@ -1302,9 +1360,9 @@ function getoption(obj,type,uno)
                     </p>
 
                     <?php for($a=1; $a<11; $a++ )
-				   {$b=$a+1;
-				   $c=$a+5
-					?>
+           {$b=$a+1;
+           $c=$a+5
+          ?>
 
                    <div style="display:none;margin-left:13%;margin-top:3%;" id="s<?php echo $c;?>">  <select class="slectBox select_box"  name="partoption<?php echo $a;?>" id="partoption<?php echo $a;?>" onChange="getoption(this.value,'partoption<?php echo $b;?>',<?php echo $c;?>)" >
                         <option value="">Part Option <?php echo $a;?></option>
@@ -1320,33 +1378,35 @@ function getoption(obj,type,uno)
                     <h1 class="formTittle small"><img src="img/contactUs.png" >Contact Info</h1>
                     <p class="go_back" id="go_back1" ></p>
                     <!-- <input type="text" name="phone" id="phone" class="inputbox" placeholder="Phone Number" required="true" >-->
-                     <input type="email" name="email" id="email" class="inputbox" placeholder="Email Address" >
+                     <!-- <input type="email" name="email" id="email" class="inputbox" placeholder="Email Address" > -->
                      <input type="text" name="zip" id="zip" class="inputbox" placeholder="Zip Code" >
-                     <input type="hidden" name="fs" id="fs" value="1">
+                     <input type="hidden" name="year" id="idyear" value="">
+            <input type="hidden" name="make" id="idmake" value="">
+            <input type="hidden" name="model" id="idmodel" value="">
+            <input type="hidden" name="partname" id="idpartname" value="">
+            <input type="hidden" name="interchange" id="idinterchange" value="">
+            <input type="hidden" name="hollanderoption" id="idhollanderoption" value="">
+            <input type="hidden" name="zip" id="idzip" value="">
+            <input type="hidden" name="response" id="resp" value="">
+            <input type="hidden" name="resp" id="pg" value="">
+            
+
+                     <input type="hidden" name="fs" id="fs" value="">
                      <input type="hidden" value="" name="interchange" id="interchange"/>
-		             <input type="hidden" value="" name="application" id="application"/>
+                 <input type="hidden" value="" name="application" id="application"/>
                      <input type="hidden" id="partname" name="partname" value=""/>
                      <input type="hidden" name="cttt" id="cttt">
                      <input type="image" src="img/inputbg.png" style="display:none;">
-                    <p style="margin-bottom: 16px; margin-left: 30px;"> <input type="checkbox" name="mechanics" id="mechanics" class="checkbox" placeholder="Mechanics"  checked="true"><span style="color:#000;">&nbsp;Receive offers on installation </span></p>
-                     <p class="part_3_Para"><button class="button" type="submit" onClick="return submitform();">Submit</button></p>
+                    <!-- <p style="margin-bottom: 16px; margin-left: 30px;"> <input type="checkbox" name="mechanics" id="mechanics" class="checkbox" placeholder="Mechanics"  checked="true"><span style="color:#000;">&nbsp;Receive offers on installation </span></p> -->
+                    <div style="width:100%;text-align:center;"><span class="button" style="padding:15px 20px;" onClick="submitform();">Submit</span></div>
                     </div>
                     <div align="center" class="form_button">
-                    	<a href="part_1" id="part1"  class="activeicon"  onClick="document.location.hash= '#1'"  ></a>
+                      <a href="part_1" id="part1"  class="activeicon"  onClick="document.location.hash= '#1'"  ></a>
                         <a href="part_2" id="part2"  class="blockp" onClick="document.location.hash= '#2'" ></a>
-                        <a href="part_3" id="part3" class="blockp" onClick="document.location.hash= '#3'"></a>
-
-
-
-                    </div>
-
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <div class="foot"><span> &copy; Copyright - Car Parts Locator - Enfold Theme by Kriesi</span>
-    <span style="float: right;margin-right: 35px;">FAQ | Terms & Conditions | Privacy Policy | <a href="http://www.iusedautoparts.com/search/contactus.php">Contact</a></span></div>
+                        <a href="part_3" id="part3" class="blockp" onClick="document.location.hash= '#3'"></a> </div></form>
+            </div> </div> </div>
+    <div class="foot" style="text-align:center;"><p style="margin-left:0;"> &copy; Copyright - autorecyclersonline.com</p>
+    <p style="position: relative;display: inline-block;text-align: center;margin-left:0;">FAQ | Terms & Conditions | Privacy Policy | <a href="http://www.autorecyclersonline.com/search/contactus.php">Contact | <a href="http://www.autorecyclersonline.com/search/aboutus.php">About</a></p]></div>
 </body>
 
 
@@ -1385,44 +1445,44 @@ $(function(){
     });
 
 */
-	var gb = $(".go_back");
-	gb.click(function(){
-		if($(".form_part:visible").hasClass("part_2")){
-			$(".form_part").hide();
-			document.location.hash= '#1';
-			document.getElementById('part2').className = 'blockp';
-			document.getElementById('part1').className = 'activeicon showp';
-			$(".part_1").show();
-			}
-			else if($(".form_part:visible").hasClass("part_3")){
-			$(".form_part").hide();
-			document.location.hash= '#2';
-			document.getElementById('part3').className = 'blockp';
-			document.getElementById('part2').className = 'activeicon showp';
-			$(".part_2").show();
+  var gb = $(".go_back");
+  gb.click(function(){
+    if($(".form_part:visible").hasClass("part_2")){
+      $(".form_part").hide();
+      document.location.hash= '#1';
+      document.getElementById('part2').className = 'blockp';
+      document.getElementById('part1').className = 'activeicon showp';
+      $(".part_1").show();
+      }
+      else if($(".form_part:visible").hasClass("part_3")){
+      $(".form_part").hide();
+      document.location.hash= '#2';
+      document.getElementById('part3').className = 'blockp';
+      document.getElementById('part2').className = 'activeicon showp';
+      $(".part_2").show();
 
-			}
-	});
-
-
+      }
+  });
 
 
-	var icon= $(".form_button a");
-	icon.click(function(){
-		icon.removeClass("activeicon");
-		$(this).addClass("activeicon")
-		})
 
 
-	var a = $(".form_button a");
-	a.click(function(e){
-		var error = false;
-		e.preventDefault();
-		var b = $(this).attr("href");
-		$(".form_part").hide().fadeIn('slow');
-		$("."+b).show();
-		});
-	});
+  var icon= $(".form_button a");
+  icon.click(function(){
+    icon.removeClass("activeicon");
+    $(this).addClass("activeicon")
+    })
+
+
+  var a = $(".form_button a");
+  a.click(function(e){
+    var error = false;
+    e.preventDefault();
+    var b = $(this).attr("href");
+    $(".form_part").hide().fadeIn('slow');
+    $("."+b).show();
+    });
+  });
 
 
 
@@ -1430,35 +1490,35 @@ $(window).on('hashchange', function() {
 
   if(document.location.hash=='')
   {
-	  $(".form_part").hide();
-	  document.getElementById('part1').className = 'activeicon showp';
-	  document.getElementById('part2').className = 'showp';
-	  document.getElementById('part3').className = 'showp';
-	  $(".part_1").show();
+    $(".form_part").hide();
+    document.getElementById('part1').className = 'activeicon showp';
+    document.getElementById('part2').className = 'showp';
+    document.getElementById('part3').className = 'showp';
+    $(".part_1").show();
   }
   if(document.location.hash=='#1')
   {
-	  $(".form_part").hide();
-	  document.getElementById('part1').className = 'activeicon showp';
-	  document.getElementById('part2').className = 'showp';
-	  document.getElementById('part3').className = 'showp';
-	  $(".part_1").show();
+    $(".form_part").hide();
+    document.getElementById('part1').className = 'activeicon showp';
+    document.getElementById('part2').className = 'showp';
+    document.getElementById('part3').className = 'showp';
+    $(".part_1").show();
   }
   if(document.location.hash=='#2')
   {
-	  $(".form_part").hide();
-	  document.getElementById('part2').className = 'activeicon showp';
-	  document.getElementById('part1').className = 'showp';
-	  document.getElementById('part3').className = 'showp';
-	  $(".part_2").show();
+    $(".form_part").hide();
+    document.getElementById('part2').className = 'activeicon showp';
+    document.getElementById('part1').className = 'showp';
+    document.getElementById('part3').className = 'showp';
+    $(".part_2").show();
   }
   if(document.location.hash=='#3')
   {
-	  $(".form_part").hide();
-	  document.getElementById('part3').className = 'activeicon showp';
-	  document.getElementById('part1').className = 'showp';
-	  document.getElementById('part2').className = 'showp';
-	  $(".part_3").show();
+    $(".form_part").hide();
+    document.getElementById('part3').className = 'activeicon showp';
+    document.getElementById('part1').className = 'showp';
+    document.getElementById('part2').className = 'showp';
+    $(".part_3").show();
   }
 
 
@@ -1483,103 +1543,61 @@ $(".popup_wrapper").slideUp();
 
 function IsEmail(val)
 {
-	val1=document.getElementById(val).value
-	//this is a regular expression
-	var u = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-	var c=u.test(val1);
-	if(c)
-	{
-	 Highlight(val,'#BBBBBB');
-	return true;
-	}
-	else
-	{
-		Highlight(val,'red');
-	return false;
-	}
+  val1=document.getElementById(val).value
+  //this is a regular expression
+  var u = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+  var c=u.test(val1);
+  if(c)
+  {
+   Highlight(val,'#BBBBBB');
+  return true;
+  }
+  else
+  {
+    Highlight(val,'red');
+  return false;
+  }
 }
 function selectcon(obj)
 {
-	if(document.getElementById(obj).value=='')
-	{
-		Highlight(obj,'red');
+  if(document.getElementById(obj).value=='')
+  {
+    Highlight(obj,'red');
 
-		return false;
-	}
-	else
-	{
-		Highlight(obj,'#BBBBBB');
+    return false;
+  }
+  else
+  {
+    Highlight(obj,'#BBBBBB');
 
-		return true;
-	}
+    return true;
+  }
 }
 function Highlight(obj,col)
 {
-	document.getElementById(obj).style.border = col+' 1px solid';
+  document.getElementById(obj).style.border = col+' 1px solid';
 
 }
 
 
-function submitform(thisform)
+function submitform()
 {
-
-var er=0;
-var foc ='';
-
-	if (IsEmail('email')==false)
-		{
-
-			if(er==0)
-			foc = 'email';
-			er=1;
-		}
-		if (selectcon('zip')==false)
-		{
-
-			if(er==0)
-			foc = 'zip';
-			er=1;
-		}
-		if(er==1)
-		{
-
-				document.getElementById(foc).focus();
-				return false;
-		}
-
-		else
-		{
-
-			var coptions = "";
-
-			for (var i=0;i<=11;i++)
-			{
-			var option = 'partoption'+i;
-			var obj = eval('{document.form1.' + option + '}');
-			if (typeof(obj) == "object")
-			{
-			if(obj.options[obj.selectedIndex].value!='')
-			{
-			if (i==0)
-			{
-			coptions = "[" + obj.options[obj.selectedIndex].text;
-			}else
-			{
-			coptions = coptions + ", " + obj.options[obj.selectedIndex].text;
-			}
-			}
-
-			}
-			}
-
-			coptions = coptions + "]";
-			document.form1.partname.value = document.form1.part.options[document.form1.part.selectedIndex].text;
-			document.getElementById('application').value=coptions;
-			document.forms["form1"].submit();
-			return true;
-
-		}
+  $('#idyear').val($('#s2id_year a .select2-chosen').text());
+  $('#idmake').val($('#s2id_make a .select2-chosen').text());
+  $('#idmodel').val($('#s2id_model a .select2-chosen').text());
+  $('#idpartname').val($('#s2id_part a .select2-chosen').text());
+  $('#idinterchange').val($('#partoption0 option').eq('1').val());
+  $('#idhollanderoption').val($('#s2id_year a .select2-chosen').text());
+  $('#idzip').val($('#zip').val());
+  $.loader({
+        className:"blue-with-image-13",
+        content:'Please wait while we search for inventory from our vendors..'
+  });
+  //setTimeout('$.loader("close");LaunchProgressBar();', 3000);
+  LaunchProgressBar();
 }
+
+
 
 
 </script>
@@ -1620,7 +1638,4 @@ var google_remarketing_only = false;
 
 
 </script>
-
-
-
 </html>
