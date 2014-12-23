@@ -1,0 +1,165 @@
+<?php
+require '../inc/rb.phar';
+R::setup('mysql:host=192.168.200.100;dbname=iusedparts',
+    'iusedparts','5huYvRDH');
+
+function modelxref($cplmodel)
+{
+    $result = R::getAll("select distinct HModel from hmodelxref where cplmodel = '$cplmodel' limit 1");
+    if($result)
+        return $result[0]['HModel'];
+    else return false;
+}
+
+
+function makexref($cplmake)
+{
+    $result = R::getAll("select distinct HMakeCode from hmodelxref where cplmake = '$cplmake' limit 1");
+    if($result)
+        return $result[0]['HMakeCode'];
+    else return 0;
+
+}
+
+if(!empty($_POST['carYears']))
+{
+
+    $result = R::getAll( 'SELECT CarlineYear FROM carline group by CarlineYear DESC' );
+    if($result)
+    {
+        $years = array();
+        foreach($result as $r)
+        {
+            $years[] = $r['CarlineYear'];
+        }
+        echo json_encode($result, JSON_FORCE_OBJECT);
+    }
+}
+if(!empty($_POST['label']))
+{
+    $result = R::getAll( "select distinct hmodelxref.cplmake as make from carline inner join hmodelxref on hmodelxref.HMakeCode = carline.MfrCd  where carline.CarlineYear = ". (int)$_POST['label']. " order by make" );
+    if($result)
+    {
+        $json = array();
+        foreach($result as $r)
+        {
+            $json[] = '{"manufacture":"' . $r['make'] . '"}';
+        }
+    }
+    $json = "[".implode(',',$json)."]";
+        echo $json;//json_encode($result, JSON_FORCE_OBJECT);
+}
+if(!empty($_POST['manufacture']))
+{
+    $result = R::getAll( "select distinct hmodelxref.cplmodel as model from carline inner join hmodelxref on hmodelxref.Hmodel = carline.ModelNm where hmodelxref.cplmake = '".$_POST['manufacture']."' and carline.CarLineYear = '".$_POST['year']."' order by Model");
+    if($result)
+    {
+        $json = array();
+        foreach($result as $r)
+        {
+            $json[] = '{"model":"' . trim($r['model']) . '"}';
+        }
+    }
+    $json = "[".implode(',',$json)."]";
+        echo $json;//json_encode($result, JSON_FORCE_OBJECT);
+}
+if(!empty($_POST['carModel']))
+{
+    $result = R::getAll( "select distinct ptype.Description as pdesc,indexlist.parttype as ptype from indexlist inner join ptype on ptype.PartType = indexlist.PartType where ".
+        $_POST['year']." between beginyear and endyear and ModelNm = '".modelxref($_POST['carModel'])."' order by pdesc asc" );
+
+    if($result)
+    {
+        $json = array();
+        $counter = 0;
+
+        foreach($result as $r)
+        {
+            $json[] = '{"part":{"desc":"' . $r['pdesc']. '","id":"' . $r['ptype']. '"}}';
+            $counter++;
+        }
+    }
+    if(!empty($json))
+    {
+        $json = "[".implode(',',$json)."]";
+        echo $json;
+    } else echo "[]";
+}
+if(!empty($_POST['partOptions']))
+{
+    $res = array();
+    $level = array();
+    $result = R::getAll( "select indexlistapp.* from indexlist inner join indexlistapp on indexlist.IndexListId = indexlistapp.indexlistid where ".
+        $_POST["year"]." between indexlist.beginyear and indexlist.endyear and indexlist.modelnm = '"
+        .modelxref($_POST['model'])."' and indexlist.parttype = '".$_POST["part"]."';" );
+$query = "select indexlistapp.* from indexlist inner join indexlistapp on indexlist.IndexListId = indexlistapp.indexlistid where ".
+        $_POST["year"]." between indexlist.beginyear and indexlist.endyear and indexlist.modelnm = '"
+        .modelxref($_POST['model'])."' and indexlist.parttype = '".$_POST["part"]."';";
+        //echo $query;
+        //return;
+
+    if($result)
+    {
+        foreach($result as $r)
+        {
+            $interchange = trim($r['InterchangeNumber']);
+            if($r['TreeLevel'] == 1) {
+                // new task
+                if(count($level)>0) $res[]=implode("; ",$level);
+
+                $level = array();
+                $level[$r['TreeLevel']]=$r['Application'];
+                //continue;
+            }
+            if(isset($level[$r['TreeLevel']]) && $level[$r['TreeLevel']] != $r['Application']){
+                // dump
+                $res[] = implode("; ",$level);
+                $total = count($level);
+                for($i = $r['TreeLevel']; $i<=$total; $i++) unset($level[$i]);
+            }
+            if($interchange)
+            {
+                $indexlistid = $r['IndexListId'];
+                $seqnbr = $r['SeqNbr'];
+                $ival = $indexlistid."|".$seqnbr."|".$interchange;
+                $level[$r['TreeLevel']] = $r['Application'].":::$ival";
+            } else {
+                $level[$r['TreeLevel']] = $r['Application'];
+            }
+
+/*
+            $indexlistid = $r['IndexListId'];
+            $seqnbr = $r['SeqNbr'];
+            $interchange = trim($r['InterchangeNumber']);
+            $application = trim($r['Application']);
+            $level = trim($r['TreeLevel']);
+            if ($application == "")
+            {
+                $application = "Standard";
+            }
+            $ival = $indexlistid."|".$seqnbr."|".$interchange;
+            $json[] = '{"option":{"value":"' . $ival. '","application":"' .
+                str_replace('"',"''",$application). '","level":"'.$level.'"}}';
+       */
+        }
+        if(count($level)>0)
+            $res[]=implode("; ",$level);
+        //var_dump($res);
+        $json = array();
+        foreach($res as $r)
+        {
+            $part = explode(':::',$r);
+            //var_dump($part);
+            $json[] = '{"option":{"value":"' . $part[1]. '","application":"' .
+                str_replace('"',"''",$part[0]). '","level":"1"}}';
+
+            //$json[] = '{"option":{"value":"' . $part[1]. '","text":"' .
+            //    str_replace('"',"''",$part[0]). '","parentid":"1"}}';
+        }
+    }
+    if(!empty($json))
+    {
+        $json = "[".implode(',',$json)."]";
+        echo $json;
+    } else echo "[]";
+}

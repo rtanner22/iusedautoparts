@@ -1,0 +1,21 @@
+<div align="left"  style="width:1028;">
+<p>Thank you for using our service. The below vendors have responded with the following inventory. Be sure to check their price, warranty, distance, shipping times and make your selection. You can call them directly or simply buy now on or secure checkout!</p>
+<p>Part Requested: <strong>PARTDETAILS.</strong> This item was interchangeable with the following vehicles and is a direct fit with what you requested.</p>
+<p>INTERCHANGELIST<br>
+</p>
+<table width="1028px" border="1" cellspacing="0" cellpadding="0">
+  <tr >
+    <th width="2%" scope="col">Year</th>
+    <th width="11%" scope="col">Model</th>
+    <th width="6%" scope="col">Stock#</th>
+    <th width="46%" scope="col">Notes</th>
+    <th width="6%" scope="col">Condition</th>
+    <th width="11%" scope="col">Vendor</th>
+    <th width="7%" scope="col">Warranty</th>    
+    <th width="5%" scope="col">Price</th>    
+    <th width="6%" scope="col">Options</th>        
+  </tr>
+PARTDATA
+</table>
+
+</div>

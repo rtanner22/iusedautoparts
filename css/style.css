@@ -1,0 +1,201 @@
+
+
+.wrapperbody{
+	width:100%;
+	height:681px;
+	/*background:url(http://carpartslocator.com/wp-content/uploads/2014/01/new-header-small.jpg) no-repeat;*/
+	}
+
+.contentbar-1 {
+    color: #FFFFFF;
+    display: inline;
+    float: left;
+    font-family: Arial;
+    font-size: 65px;
+    margin-left: 44px;
+    margin-top: 181px;
+    position: absolute;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.easyPainless{
+	font-family:Arial;
+	font-size:23.73px;
+	font-style:italic;
+	font-weight:bold;
+	text-transform:capitalize;
+	}
+	
+.selection-box{
+	background: #FFF;
+	width:97%;
+	float:left;	
+	display:inline;
+	margin-top:44px;
+	border-radius:10px;
+	padding-bottom:5px;
+	
+	}
+	
+	.selection-box {
+    margin-left: 1% !important;
+    width: 90% !important;
+}
+
+	
+
+.inputbox {
+	width:100%;
+	 background: linear-gradient(to bottom, #FFFFFF 0%, #F9F9F9 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+	color: #505151;
+	font-size: 1rem;
+	font-family: "Segoe UI",Segoe,"Lucida Grande","Lucida Sans Unicode",Arial,Helvetica,sans-serif;
+	 
+	margin-left: 0%;
+	margin-bottom: 3%;
+	
+	font-weight: bold;
+	padding: 3% 2%;
+	border: 1px solid #E5E5E5;
+
+}
+
+.imgcl{display: inline;
+	margin-left: -3.5%;
+	margin-top: 20px;
+	margin-bottom: 4%;
+	width: 100%;
+	height: 106px;
+	background-position: left top;
+	background-image: url(../img/content-img.png);
+	background-repeat: no-repeat;
+	background-size: 100% 100%;}
+
+.imgco{ /*float: right;
+    margin-right: 9%;
+    margin-top: 2%;
+	display:none;*/
+	margin-left: 22%;
+    margin-top: -3%;
+    position: absolute;
+    z-index: 9999;
+	display:none;
+}
+
+
+
+
+.form_part{
+	display:none;
+	}
+	
+.form_part:first-child{
+	display:block;
+	}	
+
+.formTittle {
+	display: inline;
+	font-size: 38px;
+	font-family: Arial, Helvetica, sans-serif;
+	color: #FFF;
+	float: left;
+	margin-left: 2%;
+	margin-top: -121px;
+	margin-bottom: 4%;
+	width: 79%;
+	font-weight: bold;
+	position: relative;
+	z-index: 10;
+}
+
+.formTittle img{
+	display: inline;
+	float:left;
+	margin-right:2%;
+	margin-top:-5px;
+	}
+.button{
+	display: inline;
+	width:100%;
+	height:46px;
+	background:#c3512d;
+	line-height:0;
+	text-align:center;
+	font-family: "Arial Black", Gadget, sans-serif;
+	text-transform:uppercase;
+	color:#FFF;
+	font-size:28px;
+	border:none;
+	cursor:pointer;
+	margin-bottom:10px;
+	}
+	
+.button:hover{
+	background:#ba3a12;
+
+}
+
+
+p.part_3_Para{
+	float:left;
+	display: block;
+	width:100%;
+	margin-left:0;
+	text-align:center;}
+	
+.form_button a{
+	text-indent:-9999999px;
+	display: inline-block;
+	width:15px;
+	height:15px;
+	background:#9CF;
+	margin:4px;
+	border-radius:100%;
+	}
+	
+.form_button a:hover,
+.form_button a.activeicon{
+	background: #969;
+	}
+	
+
+.go_back{
+	color: #000c;
+    cursor: pointer;
+    float: right;
+    font-family: Arial;
+    font-size: 14px;
+    margin-right: 23px;
+    margin-top: -11px;}
+	
+.go_back:hover{
+	text-decoration:underline;
+	cursor:pointer;}
+	
+
+.selection-box ,.select2-results{
+ font-family: "Segoe UI",Segoe,"Lucida Grande","Lucida Sans Unicode",Arial,Helvetica,sans-serif;
+ font-size: 1rem;
+ font-weight: bold;
+}
+
+.select2-container { width:100%;}
+select{color: #505151;font-size: 1rem;font-family: "Segoe UI",Segoe,"Lucida Grande","Lucida Sans Unicode",Arial,Helvetica,sans-serif;}
+
+.select2-container .select2-choice { height: 50px !important;
+    line-height: 49px !important;}
+.select2-container .select2-choice .select2-arrow{padding: 9px;}
+
+
+.foot {
+    background-color: #333333;
+    color: #FFFFFF;
+    font-family: 'Open Sans','HelveticaNeue','Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-size: 11px;
+    height: 46px;
+    line-height: 35px;
+}
+.foot span{ margin-left:150px;}
+

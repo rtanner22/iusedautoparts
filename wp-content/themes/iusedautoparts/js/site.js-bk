@@ -1,0 +1,342 @@
+$(function(){
+    window.cars ={
+        selectedManufacture:"",
+        selectedCarYear:"",
+        selectedModel:"",
+        selectedPart:"",
+        selectedOption:"",
+
+        carYears : function(years)
+        {
+            var newYears = JSON.parse(years);
+            var yearsList = $('#group-year ul.dropdown-menu');
+            yearsList.empty();
+            for (var y in newYears)
+            {
+                yearsList.append('<li><a href="#">'+newYears[y].CarlineYear+'</a></li>');
+            }
+        },
+
+        init : function(){
+            var params = { carYears:1 };
+            var data = this.getCarsData( params );
+
+            if( data )
+            {
+                this.carYears( data );
+            }
+        },
+        prepareData : function(data,sourceId,name){
+            this.source[sourceId].items = [];
+            var newData = JSON.parse(data);
+            for (var d in newData)
+                this.source[sourceId].items.push({label:""+newData[d][name]});
+            this.render();
+        },
+        carModel : function(data){
+            var models = this.getCarsData({ manufacture:this.selectedManufacture, year:this.selectedCarYear});
+            if(models)
+            {
+                var modelsList = $('#group-model ul.dropdown-menu');
+                modelsList.empty();
+                models = JSON.parse(models);
+                for(var m in models)
+                {
+                    modelsList.append('<li><a href="#">'+models[m].model+'</a></li>')
+                }
+                console.log(models);
+            }
+        },
+        carMakes : function(){
+            var makers = this.getCarsData({label:this.selectedCarYear});
+            if(makers)
+            {
+                var makersList = $('#group-make ul.dropdown-menu');
+                makersList.empty();
+                makers = JSON.parse(makers);
+                for(var m in makers)
+                {
+                    makersList.append('<li><a href="#">'+makers[m].manufacture+'</a></li>')
+                }
+            }
+        },
+        carPart: function(){
+            console.log(this)
+            var parts = this.getCarsData({carModel:this.selectedModel, year:this.selectedCarYear});
+            if(parts)
+            {
+                console.log(parts);
+                var partsList = $('#group-part ul.dropdown-menu');
+                partsList.empty();
+                parts = JSON.parse(parts);
+                for(var p in parts)
+                {
+                    partsList.append('<li><a data-part_id="'+parts[p].part.id+'" href="#">'+parts[p].part.desc+'</a></li>');
+                }
+            }
+        },
+        getOptions: function(){
+            var options = this.getCarsData({partOptions:1,year:this.selectedCarYear, model:this.selectedModel, part:this.selectedPart});
+            if( options )
+            {
+                console.log( options );
+                var optionsList = $('#group-options .dropdown-menu');
+                optionsList.empty();
+                options = JSON.parse(options);
+                for(var o in options)
+                {
+                    if(options[o].option.level)
+                    optionsList.append('<li><a data-value="'+options[o].option.value+'" href="#" class="level'+options[o].option.level+'">'+options[o].option.application+'</a></li>')
+                }
+            }
+        },
+        getCarsData : function(params){
+            var that = this;
+            var response ="";
+            $.ajax({
+                async:false,
+                type:'post',
+                url:window.location.origin+"/testing/ajax/index.php",
+                data: params,
+                success:function(resp){
+                    if(resp)
+                    {
+                        response = resp;
+                    }
+                    else response = false;
+                }
+            });
+            return response;
+        }
+    }
+    cars.init();
+	
+	InitPrimarySearch();
+	InitSecondarySearch();
+	ShowProgress();
+	ResetStates();
+	
+	$("#btn-change-search").click(function() {
+	  $( this ).find('.fa').toggleClass('fa-chevron-up fa-chevron-down');
+	});
+
+});
+
+function InitPrimarySearch() {
+	$("#banner #group-year .btn-dropdown").addClass("active");
+	
+	//Select Year
+	$("#banner #group-year .dropdown-menu li a").click(function(e){
+		e.preventDefault();
+          cars.selectedCarYear = $(this).text();
+		  $(this).parents(".btn-group").find('.selection').text($(this).text());
+		  $(this).parents(".btn-group").find('.selection').val($(this).text());
+		$("#banner #group-year .btn-dropdown").removeClass("active");
+		
+		$("#banner #group-make .btn-dropdown").addClass("active");
+        cars.carMakes();
+	});
+	
+	//Select Make
+	$("#banner #group-make .dropdown-menu").click(function(e){
+        if(e.target.nodeName.toLowerCase() == "a")
+        {
+            e.preventDefault();
+            cars.selectedManufacture = $(e.target).text();
+              $(this).parents(".btn-group").find('.selection').text($(e.target).text());
+              $(this).parents(".btn-group").find('.selection').val($(e.target).text());
+            $("#banner #group-make .btn-dropdown").removeClass("active");
+
+            $("#banner #group-model .btn-dropdown").addClass("active");
+            cars.carModel();
+        }
+	});
+	
+	//Select Model
+	$("#banner #group-model .dropdown-menu").click(function(e){
+        if(e.target.nodeName.toLowerCase() == "a")
+        {
+            e.preventDefault();
+            cars.selectedModel = $(e.target).text();
+            console.log("selectedModel");
+            console.log($(e.target).text());
+              $(this).parents(".btn-group").find('.selection').text($(e.target).text());
+              $(this).parents(".btn-group").find('.selection').val($(e.target).text());
+            $("#banner #group-model .btn-dropdown").removeClass("active");
+
+            $("#banner #group-part .btn-dropdown").addClass("active");
+            cars.carPart();
+        }
+	});
+	
+	//Select Part
+	$("#banner #group-part .dropdown-menu").click(function(e){
+        if(e.target.nodeName.toLowerCase() == "a")
+        {
+            e.preventDefault();
+              $(this).parents(".btn-group").find('.selection').text($(e.target).text());
+              $(this).parents(".btn-group").find('.selection').val($(e.target).text());
+            $("#banner #group-part .btn-dropdown").removeClass("active");
+
+            $("#step1-title").slideUp();
+            var year = $("#banner #group-year .btn-group .selection").text().toUpperCase();
+            var make = $("#banner #group-make .btn-group .selection").text().toUpperCase();
+            var model = $("#banner #group-model .btn-group .selection").text().toUpperCase();
+            var part = $("#banner #group-part .btn-group .selection").text().toUpperCase();
+
+            $("#step2-title").html("<h2><span class='text-orange'>" + part + "</span> for a <span class='text-orange'>" + year + "</span> <span class='text-orange'>" + make + "</span> <span class='text-orange'>" + model + "</span></h2>");
+            $("#step2-title").slideDown("slow");
+
+            $("#banner #group-options .btn-dropdown").addClass("active");
+            $("#banner #group-options").slideDown("slow");
+
+            //Indicator
+            $(".line-indicator").removeClass("step1").addClass("step2");
+            $(".indicators li:first-child").removeClass("active");
+            $(".indicators  li:nth-child(2)").addClass("active");
+            cars.selectedPart = $(e.target).data('part_id');
+            cars.getOptions();
+        }
+	});
+	
+	//Select Options
+	$("#banner #group-options .dropdown-menu").click(function(e){
+        if(e.target.nodeName.toLowerCase() == "a")
+        {
+            e.preventDefault();
+              $(this).parents(".btn-group").find('.selection').text($(e.target).text());
+              $(this).parents(".btn-group").find('.selection').val($(e.target).text());
+            $("#banner #group-options .btn-dropdown").removeClass("active");
+
+            $("#banner #group-zip").slideDown("slow");
+
+            //Indicator
+            $(".line-indicator").removeClass("step2").addClass("step3");
+            $(".indicators li:nth-child(2)").removeClass("active");
+            $(".indicators  li:last-child").addClass("active");
+            cars.selectedOption = $(e.target).data('value');
+        }
+	});
+	
+	$( "#zip" ).focus(function() {
+		$("#banner #group-button").slideDown("slow");
+	});
+	
+	$("#btn-check").click(function(e) {
+		e.preventDefault();
+		$('#modal-progress').modal({
+			backdrop: 'static',
+			show: true
+		});
+	});
+}
+
+function InitSecondarySearch() {
+	$("#banner.content #group-year .btn-dropdown").addClass("active");
+	
+	//Select Year
+	$("#banner.content #group-year .dropdown-menu li a").click(function(){
+		
+		  $(this).parents(".btn-group").find('.selection').text($(this).text());
+		  $(this).parents(".btn-group").find('.selection').val($(this).text());
+		$("#banner.content #group-year .btn-dropdown").removeClass("active");
+		
+		$("#banner.content #group-make .btn-dropdown").addClass("active");
+		$("#banner.content #group-make").slideDown("slow");
+	});
+	
+	//Select Make
+	$("#banner.content #group-make .dropdown-menu li a").click(function(){
+		
+		  $(this).parents(".btn-group").find('.selection').text($(this).text());
+		  $(this).parents(".btn-group").find('.selection').val($(this).text());
+		$("#banner.content #group-make .btn-dropdown").removeClass("active");
+		
+		$("#banner.content #group-model .btn-dropdown").addClass("active");
+		$("#banner.content #group-model").slideDown("slow");
+	});
+	
+	//Select Model
+	$("#banner.content #group-model .dropdown-menu li a").click(function(){
+		
+		  $(this).parents(".btn-group").find('.selection').text($(this).text());
+		  $(this).parents(".btn-group").find('.selection').val($(this).text());
+		$("#banner.content #group-model .btn-dropdown").removeClass("active");
+		
+		$("#banner.content #group-part .btn-dropdown").addClass("active");
+		$("#banner.content #group-part").slideDown("slow");
+	});
+	
+	//Select Part
+	$("#banner.content #group-part .dropdown-menu li a").click(function(){
+		
+		  $(this).parents(".btn-group").find('.selection').text($(this).text());
+		  $(this).parents(".btn-group").find('.selection').val($(this).text());
+		$("#banner.content #group-part .btn-dropdown").removeClass("active");
+		
+		//$("#banner.content #group-button .btn-dropdown").addClass("active");
+		$("#banner.content #group-button-option").slideDown("slow");
+	});
+	
+	
+	$("#btn-choose").click(function(e) {
+		e.preventDefault();
+		$(".step1").slideUp("slow");
+		$(".step2").slideDown("slow");
+	});
+	
+	
+	//Select Options
+	$("#banner.content #group-options .dropdown-menu li a").click(function(e){
+		e.preventDefault();
+		  $(this).parents(".btn-group").find('.selection').text($(this).text());
+		  $(this).parents(".btn-group").find('.selection').val($(this).text());
+		$("#banner #group-options .btn-dropdown").removeClass("active");
+		
+		$("#banner #group-zip").slideDown("slow");
+		
+		//Indicator
+		$(".line-indicator").removeClass("step2").addClass("step3");
+		$(".indicators li:nth-child(2)").removeClass("active");
+		$(".indicators  li:last-child").addClass("active");
+	});
+}
+
+
+function ResetStates() {
+	$(".btn-dropdown").click(function(){
+		
+		$(".btn-dropdown").removeClass("active");
+		$(this).addClass("active");
+	
+	});
+}
+
+
+function ShowProgress() {
+	$('#modal-progress').on('shown.bs.modal', function () {
+ 
+		var progress = setInterval(function() {
+		var $bar = $('.bar');
+	
+		if ($bar.width()==500) {
+		  
+		  	window.location.href = "/inventory";
+			
+			clearInterval(progress);
+			$('.progress').removeClass('active');
+			$('#modal-progress').modal('hide');
+			$bar.width(0);
+			
+		} else {
+		  
+			
+			$bar.width($bar.width()+50);
+		}
+		
+		$bar.text($bar.width()/5 + "%");
+		}, 800);
+	  
+	  
+	})
+}
