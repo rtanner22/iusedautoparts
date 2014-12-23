@@ -12,6 +12,46 @@ ini_set("allow_url_fopen", true);
 
 R::setup('mysql:host=192.168.200.100;dbname=iusedparts', 'iusedparts', '5huYvRDH');
 
+
+
+
+//function min_mod () { 
+//  $args = func_get_args(); 
+//  if (!count($args[0])) return false; 
+//  else { 
+//    $minVal = 1;
+//    foreach ($args[0] as $value) {
+//        if($value === 0){$minVal = 0;}
+//        else if ($value < $minVal) {
+//            $minVal = floatval($value);
+//        }
+//        else {
+//            $minVal = 0;
+//        }
+//    } 
+//  }
+//  return $minVal;   
+//} 
+function min_mod () { 
+  $args = func_get_args(); 
+
+  if (!count($args[0])) return false; 
+  else { 
+    $min = false; 
+    foreach ($args[0] AS $value) { 
+      if (is_numeric($value) && $value != 0 ) { 
+        $curval = floatval($value); 
+        if ($curval < $min || $min === false) $min = $curval; 
+      } 
+    } 
+  } 
+
+  return $min;   
+} 
+
+
+
+
 function getLnt($zip) {
 
     $result1 = R::getAll("select lat, lng from zipcodes2 where Zipcode = '$zip' ");
@@ -89,9 +129,6 @@ $numofpages = ceil($page_row / $rowsPerPage);
 // if (isset($_POST['test'])){
     $pagesql = "select 
     COUNT(DISTINCT inventory.inventoryid) as c_count,
-    GROUP_CONCAT(DISTINCT inventory.modelyear ORDER BY inventory.modelyear ASC SEPARATOR ',') AS c_year,
-    GROUP_CONCAT(DISTINCT inventory.modelname ORDER BY inventory.modelname ASC SEPARATOR ',') AS c_model,
-    GROUP_CONCAT(DISTINCT inventory.stockticketnumber ORDER BY inventory.stockticketnumber ASC SEPARATOR ',') AS c_stock,
     GROUP_CONCAT(DISTINCT inventory.retailprice ORDER BY inventory.retailprice ASC SEPARATOR ',') AS c_price,
     yards.yardid,yards.yard,yards.warranty,yards.address,yards.city,yards.state,yards.phone,yards.directory,yards.zip,inventory.*
     from inventory 
@@ -122,7 +159,7 @@ display: none;
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-         <h4 class="modal-title" id="myModalLabel">All Results</h4>
+        <h4 class="modal-title" id="myModalLabel">All Results for <span></span></h4>
       </div>
       <div class="modal-body">
         <p>One fine body&hellip;</p>
@@ -190,8 +227,15 @@ display: none;
                         <td><?php echo $row[conditioncode]."-".$row[partrating]; ?></td>
                         <td class="green">
                             <?php if($row[c_count] > 1){ ?>
-                                <p class="vehiclee">From</p>
-                                <p class="text-tb"><?php echo $quote ; ?></p>
+                                
+                                    
+                                    <?php if(min_mod(explode(',',$row[c_price])) != null ){ ?>
+                                    <p class="vehiclee">From</p>
+                                    <p class="text-tb">
+                                        $<?= min_mod(explode(',',$row[c_price])); ?>
+                                    </p>
+                                    <?php }else{ echo '<p></p><p class="text-tb">Call</p>';} ?>
+                                
                                 <p class="vehicle" data-request="<?= htmlspecialchars(json_encode($_REQUEST));?>" data-id="<?= $row['yardid'] ?>">View All</p>
                             <?php }else{ ?>
                                 <p class="text-tb"><?php echo $quote ; ?></p>

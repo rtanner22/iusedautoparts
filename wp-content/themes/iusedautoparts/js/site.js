@@ -31,7 +31,9 @@ $( document ).ready(function() {
         req['yardid'] = $(this).data('id');
 //        var _self = $(this).parents('td').parent('tr');
         $.post( "http://www.iusedautoparts.dev.gbksoft.net/testing/ajax/add_result.php", req, function( data ) {
+                var namevendor = $(data).find('.namevendor:first').text();
                 $('#data').find('.modal-body').html(data);
+                $('#data').find('#myModalLabel span').text(namevendor);
                 $('#data').modal('show');
         });  
     });        
