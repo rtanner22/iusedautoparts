@@ -4,13 +4,11 @@
       <div class="container">
         <div class="row">
           <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-            <ul class="footer-links">
-              <li><a href="<?php bloginfo('url'); ?>/">HOME</a></li>
-              <li><a href="<?php bloginfo('url'); ?>/about">ABOUT US</a></li>
-              <li><a href="<?php bloginfo('url'); ?>/partslist">PARTS LIST</a></li>
-              <!--<li><a href="<?php bloginfo('url'); ?>/">BLOG</a></li>-->
-              <li><a href="<?php bloginfo('url'); ?>/contact">CONTACT</a></li>
-            </ul>
+          		<?php wp_nav_menu( array( 'theme_location' => 'footer-menu', 
+											'container'       => 'ul',			
+											'menu_class' => 'footer-links',
+											'depth' => 1 ) ); ?>
+            
           </div>
           <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
             <ul class="footer-socials pull-right">
@@ -28,14 +26,14 @@
       <div class="container">
         <div class="row">
           <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-            <p class="copy">&copy; COPYRIGHT IUSEDAUTOPARTS <?php echo date("Y") ?>. ALL RIGHTS RESERVED.</p>
+            <p class="copy">&copy; COPYRIGHT AutoRecyclersOnline.com <?php echo date("Y") ?>. ALL RIGHTS RESERVED.</p>
           </div>
           <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-            <ul class="footer-links pull-right">
-              <li><a href="<?php bloginfo('url'); ?>/terms-and-conditions">TERMS OF USE</a></li>
-              <li><a href="<?php bloginfo('url'); ?>/privacy">PRIVACY STATEMENT</a></li>
-              
-            </ul>
+            <?php wp_nav_menu( array( 'theme_location' => 'footer-menu-copy', 
+											'container'       => 'ul',			
+											'menu_class' => 'footer-links pull-right',
+											'depth' => 1 ) ); ?>
+            
           </div>
         </div>
       </div>

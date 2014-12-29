@@ -575,8 +575,153 @@ function preload_part() {
 }
 
 
+/*
+function preload_year() {
+  
+  if ($('#preload-year').val()!=undefined&&$('#preload-year').val()!="") {
+    cars.selectedCarYear = $("#preload-year").val();
+    var makers = cars.getCarsData({label:cars.selectedCarYear});
+    if(makers!=[])
+    {
+      var makersList = $('#box-make');
+      makersList.empty();
+      makers = JSON.parse(makers);
+      for(var m in makers)
+      {
+        if(makers[m].manufacture==$('#preload-make').val())
+          makersList.append('<option selected="selected"><a href="#">'+makers[m].manufacture+'</a></option>')
+        else
+          makersList.append('<option><a href="#">'+makers[m].manufacture+'</a></option>')
+      }
+    }
+  }
+}
+
+function preload_make() {
+  if ($('#preload-make').val()!=undefined) {
+
+    var preloadmake = $('#preload-make').val();
+    cars.selectedManufacture = $("#preload-make").val();
+    var models = cars.getCarsData({ manufacture:cars.selectedManufacture, year:cars.selectedCarYear});
+    if(models!="[]")
+    {
+      var modelsList = $('#box-model');
+      modelsList.empty();
+      models = JSON.parse(models);
+      for(var m in models)
+      {
+        if(models[m].model==$('#preload-model').val())
+          modelsList.append('<option selected="selected"><a href="#">'+models[m].model+'</a></option>')
+        else
+          modelsList.append('<option><a href="#">'+models[m].model+'</a></option>')
+      }
+    } else {
+      $('#group-make .select2-chosen').text(preloadmake);
+    }
+
+  }
+}
+
+function preload_model() {
+  if ($('#preload-model').val()!=undefined&&cars.selectedCarYear!=undefined) {
+
+    cars.selectedCarModel = $("#preload-model").val();
+    var parts = cars.getCarsData({carModel:cars.selectedCarModel, year:cars.selectedCarYear});
+    if(parts!="")
+    {
+      console.log(parts);
+      var partsList = $('#box-part');
+      partsList.empty();
+      parts = JSON.parse(parts);
+      for(var p in parts)
+      {
+        if(parts[p].part.desc.toUpperCase()==$('#preload-part').val()) {
+          partsList.append('<option value="'+parts[p].part.id+'" selected="selected"><a data-part_id="'+parts[p].part.id+'" href="#">'+parts[p].part.desc+'</a></option>');
+          cars.selectedCarPart = parts[p].part.id;
+        }
+        else
+          partsList.append('<option value="'+parts[p].part.id+'"><a data-part_id="'+parts[p].part.id+'" href="#">'+parts[p].part.desc+'</a></option>');
+      }
+    } else {
+      $('#group-model .select2-chosen').text($("#preload-model").val());
+    }
+  }
+}
+
+function preload_part() {
+  if (cars.selectedCarPart!=undefined) {
+    //cars.selectedCarPart = $('#preload-part').val();
+    if($.isNumeric($('#preload-part').val())) {
+      var response;
+      var partNum = cars.selectedCarPart;
+      var params;
+      params = { PartType:partNum };
+      $.ajax({
+        async:false,
+        type:'post',
+        url:"http://www.iusedautoparts.dev.gbksoft.net/testing/ajax/index.php",
+        data: params,
+        success:function(resp){
+          if(resp)
+          {
+            response = resp;
+          }
+          else response = false;
+        }
+      });
+      var partName = response;
+
+    } else { var partName = $('#preload-part').val(); }
+    var options = cars.getCarsData({partOptions:1,year:cars.selectedCarYear, model:cars.selectedCarModel, part:cars.selectedCarPart});
+    if( options !="" )
+    {
+      console.log( options );
+      var optionsList = $('#group-options .dropdown-menu');
+      optionsList.empty();
+
+      options = JSON.parse(options);
+
+      // prepare the data
+      var source =
+      {
+        datatype: "json",
+        datafields: [
+          { name: 'id' },
+          { name: 'parentid' },
+          { name: 'text' },
+          { name: 'value' }
+        ],
+        id: 'id',
+        localdata: options
+      };
+      //$('#optionvalue').jqxTree('destroy');
+      // create data adapter.
+      var dataAdapter = new $.jqx.dataAdapter(source);
+      // perform Data Binding.
+      dataAdapter.dataBind();
+      // get the tree items. The first parameter is the item's id. The second parameter is the parent item's id. The 'items' parameter represents
+      // the sub items collection name. Each jqxTree item has a 'label' property, but in the JSON data, we have a 'text' field. The last parameter
+      // specifies the mapping between the 'text' and 'label' fields.
+      var records = dataAdapter.getRecordsHierarchy('id', 'parentid', 'items', [{ name: 'text', map: 'label'}]);
+
+      $('#optionvalue').jqxTree({ source: records});
+
+      $(".jqx-tree-item").mouseenter(function (event) {
+        var item = $('#optionvalue').jqxTree('getItem', $(event.target.parentElement)[0]);
+        if (item.hasItems == true) {
+          $(event.target).removeClass("jqx-fill-state-hover");
+          $(event.target).removeClass("jqx-fill-state-hover-" + theme);
+        }
+      });
+    } else {
+      $('#group-part .select2-chosen').text(partName);
+    }
+  }
+}
+*/
+
 function create_yearbox() {
-  $(".step1").append('<div id="group-year" class="form-group">                <label for="year">Your vehicleï¿½s model year:</label>               <div class="btn-group btn-group-justified">                  <div class="btn-group">        <select class="btn btn-dropdown btn-lg dropdown-toggle" name="box-year" id="box-year" role="menu" >        <option value="">Year</option> </select>                  </div>            </div>              </div>');
+  $(".step1").append('<div id="group-year" class="form-group">                <label for="year">Your vehicle’s model year:</label>               <div class="btn-group btn-group-justified">                  <div class="btn-group">        <select class="btn btn-dropdown btn-lg dropdown-toggle" name="box-year" id="box-year" role="menu" >        <option value="">Year</option> </select>                  </div>            </div>              </div>');
 
 }
 
@@ -627,7 +772,7 @@ function ShowProgress() {
     $.ajax({
       async:false,
       type:'post',
-      url:"http://www.iusedautoparts.net/scripts/request.php",
+      url:"http://www.iusedautoparts.dev.gbksoft.net/scripts/request.php",
       data: params,
       success:function(resp){
         if(resp)

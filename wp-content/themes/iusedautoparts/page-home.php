@@ -8,22 +8,32 @@ Template Name: Page Home
 <section id="content">
   <div class="wrap">
     <div class="container">
-      <?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
-      <?php the_content(); ?>
+      <?php
+		
+	  if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
+      <?php the_content(); 
+	  	  ?>
       <?php endwhile; else: ?>
-      <p>
+      
         <?php _e('Sorry, no posts matched your criteria.'); ?>
       </p>
       <?php endif; ?>
-    </div>
+	  <br>
+  
+  
   </div>
+  
+  </div>
+  
   <div class="wrap alt">
       <div class="container">
         <div class="row">
           <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+		  
             <div class="panel panel-custom">
               <div class="panel-body">
                 <div class="text-center">
+				
                   <p><img src="<?php bloginfo('template_url'); ?>/images/vehicle.png" alt="POPULAR VEHICLES"/></p>
                   <p><a href="#" class="btn btn-custom">POPULAR VEHICLES</a></p>
                   <p>View our most popular Makes and Models</p>
