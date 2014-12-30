@@ -207,18 +207,17 @@ while ( $row = mysql_fetch_array($res))
    
     $desc2= "Compare prices and save big.";
      
-    $dispurl= "autorecyclersonline.com/";
-	echo $headline." ".$desc1." ".$desc2."<br>";
-    
-	
-	//add part to this 23 characters
-    if (strlen($partkwlist[0] < 12))
+    $dispurl= "/";
+    echo $headline." ".$desc1." ".$desc2."<br>";
+
+    //add part to this 19 characters
+    if (strlen($kwlist[0] < 16))
     {
       $dispurl = $dispurl . strtolower(str_replace(" ","_",$partkwlist[0]));  
     }
 
 
-    $url ="http://www.autorecyclersonline.com/parts/?make=".$cplmake."&model=".$cplmodel."&part=".$ptype;
+    $url ="/parts/?make=".$cplmake."&model=".$cplmodel."&part=".$ptype;
 
   
     if ($cplmake == "" || $cplmodel == "")

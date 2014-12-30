@@ -51,14 +51,14 @@ session_start();
           <p>&nbsp;</p>
           <p>If you are a recycler and would like to become a member please <a href="http://www.autorecyclersonline.com">click here.</a></p>
           <p>&nbsp;</p>
-          <p>If you&#8217;d like to send us an email <a href="http://www.AutoRecyclersOnline.com/search/contactus.php">go here</a>.</p>
+          <p>If you&#8217;d like to send us an email <a href="/search/contactus.php">go here</a>.</p>
         </div>
               
     </div>
   </div>
 </div>
 <div class="foot" style="text-align:center;margin-top:40px;"><p style="margin-left:0;"> &copy; Copyright - AutoRecyclersOnline.com</p>
-    <p style="position: relative;display: inline-block;text-align: center;margin-left:0;">FAQ | Terms & Conditions | Privacy Policy | <a href="http://www.iusedautoparts.com/search/contactus.php">Contact | <a href="http://www.AutoRecyclersOnline.com/search/aboutus.php">About</a></p]></div>
+    <p style="position: relative;display: inline-block;text-align: center;margin-left:0;">FAQ | Terms & Conditions | Privacy Policy | <a href="http://www.iusedautoparts.com/search/contactus.php">Contact | <a href="/search/aboutus.php">About</a></p]></div>
 </div>
 
  <script type="text/javascript">

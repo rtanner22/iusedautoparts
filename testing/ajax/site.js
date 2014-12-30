@@ -721,7 +721,7 @@ function preload_part() {
 */
 
 function create_yearbox() {
-  $(".step1").append('<div id="group-year" class="form-group">                <label for="year">Your vehicle’s model year:</label>               <div class="btn-group btn-group-justified">                  <div class="btn-group">        <select class="btn btn-dropdown btn-lg dropdown-toggle" name="box-year" id="box-year" role="menu" >        <option value="">Year</option> </select>                  </div>            </div>              </div>');
+  $(".step1").append('<div id="group-year" class="form-group">                <label for="year">Your vehicleï¿½s model year:</label>               <div class="btn-group btn-group-justified">                  <div class="btn-group">        <select class="btn btn-dropdown btn-lg dropdown-toggle" name="box-year" id="box-year" role="menu" >        <option value="">Year</option> </select>                  </div>            </div>              </div>');
 
 }
 
@@ -772,7 +772,7 @@ function ShowProgress() {
     $.ajax({
       async:false,
       type:'post',
-      url:"http://www.iusedautoparts.dev.gbksoft.net/scripts/request.php",
+      url:"/scripts/request.php",
       data: params,
       success:function(resp){
         if(resp)

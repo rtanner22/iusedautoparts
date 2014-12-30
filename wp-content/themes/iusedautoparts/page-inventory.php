@@ -2,6 +2,7 @@
 /*
   Template Name: Page Inventory
  */
+
 if (file_exists('testing/inc/rb.phar')) {
     require 'testing/inc/rb.phar';
 }
@@ -11,12 +12,46 @@ ini_set("allow_url_fopen", true);
 
 R::setup('mysql:host=192.168.200.100;dbname=iusedparts', 'iusedparts', '5huYvRDH');
 
+//function min_mod () {
+//  $args = func_get_args();
+//  if (!count($args[0])) return false;
+//  else {
+//    $minVal = 1;
+//    foreach ($args[0] as $value) {
+//        if($value === 0){$minVal = 0;}
+//        else if ($value < $minVal) {
+//            $minVal = floatval($value);
+//        }
+//        else {
+//            $minVal = 0;
+//        }
+//    }
+//  }
+//  return $minVal;
+//}
+function min_mod () {
+  $args = func_get_args();
+
+  if (!count($args[0])) return false;
+  else {
+    $min = false;
+    foreach ($args[0] AS $value) {
+      if (is_numeric($value) && $value != 0 ) {
+        $curval = floatval($value);
+        if ($curval < $min || $min === false) $min = $curval;
+      }
+    }
+  }
+
+  return $min;
+}
+
 function getLnt($zip) {
 
     $result1 = R::getAll("select lat, lng from zipcodes2 where Zipcode = '$zip' ");
     $result['lat'] = $result1[0][lat];
     $result['lng'] = $result1[0][lng];
-    //die($result['lng']);
+//die($result['lng']);
 //$result['lat'] = 0.0;
 //$result['lng'] = 0.0;
     return $result;
@@ -61,17 +96,17 @@ $hnumber = $result1[0][hnumber];
 //$hvars = explode("|",$_REQUEST['hollanderoption']);
 //$hnumber = $hvars[2];
 
- //$lcsql ="select yards.yard,yards.warranty,yards.phone,yards.directory,yards.address,yards.city,yards.state,yards.zip, inventory.* from inventory 
+ //$lcsql ="select yards.yard,yards.warranty,yards.phone,yards.directory,yards.address,yards.city,yards.state,yards.zip, inventory.* from inventory
  //inner join yards on yards.yardid = inventory.yardid where inventory.inventorynumber = '" . $hnumber ."' order by retailprice desc " ;
 // $result = R::getAll($lcsql);
 
-$lcsql ="SELECT COUNT(*) from inventory 
+$lcsql ="SELECT COUNT(*) from inventory
 inner join yards on yards.yardid = inventory.yardid where inventory.inventorynumber = '" . $hnumber ."' order by retailprice desc " ;
 $result = R::getAll($lcsql);
 $page_row = $result[0]['COUNT(*)'];
 ############################ Paging variables ########################
 include("testing/inc/paging_admin.php");
-$rowsPerPage = 10; 
+$rowsPerPage = 10;
 
 //$_SESSION['rowsPerPage']=$rowsPerPage;
 // $_SESSION['page_r'] = $_REQUEST['pg'];
@@ -86,28 +121,46 @@ $numofpages = ceil($page_row / $rowsPerPage);
 // $selfurl = "?"; //paging URL
 //============================================================================
 // if (isset($_POST['test'])){
-    $pagesql = "select yards.yard,yards.warranty,yards.address,yards.city,yards.state,yards.phone,yards.directory,yards.zip,inventory.*
-    from inventory 
-    inner join yards on yards.yardid = inventory.yardid 
-    where inventory.inventorynumber = '" . $hnumber ."' 
+    $pagesql = "select
+    COUNT(DISTINCT inventory.inventoryid) as c_count,
+    GROUP_CONCAT(DISTINCT inventory.retailprice ORDER BY inventory.retailprice ASC SEPARATOR ',') AS c_price,
+    yards.yardid,yards.yard,yards.warranty,yards.address,yards.city,yards.state,yards.phone,yards.directory,yards.zip,inventory.*
+    from inventory
+    inner join yards on yards.yardid = inventory.yardid
+    where inventory.inventorynumber = '" . $hnumber ."'
+    group by yards.yard
     order by retailprice DESC LIMIT $offset,$rowsPerPage ";
 // }else{
 //     $pagesql = "select yards.yard,yards.warranty,yards.address,yards.city,yards.state,yards.phone,yards.directory,yards.zip,inventory.*
-//     from inventory 
-//     inner join yards on yards.yardid = inventory.yardid 
-//     where inventory.inventorynumber = '" . $hnumber ."' 
+//     from inventory
+//     inner join yards on yards.yardid = inventory.yardid
+//     where inventory.inventorynumber = '" . $hnumber ."'
 //     group by inventory.inventorynumber
 //     order by retailprice ASC LIMIT $offset,$rowsPerPage ";
 // }
 // echo $pagesql;
 $result = R::getAll($pagesql);
 
-
-
 ?>
 
 <?php get_header(); ?>
 <?php get_template_part('banner', 'inventory'); ?>
+<style>.hide {
+display: none;
+}</style>
+<div class="modal fade" id="data">
+  <div class="modal-dialog" style="min-width: 900px;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">All Results for <span></span></h4>
+      </div>
+      <div class="modal-body">
+        <p>One fine body&hellip;</p>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 <section id="content">
     <div class="wrap alt">
         <div class="container">
@@ -120,7 +173,7 @@ $result = R::getAll($pagesql);
                             <thead>
                                 <tr>
                                     <th>Donor Vehicle</th>
-									
+
                                     <th width="60px">Part/Options</th>
                                     <th>Stock #</th>
                                     <th>Grade</th>
@@ -136,29 +189,48 @@ $result = R::getAll($pagesql);
     foreach ($result as $row) {
         $distance = getDistance($zipcode, "$row[zip]", "M");
         $distance = sprintf("%1.1f", $distance);
-		$quote = (float)$row[retailprice];;
-		$mileage = $row['mileage'];
-		if ($mileage > 0)
-		{
-		$mileage = "(Mileage: " . number_format($mileage,0,'.',',').")";
-		}else{$mileage="";}
-		//number_format($quote,2,'.',',');
-		if ($quote == 0)    { $quote='Call';  }   else { $quote = '$'.(float)$row[retailprice];}
+        $quote = (float)$row[retailprice];
+        $mileage = $row['mileage'];
+        if ($mileage > 0)
+        {
+        $mileage = "(Mileage: " . number_format($mileage,0,'.',',').")";
+        }else{$mileage="";}
+        //number_format($quote,2,'.',',');
+        if ($quote == 0)    { $quote='Call';  }   else { $quote = '$'.(float)$row[retailprice];}
         //echo $row[zip];
         ?>
                     <tr>
                         <td>
-                            <?php echo $row[modelyear]; ?> <?php echo $row[modelname]; ?> 
+                            <?php if($row[c_count] > 1){ ?>
+                                <p class="vehicle" data-request="<?= htmlspecialchars(json_encode($_REQUEST));?>" data-id="<?= $row['yardid'] ?>">View All</p>
+                            <?php }else{ ?>
+                                <?php echo $row[modelyear]; ?> <?php echo $row[modelname]; ?>
+                            <?php } ?>
                         </td>
                         <td><?php  echo $mainresult[0][part] ."<br>". $row[conditionsandoptions] . "<br>". $mileage ; ?></td>
                         <td>
-                            <?php echo $row[stockticketnumber]; ?>
+                            <?php if($row[c_count] > 1){ ?>
+                                <p class="vehicle" data-request="<?= htmlspecialchars(json_encode($_REQUEST));?>" data-id="<?= $row['yardid'] ?>">View All</p>
+                            <?php }else{ ?>
+                                <?php echo $row[stockticketnumber]; ?>
+                            <?php } ?>
                         </td>
                         <td><?php echo $row[conditioncode]."-".$row[partrating]; ?></td>
                         <td class="green">
-      
-                                    <?php echo $quote ; ?>
-          
+                            <?php if($row[c_count] > 1){ ?>
+
+
+                                    <?php if(min_mod(explode(',',$row[c_price])) != null ){ ?>
+                                    <p class="vehiclee">From</p>
+                                    <p class="text-tb">
+                                        $<?= min_mod(explode(',',$row[c_price])); ?>
+                                    </p>
+                                    <?php }else{ echo '<p></p><p class="text-tb">Call</p>';} ?>
+
+                                <p class="vehicle" data-request="<?= htmlspecialchars(json_encode($_REQUEST));?>" data-id="<?= $row['yardid'] ?>">View All</p>
+                            <?php }else{ ?>
+                                <p class="text-tb"><?php echo $quote ; ?></p>
+                            <?php } ?>
                         </td>
                         <td>
         <?php
@@ -276,14 +348,14 @@ $result = R::getAll($pagesql);
                                                     <input type="email" class="form-control input-lg" ng-model="req.email"
                                                            placeholder="Enter a valid email address" required=""/>
                                                 </div>
-                                                
+
                                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 padding-center" style="text-align:center;">
                                                         <div ng-show="user_form.$valid" ng-click="submit()" class="btn btn-orange" style="display: inline-block !important;">
                                                             Submit <i class="fa fa-arrow-right"></i>
                                                         </div>
                                                 </div>
-                                                
-                                                
+
+
                                             </div>
                                             <div class="row mtop10 text-center">
 <!--                                                <div ng-show="user_form.$valid" ng-click="submit()" class="btn btn-orange">

@@ -63,7 +63,7 @@ session_start();
   </div>
 </div>
 <div class="foot" style="text-align:center;margin-top:40px;"><p style="margin-left:0;"> &copy; Copyright - autorecyclersonline.com</p>
-    <p style="position: relative;display: inline-block;text-align: center;margin-left:0;">FAQ | Terms & Conditions | Privacy Policy | <a href="http://www.autorecyclersonline.com/search/contactus.php">Contact | <a href="http://www.autorecyclersonline.com/search/aboutus.php">About</a></p]></div>
+    <p style="position: relative;display: inline-block;text-align: center;margin-left:0;">FAQ | Terms & Conditions | Privacy Policy | <a href="/search/contactus.php">Contact | <a href="/search/aboutus.php">About</a></p]></div>
 </div>
 
  <script type="text/javascript">

@@ -91,20 +91,20 @@ Template Name: Page Home
                 <div class="text-center">
                   <p><img src="<?php bloginfo('template_url'); ?>/images/parts.png" alt="POPULAR PARTS"/></p>
                   <p><a href="#" class="btn btn-custom">POPULAR PARTS</a></p>
-                  <p>Below is a list of the most popular parts searched for. Click <a href="http://www.autorecyclersonline.com/partslist/">here</a> for a complete list.</p>
+                  <p>Below is a list of the most popular parts searched for. Click <a href="/partslist/">here</a> for a complete list.</p>
                 </div>
                 <div class="row">
                   <div class="col-sm-12">
                       <ul><!--
-                          <li><a href="http://www.autorecyclersonline.com/partslist/engine_assembly/">Engine</a></li>
-                          <li><a href="http://www.autorecyclersonline.com/partslist/side_view_mirror/">Door Mirror</a></li>
-                          <li><a href="http://www.autorecyclersonline.com/partslist/transmission/">Transmission</a></li>
-                          <li><a href="http://www.autorecyclersonline.com/partslist/ac_compressor/">AC Compressor</a></li>
-                          <li><a href="http://www.autorecyclersonline.com/partslist/air_flow_meter/">Air Flow Meter</a></li>
-                          <li><a href="http://www.autorecyclersonline.com/partslist/front_lower_control_arm/">Front Lower Control Arm</a></li>
-              <li><a href="http://www.autorecyclersonline.com/partslist/spindle_knuckle/">Spindle Knuckle</a></li>
-              <li><a href="http://www.autorecyclersonline.com/partslist/steering_column/">Steering Column</a></li>
-              <li><a href="http://www.autorecyclersonline.com/partslist/window_regulator/">Window Regulator</a></li>
+                          <li><a href="/partslist/engine_assembly/">Engine</a></li>
+                          <li><a href="/partslist/side_view_mirror/">Door Mirror</a></li>
+                          <li><a href="/partslist/transmission/">Transmission</a></li>
+                          <li><a href="/partslist/ac_compressor/">AC Compressor</a></li>
+                          <li><a href="/partslist/air_flow_meter/">Air Flow Meter</a></li>
+                          <li><a href="/partslist/front_lower_control_arm/">Front Lower Control Arm</a></li>
+              <li><a href="/partslist/spindle_knuckle/">Spindle Knuckle</a></li>
+              <li><a href="/partslist/steering_column/">Steering Column</a></li>
+              <li><a href="/partslist/window_regulator/">Window Regulator</a></li>
               
               -->
               <?php $args = array(  

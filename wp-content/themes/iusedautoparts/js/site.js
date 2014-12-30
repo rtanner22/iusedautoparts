@@ -281,7 +281,7 @@ $(function () {
             $.ajax({
                 async: false,
                 type: 'post',
-                url: "http://www.iusedautoparts.dev.gbksoft.net/testing/ajax/index.php",
+                url: "/testing/ajax/index.php",
                 data: params,
                 success: function (resp) {
                     if (resp) {
@@ -889,25 +889,19 @@ function LaunchProgressBar() {
         hollanderoption: hoption,
         zip: document.getElementById('zip').value
     };
-    var response;
     $.ajax({
         async: false,
         type: 'post',
-        url: "http://www.iusedautoparts.dev.gbksoft.net/scripts/request.php",
+        url: "/scripts/request.php",
         data: params,
         success: function (resp) {
             if (resp) {
-                response = resp;
+                document.getElementById('reqid').value = resp;
+                window.searchform.submit();
+                $.loader('close');
             }
-            else
-                response = false;
         }
     });
-    var reqid = response;
-    document.getElementById('reqid').value = reqid;
-    
-    var progress = setTimeout( function() { $.loader('close');window.searchform.submit(); } , 4000);
-    
 }
 
 function validateEmail(email) {

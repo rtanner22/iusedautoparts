@@ -219,8 +219,8 @@ if(isset($_POST['fs']))
 <link href="css/style.css" rel="stylesheet" type="text/css" />
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-<script src="http://www.autorecyclersonline.com/wp-content/themes/iusedautoparts/js/jquery.loader.js"></script>
-<link href="http://www.autorecyclersonline.com/wp-content/themes/iusedautoparts/js/jquery.loader.css" rel="stylesheet">
+<script src="/wp-content/themes/iusedautoparts/js/jquery.loader.js"></script>
+<link href="/wp-content/themes/iusedautoparts/js/jquery.loader.css" rel="stylesheet">
 <link href="js/select2.css" rel="stylesheet"/>
 <script src="js/select2.js"></script>
 <script>
@@ -522,7 +522,7 @@ $.loader("close");
 <div class="wrapperheader">
     <div class="inwrap">
         <div class="header-img">
-            <img src="http://www.autorecyclersonline.com/wp-content/themes/iusedautoparts/images/logo.png" alt="img"  />
+            <img src="/wp-content/themes/iusedautoparts/images/logo.png" alt="img"  />
         </div>
     </div>
 </div>
@@ -1406,7 +1406,7 @@ $.loader("close");
                         <a href="part_3" id="part3" class="blockp" onClick="document.location.hash= '#3'"></a> </div></form>
             </div> </div> </div>
     <div class="foot" style="text-align:center;"><p style="margin-left:0;"> &copy; Copyright - autorecyclersonline.com</p>
-    <p style="position: relative;display: inline-block;text-align: center;margin-left:0;">FAQ | Terms & Conditions | Privacy Policy | <a href="http://www.autorecyclersonline.com/search/contactus.php">Contact | <a href="http://www.autorecyclersonline.com/search/aboutus.php">About</a></p]></div>
+    <p style="position: relative;display: inline-block;text-align: center;margin-left:0;">FAQ | Terms & Conditions | Privacy Policy | <a href="/search/contactus.php">Contact | <a href="/search/aboutus.php">About</a></p]></div>
 </body>
 
 

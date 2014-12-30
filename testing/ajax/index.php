@@ -170,27 +170,27 @@ $id=1;
 			$seqnbr = $r['SeqNbr'];
 			$ival = $indexlistid."|".$seqnbr."|".$interchange;
         	if($r['Application']!="") {
-        		$entry[$id][text] = str_replace('"', '&quot;', $r['Application']);
-				$entry[$id][value] = $ival;
-				$entry[$id][id] = $id;
+        		$entry[$id]['text'] = str_replace('"', '&quot;', $r['Application']);
+				$entry[$id]['value'] = $ival;
+				$entry[$id]['id'] = $id;
 				$level = $r['TreeLevel'];
-				$entry[$id][parentid] = $parentids[$level];
+				$entry[$id]['parentid'] = $parentids[$level];
 				$parentids[$level+1] = $id;
 				$id++;
 			}
 			else {
-        		$entry2[text] = str_replace('"', '&quot;', $r['Application']);
-				$entry2[value] = $ival;
-				$entry2[id] = $id;
+        		$entry2['text'] = str_replace('"', '&quot;', $r['Application']);
+				$entry2['value'] = $ival;
+				$entry2['id'] = $id;
 				$level2 = $r['TreeLevel'];
-				$entry2[parentid] = $parentids[$level2];
+				$entry2['parentid'] = $parentids[$level2];
 			}
 		}
 		if(count($entry) > 1 || !isset($entry2)) {
 			foreach($entry as $r)
 			{
-				$json[] = '{"value":"' . $r[value]. '","id":"' .
-					$r[id] . '","parentid":"' . $r[parentid]. '","text":"' . $r[text]. '"}';
+				$json[] = '{"value":"' . $r['value']. '","id":"' .
+					$r['id'] . '","parentid":"' . $r['parentid']. '","text":"' . $r['text']. '"}';
 				//$json[] = '{"option":{"value":"' . $part[1]. '","text":"' .
 				//    str_replace('"',"''",$part[0]). '","parentid":"1"}}';
 			}
@@ -201,8 +201,8 @@ $id=1;
         $json = "[".implode(',',$json)."]";
         echo $json;
     } else if($entry2) {
-		$json[] = '{"value":"' . $entry2[value]. '","id":"' .
-         $entry2[id] . '","parentid":"' . $entry2[parentid]. '","text":"' . $entry2[text]. '"}';
+		$json[] = '{"value":"' . $entry2['value']. '","id":"' .
+         $entry2['id'] . '","parentid":"' . $entry2['parentid']. '","text":"' . $entry2['text']. '"}';
         $json = "[".implode(',',$json)."]";
         echo $json;
      } else echo "[]";
