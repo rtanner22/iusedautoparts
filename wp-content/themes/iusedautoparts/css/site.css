@@ -669,14 +669,16 @@ body {
 .modal-lg {
 	width: 450px;
 }
-@media (min-width: 992px)
-.modal-lg {
-	width: 450px;
+@media (min-width: 992px) {
+    .modal-lg {
+            width: 450px;
+    }
 }
-@media (min-width: 768px)
-.modal-dialog {
-	width: 450px;
-	margin: 30px auto;
+@media (min-width: 768px) {
+    .modal-dialog {
+            width: 450px;
+            margin: 30px auto;
+    }
 }
 ng-form h2{
 	text-align:center;
