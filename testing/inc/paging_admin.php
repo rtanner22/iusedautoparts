@@ -1,4 +1,4 @@
-<?
+<?php
 function AdminPaging($pageNumber,$numofrows,$rowsPerPage,$selfurl)
 {
 	echo '<tr><td height="5px"></td></tr>';
