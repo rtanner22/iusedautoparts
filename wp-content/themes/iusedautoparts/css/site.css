@@ -681,3 +681,37 @@ body {
 ng-form h2{
 	text-align:center;
 }
+#btn-show{     padding: 4px 18px;
+       background: #EE773D;
+       border-width: 0 1px 4px 1px;
+       border-color: #E65726;
+       color: #FFF;
+       font-family: 'bariol_bold', sans-serif;
+       font-size: 20px;
+       cursor: pointer;
+       border-radius: 3px;
+}
+#btn-hide{
+       padding: 4px 18px;
+       background: #EE773D;
+       border-width: 0 1px 4px 1px;
+       border-color: #E65726;
+       color: #FFF;
+       font-family: 'bariol_bold', sans-serif;
+       font-size: 20px;
+       cursor: pointer;
+       border-radius: 3px;
+}
+.vehicle{
+       color:green;text-align:center;cursor:pointer;text-decoration: underline;
+}
+.vehiclee{
+       color:green;text-align:center;
+}
+.text-tb{
+       text-align: center;
+       font-weight: bold;
+       font-size: 20px;
+       line-height: 9px;
+       color: black;
+}
