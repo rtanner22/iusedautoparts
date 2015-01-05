@@ -275,8 +275,6 @@ display: none;
                                         class="fa fa-arrow-left"></i> PREVIOUS PAGE</a></div>
                             <div class="col-lg-4">
                                 <div class="text-center">
-                                    <p>Results Page <?php echo $pageNum; ?> of <?php echo $numofpages; ?>
-                                        (<?php echo $page_row; ?> results)</p>
                                     <ul class="pagination">
                                         <li>
                                             <a href="?pg=<?php echo $pg - 1; ?>&reqid=<?php echo $_REQUEST['reqid']; ?>" <?php
