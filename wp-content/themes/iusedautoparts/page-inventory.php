@@ -8,7 +8,6 @@ if (file_exists('testing/inc/rb.phar')) {
 }
 ini_set('error_reporting', 'on');
 ini_set("allow_url_fopen", true);
-//echo ini_get("allow_url_fopen");
 
 R::setup('mysql:host=192.168.200.100;dbname=iusedparts', 'iusedparts', '5huYvRDH');
 
@@ -51,9 +50,6 @@ function getLnt($zip) {
     $result1 = R::getAll("select lat, lng from zipcodes2 where Zipcode = '$zip' ");
     $result['lat'] = $result1[0][lat];
     $result['lng'] = $result1[0][lng];
-//die($result['lng']);
-//$result['lat'] = 0.0;
-//$result['lng'] = 0.0;
     return $result;
 }
 
@@ -83,66 +79,36 @@ function getDistance($zip1, $zip2, $unit) {
     }
 }
 
-// if (!isset($_REQUEST['order_by'])) {
-//     $order_by = "quote";
-// } else {
-//     $order_by = $_REQUEST['order_by'];
-// }
-
 $result1 = R::getAll("select * from requests where id = '" . $_REQUEST['reqid'] . "' ");
-$zipcode = $result1[0][zip];
-$hnumber = $result1[0][hnumber];
-//$result = R::getAll("select yards.yard,yards.warranty,yards.phone,yards.directory,yards.zip,requests.email,requests.year,requests.make,requests.model as umodel,requests.part,requests.hollanderoption,quotes.* from quotes inner join yards on yards.yardid = quotes.yardid inner join requests on requests.id =     quotes.leadid where quotes.done = 0 and leadid = '" . $_REQUEST['reqid'] . "' order by " . $order_by . " desc ");
-//$hvars = explode("|",$_REQUEST['hollanderoption']);
-//$hnumber = $hvars[2];
+$zipcode = $result1[0]['zip'];
+$hnumber = $result1[0]['hnumber'];
 
- //$lcsql ="select yards.yard,yards.warranty,yards.phone,yards.directory,yards.address,yards.city,yards.state,yards.zip, inventory.* from inventory
- //inner join yards on yards.yardid = inventory.yardid where inventory.inventorynumber = '" . $hnumber ."' order by retailprice desc " ;
-// $result = R::getAll($lcsql);
-
-$lcsql ="SELECT COUNT(*) from inventory
-inner join yards on yards.yardid = inventory.yardid where inventory.inventorynumber = '" . $hnumber ."' order by retailprice desc " ;
-$result = R::getAll($lcsql);
-$page_row = $result[0]['COUNT(*)'];
 ############################ Paging variables ########################
 include("testing/inc/paging_admin.php");
-$rowsPerPage = 10;
 
-//$_SESSION['rowsPerPage']=$rowsPerPage;
-// $_SESSION['page_r'] = $_REQUEST['pg'];
+$rowsPerPage = 10;
 $pageNum = 1;
 if (isset($_GET['pg'])) {
-    $pageNum = $_GET['pg'];
+    $pageNum = (int)$_GET['pg'];
+    $pageNum = ($pageNum <= 0) ? 1 : $pageNum;
 }
 $offset = ($pageNum - 1) * $rowsPerPage;
-$pg = $pageNum;
 
-$numofpages = ceil($page_row / $rowsPerPage);
-// $selfurl = "?"; //paging URL
-//============================================================================
-// if (isset($_POST['test'])){
-    $pagesql = "select
-    COUNT(DISTINCT inventory.inventoryid) as c_count,
-    GROUP_CONCAT(DISTINCT inventory.retailprice ORDER BY inventory.retailprice ASC SEPARATOR ',') AS c_price,
-    yards.yardid,yards.yard,yards.warranty,yards.address,yards.city,yards.state,yards.phone,yards.directory,yards.zip,inventory.*
-    from inventory
-    inner join yards on yards.yardid = inventory.yardid
-    where inventory.inventorynumber = '" . $hnumber ."'
-    group by yards.yard
-    order by retailprice DESC LIMIT $offset,$rowsPerPage ";
-// }else{
-//     $pagesql = "select yards.yard,yards.warranty,yards.address,yards.city,yards.state,yards.phone,yards.directory,yards.zip,inventory.*
-//     from inventory
-//     inner join yards on yards.yardid = inventory.yardid
-//     where inventory.inventorynumber = '" . $hnumber ."'
-//     group by inventory.inventorynumber
-//     order by retailprice ASC LIMIT $offset,$rowsPerPage ";
-// }
-// echo $pagesql;
+$pagesql = "SELECT SQL_CALC_FOUND_ROWS
+COUNT(DISTINCT inventory.inventoryid) as c_count,
+GROUP_CONCAT(DISTINCT inventory.retailprice ORDER BY inventory.retailprice ASC SEPARATOR ',') AS c_price,
+yards.yardid,yards.yard,yards.warranty,yards.address,yards.city,yards.state,yards.phone,yards.directory,yards.zip,inventory.*
+FROM inventory
+INNER JOIN yards on yards.yardid = inventory.yardid
+WHERE inventory.inventorynumber = '" . $hnumber ."'
+GROUP by yards.yard
+ORDER by retailprice DESC LIMIT $offset,$rowsPerPage;";
+
 $result = R::getAll($pagesql);
-
+$page_row = R::getCell('SELECT FOUND_ROWS();');
+$pg = $pageNum;
+$numofpages = ceil($page_row / $rowsPerPage);
 ?>
-
 <?php get_header(); ?>
 <?php get_template_part('banner', 'inventory'); ?>
 <style>.hide {
@@ -196,7 +162,7 @@ display: none;
         $mileage = "(Mileage: " . number_format($mileage,0,'.',',').")";
         }else{$mileage="";}
         //number_format($quote,2,'.',',');
-        if ($quote == 0)    { $quote='Call';  }   else { $quote = '$'.(float)$row[retailprice];}
+        if ($quote == 0)    { $quote='Call';  }   else { $quote = '$'.(float)$row['retailprice'];}
         //echo $row[zip];
         ?>
                     <tr>
