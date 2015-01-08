@@ -22,15 +22,6 @@ $make= mysql_real_escape_string(@$_GET['make']);
 $model= mysql_real_escape_string(@$_GET['model']);
 $part= mysql_real_escape_string(@$_GET['part']);
 
-
-
-
-
-
-
-
-
-
 if($keys=='make~model~part')
 {
   $dtype=1;
@@ -199,7 +190,6 @@ if(isset($_POST['fs']))
   $que=mysql_query($sql);
   if($que)
   {
-    /*echo "<script>alert('Thanks!! We will contact you soon.')</script>";*/
     echo "<script>window.location.href='thanks.php'</script>";
   }
 
@@ -207,8 +197,6 @@ if(isset($_POST['fs']))
 
 
 ?>
-
-
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -219,10 +207,10 @@ if(isset($_POST['fs']))
 <link href="css/style.css" rel="stylesheet" type="text/css" />
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-<script src="/wp-content/themes/iusedautoparts/js/jquery.loader.js"></script>
-<link href="/wp-content/themes/iusedautoparts/js/jquery.loader.css" rel="stylesheet">
-<link href="js/select2.css" rel="stylesheet"/>
-<script src="js/select2.js"></script>
+<script src="/js/jquery.loader.js"></script>
+<link href="/js/jquery.loader.css" rel="stylesheet">
+<link href="/js/select2.css" rel="stylesheet"/>
+<script src="/js/select2.js"></script>
 <script>
 $(document).ready(function(){
   $("#year").select2({placeholder: "Select Year"});
@@ -334,17 +322,9 @@ function getoption(obj,type,uno)
   {
     if(xmlhttp.readyState==4 && xmlhttp.status==200)
     {
-      var coptions = obj.split("|");
-         var interchange = coptions.slice(2,3);
-       if (interchange != "")
-       {
-       document.getElementById('interchange').value=interchange;
-       
-        alert(interchange);
-      alert(obj + " " + type + " " + uno);
+        var coptions = obj.split("|");
+        document.getElementById('interchange').value = coptions;
 
-       }
-      //alert(xmlhttp.responseText);
       document.getElementById(nuno+'c').style.display='none';
       returnxml=xmlhttp.responseText
       if(returnxml=="<option value='0'>Select Part Option 1</option>")
@@ -459,19 +439,16 @@ function getoption(obj,type,uno)
 
 
 function LaunchProgressBar() {
-  
-  var code = $('#zip').val();
-  var hoption = "";
-  var year = $('#s2id_year span').eq('0').text();
-  var make = $('#s2id_make span').eq('0').text();
-  var model = $('#s2id_model span').eq('0').text();
-  var partname = $('#s2id_part span').eq('0').text();
-  var inter = $('#interchange').val();
-  
+    var code = $('#zip').val();
+    var hoption = $('#idhollanderoption').val();
+    var year = $('#s2id_year span').eq('0').text();
+    var make = $('#s2id_make span').eq('0').text();
+    var model = $('#s2id_model span').eq('0').text();
+    var partname = $('#s2id_part span').eq('0').text();
+    var inter = $('#interchange').val();
 
-    var params;
-
-        params = {
+    var response;
+    var params = {
         year: year,
         make: make,
         model: model,
@@ -480,30 +457,27 @@ function LaunchProgressBar() {
         hollanderoption: hoption,
         zip: code
     };
-    var response;
+
     $.ajax({
         async: false,
         type: 'post',
-        url: "http://m.autorecyclersonline.com/scripts/request_mob.php",
+        url: "http://m.iusedautoparts.dev.gbksoft.net/scripts/request_mob.php",
         data: params,
         success: function (resp) {
             if (resp) {
                 response = resp;
                 $('#resp').val(response);
                 
-                setTimeout(function(){
-$.loader("close");
+                //setTimeout(function(){
+                $.loader("close");
                 $('#form1').submit();  
-                },10000);
+                //},10000);
                 
             }
             else
                 response = false;
         }
     });
-// console.log(params);
-    
-
 }
 </script>
 
@@ -1374,36 +1348,32 @@ $.loader("close");
                     <br>
                     </div>
                     <div class="part_3 form_part">
-                    <img src="img/content-img.png" class="imgcl">
-                    <h1 class="formTittle small"><img src="img/contactUs.png" >Contact Info</h1>
-                    <p class="go_back" id="go_back1" ></p>
-                    <!-- <input type="text" name="phone" id="phone" class="inputbox" placeholder="Phone Number" required="true" >-->
-                     <!-- <input type="email" name="email" id="email" class="inputbox" placeholder="Email Address" > -->
-                     <input type="text" name="zip" id="zip" class="inputbox" placeholder="Zip Code" >
-                     <input type="hidden" name="year" id="idyear" value="">
-            <input type="hidden" name="make" id="idmake" value="">
-            <input type="hidden" name="model" id="idmodel" value="">
-            <input type="hidden" name="partname" id="idpartname" value="">
-            <input type="hidden" name="interchange" id="idinterchange" value="">
-            <input type="hidden" name="hollanderoption" id="idhollanderoption" value="">
-            <input type="hidden" name="zip" id="idzip" value="">
-            <input type="hidden" name="response" id="resp" value="">
-            <input type="hidden" name="resp" id="pg" value="">
-            
+                        <img src="img/content-img.png" class="imgcl">
+                        <h1 class="formTittle small"><img src="img/contactUs.png" >Contact Info</h1>
+                        <p class="go_back" id="go_back1" ></p>
+                        <input type="text" name="zip" id="zip" class="inputbox" placeholder="Zip Code" >
+                        <input type="hidden" name="year" id="idyear" value="">
+                        <input type="hidden" name="make" id="idmake" value="">
+                        <input type="hidden" name="model" id="idmodel" value="">
+                        <input type="hidden" name="partname" id="idpartname" value="">
+                        <input type="hidden" name="interchange" id="interchange" value="">
+                        <input type="hidden" name="hollanderoption" id="idhollanderoption" value="">
+                        <input type="hidden" name="zip" id="idzip" value="">
+                        <input type="hidden" name="reqid" id="resp" value="">
+                        <input type="hidden" name="resp" id="pg" value="">
+                        <input type="hidden" name="fs" id="fs" value="">
+                        <input type="hidden" value="" name="application" id="application"/>
+                        <input type="hidden" id="partname" name="partname" value=""/>
+                        <input type="image" src="img/inputbg.png" style="display:none;">
 
-                     <input type="hidden" name="fs" id="fs" value="">
-                     <input type="hidden" value="" name="interchange" id="interchange"/>
-                 <input type="hidden" value="" name="application" id="application"/>
-                     <input type="hidden" id="partname" name="partname" value=""/>
-                     <input type="hidden" name="cttt" id="cttt">
-                     <input type="image" src="img/inputbg.png" style="display:none;">
-                    <!-- <p style="margin-bottom: 16px; margin-left: 30px;"> <input type="checkbox" name="mechanics" id="mechanics" class="checkbox" placeholder="Mechanics"  checked="true"><span style="color:#000;">&nbsp;Receive offers on installation </span></p> -->
-                    <div style="width:100%;text-align:center;"><span class="button" style="padding:15px 20px;" onClick="submitform();">Submit</span></div>
+                        <div style="width:100%;text-align:center;"><span class="button" style="padding:15px 20px;" onClick="submitform();">Submit</span></div>
                     </div>
                     <div align="center" class="form_button">
-                      <a href="part_1" id="part1"  class="activeicon"  onClick="document.location.hash= '#1'"  ></a>
+                        <a href="part_1" id="part1"  class="activeicon"  onClick="document.location.hash= '#1'"  ></a>
                         <a href="part_2" id="part2"  class="blockp" onClick="document.location.hash= '#2'" ></a>
-                        <a href="part_3" id="part3" class="blockp" onClick="document.location.hash= '#3'"></a> </div></form>
+                        <a href="part_3" id="part3" class="blockp" onClick="document.location.hash= '#3'"></a>
+                    </div>
+                </form>
             </div> </div> </div>
     <div class="foot" style="text-align:center;"><p style="margin-left:0;"> &copy; Copyright - autorecyclersonline.com</p>
     <p style="position: relative;display: inline-block;text-align: center;margin-left:0;">FAQ | Terms & Conditions | Privacy Policy | <a href="/search/contactus.php">Contact | <a href="/search/aboutus.php">About</a></p]></div>
@@ -1412,39 +1382,6 @@ $.loader("close");
 
 <script type="text/javascript">
 $(function(){
-
-
-/*
-
- // gather all inputs of selected types
-    var inputs = $('input, textarea, select, button'), inputTo;
-
-    // bind on keydown
-    inputs.on('keydown', function(e) {
-
-        // if we pressed the tab
-        if (e.keyCode == 9 || e.which == 9) {
-            // prevent default tab action
-            e.preventDefault();
-
-            if (e.shiftKey) {
-                // get previous input based on the current input
-                inputTo = inputs.get(inputs.index(this) - 1);
-            } else {
-                // get next input based on the current input
-                inputTo = inputs.get(inputs.index(this) + 1);
-            }
-
-            // move focus to inputTo, otherwise focus first input
-            if (inputTo) {
-                inputTo.focus();
-            } else {
-                inputs[0].focus();
-            }
-        }
-    });
-
-*/
   var gb = $(".go_back");
   gb.click(function(){
     if($(".form_part:visible").hasClass("part_2")){
@@ -1586,7 +1523,7 @@ function submitform()
   $('#idmake').val($('#s2id_make a .select2-chosen').text());
   $('#idmodel').val($('#s2id_model a .select2-chosen').text());
   $('#idpartname').val($('#s2id_part a .select2-chosen').text());
-  $('#idinterchange').val($('#partoption0 option').eq('1').val());
+  $('#interchange').val($('#partoption0 option').eq('1').val());
   $('#idhollanderoption').val($('#s2id_year a .select2-chosen').text());
   $('#idzip').val($('#zip').val());
   $.loader({
@@ -1616,7 +1553,6 @@ function submitform()
 
 
   <!-- Google Code for IUAP Lead Conversion Page -->
-<script type="text/javascript">
 /* <![CDATA[ */
 var google_conversion_id = 1070872026;
 var google_conversion_language = "en";
@@ -1635,7 +1571,4 @@ var google_remarketing_only = false;
 <img height="1" width="1" style="border-style:none;" alt="" src="//www.googleadservices.com/pagead/conversion/1070872026/?label=9khiCNzOuggQ2uvQ_gM&amp;guid=ON&amp;script=0"/>
 </div>
 </noscript>
-
-
-</script>
 </html>

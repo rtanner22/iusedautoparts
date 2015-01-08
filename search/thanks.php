@@ -61,7 +61,7 @@ session_start();
   
   
   <!-- Google Code for IUAP Lead Conversion Page -->
-<script type="text/javascript">
+
 /* <![CDATA[ */
 var google_conversion_id = 1070872026;
 var google_conversion_language = "en";

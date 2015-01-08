@@ -26,14 +26,12 @@ if (isset($_POST['mechanics'])) {
 try {
     // Insert data to table inventory_r with timestamp
     if (isset($interchange[2])) {
-        mysql_query("INSERT INTO inventory_r (`yardid`,`inventoryid`,`inventorynumber`,`quantityavailable`,`stockticketnumber`,`modelyear`,`modelname`,`conditionsandoptions`,`mileage`,`conditioncode`,`partrating`,`wholesaleprice`,`timestamp`) SELECT yardid,inventoryid,inventorynumber,quantityavailable,stockticketnumber,modelyear,modelname,conditionsandoptions,mileage,conditioncode,partrating,wholesaleprice,NOW() FROM inventory WHERE inventorynumber = '" . $interchange[2] . "';");
+        mysql_query("INSERT INTO inventory_r (`yardid`,`inventoryid`,`inventorynumber`,`quantityavailable`,`stockticketnumber`,`modelyear`,`modelname`,`conditionsandoptions`,`mileage`,`conditioncode`,`partrating`,`wholesaleprice`,`retailprice`,`timestamp`) SELECT yardid,inventoryid,inventorynumber,quantityavailable,stockticketnumber,modelyear,modelname,conditionsandoptions,mileage,conditioncode,partrating,wholesaleprice,retailprice,NOW() FROM inventory WHERE inventorynumber = '" . $interchange[2] . "';");
     }
 } catch (Exception $exc) {}
 
 $sql = "insert into requests (date,udate,year,make,model,part,hnumber,hollanderoption,phone,zip,email,source,referrer,kw,se,ip,wantsrepair) values('$date',unix_timestamp(),'$year','$make','$model','$partname','$interchange[2]','" . mysql_real_escape_string($hollanderoption) . "','$phone','$zip','$email','$source','$_SESSION[referrer]','$_SESSION[kw]','$_SESSION[se]','$ip','$wantsrepair')";
 $que = mysql_query($sql) or die(mysql_error());
 if ($que) {
-    /* echo "<script>alert('Thanks!! We will contact you soon.')</script>"; */
-    //echo "<script>window.location.href='thanks.php'</script>";
     echo mysql_insert_id();
 }
