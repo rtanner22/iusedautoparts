@@ -2,9 +2,9 @@
   <div class="container">
     <div class="row">
       <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
-      	<h1>Thousands Of quality used OEM <? echo $_REQUEST['make']." ". $_REQUEST['model']; ?> parts</h1>
+        <h1>Thousands Of quality used OEM <? echo $_REQUEST['make']." ". $_REQUEST['model']; ?> parts</h1>
         <ul class="bullets">
-        	<li>Quick Quotes that save you money</li>
+          <li>Quick Quotes that save you money</li>
             <li>Save over 50% off dealer prices</li>
             <li>Fast delivery to your home or mechanic</li>
             <li>We service all major makes</li>
@@ -14,24 +14,24 @@
         <div class="form-search" style="display: block;">
           <div id="step1-title">
 <?php
-	if($_REQUEST['model'] && !$_REQUEST['make']) {
+  if($_REQUEST['model'] && !$_REQUEST['make']) {
 
-		$result = R::getAll( "select distinct hmodelxref.cplmake as make from carline inner join hmodelxref on hmodelxref.HMakeCode = carline.MfrCd where cplmodel LIKE '".$_REQUEST['model']."' order by make" );
-		$_REQUEST['make'] = $result[0]['make'];
-	}
+    $result = R::getAll( "select distinct hmodelxref.cplmake as make from carline inner join hmodelxref on hmodelxref.HMakeCode = carline.MfrCd where cplmodel LIKE '".$_REQUEST['model']."' order by make" );
+    $_REQUEST['make'] = $result[0]['make'];
+  }
 
-	if($_REQUEST['part']) {
-	    $part = R::getAll( "select distinct ptype.Description as pdesc,indexlist.parttype as ptype from indexlist inner join ptype on ptype.PartType = indexlist.PartType where indexlist.parttype = '".$_REQUEST['part']."' order by pdesc asc" );
-	}
-	//echo "select distinct ptype.Description as pdesc,indexlist.parttype as ptype from indexlist inner join ptype on ptype.PartType = indexlist.PartType where indexlist.parttype = '".$_REQUEST['part']."' order by pdesc asc";
-	$partdesc = $part[0][pdesc];
-	//echo "Model: ". $_REQUEST['model'];
-	//$lcsql ="select * from hmodelxref where HMake LIKE '".$_REQUEST['make']."' AND HModel LIKE '".$_REQUEST['model']."' ";
+  if($_REQUEST['part']) {
+      $part = R::getAll( "select distinct ptype.Description as pdesc,indexlist.parttype as ptype from indexlist inner join ptype on ptype.PartType = indexlist.PartType where indexlist.parttype = '".$_REQUEST['part']."' order by pdesc asc" );
+  }
+  //echo "select distinct ptype.Description as pdesc,indexlist.parttype as ptype from indexlist inner join ptype on ptype.PartType = indexlist.PartType where indexlist.parttype = '".$_REQUEST['part']."' order by pdesc asc";
+  $partdesc = $part[0][pdesc];
+  //echo "Model: ". $_REQUEST['model'];
+  //$lcsql ="select * from hmodelxref where HMake LIKE '".$_REQUEST['make']."' AND HModel LIKE '".$_REQUEST['model']."' ";
 //echo $lcsql;
-	$result = R::getAll("select * from hmodelxref where cplmake = '".$_REQUEST['make']."' AND cplmodel = '".$_REQUEST['model']."' ");
+  $result = R::getAll("select * from hmodelxref where cplmake = '".$_REQUEST['make']."' AND cplmodel = '".$_REQUEST['model']."' ");
 ?>
             <h2>What is the <u>YEAR</u> for your  <font color="red"><?php echo $_REQUEST['make'] . " " . $_REQUEST['model']; ?></font>?</h2>
-            <p>Please provide the year of your vehicle so we can get you a price for your <? echo $partdesc;?> or <a href="http://www.iusedautoparts.com">start a new search.</a></p>
+            <p>Please provide the year of your vehicle so we can get you a price for your <? echo $partdesc;?> or <a href="http://www.autorecyclersonline.com">start a new search.</a></p>
           </div>
           <div id="step2-title" style="display: none;">
             <h2></h2>
@@ -51,8 +51,8 @@
                 <label for="year">Your vehicle’s model year:</label>
                 <div class="btn-group btn-group-justified">
                   <div class="btn-group">
-				<select class="btn btn-dropdown btn-lg dropdown-toggle" name="box-year" id="box-year" role="menu" >
-				<option value="">Year</option> </select>
+        <select class="btn btn-dropdown btn-lg dropdown-toggle" name="box-year" id="box-year" role="menu" >
+        <option value="">Year</option> </select>
                   </div>
                 </div>
               </div>
@@ -62,7 +62,7 @@
                 <div class="btn-group btn-group-justified">
                   <div class="btn-group">
                   <select id="box-make" class="btn btn-dropdown btn-lg dropdown-toggle"  role="menu" name="carmake">
-					<option>Make</option>
+          <option>Make</option>
                  </select>
                   </div>
                 </div>
@@ -72,7 +72,7 @@
                 <div class="btn-group btn-group-justified">
                   <div class="btn-group">
                   <select id="box-model" class="btn btn-dropdown btn-lg dropdown-toggle" role="menu" name="carmodel">
-					<option>Model</option>
+          <option>Model</option>
                   </select>
                   </div>
                 </div>
@@ -82,7 +82,7 @@
                 <div class="btn-group btn-group-justified">
                   <div class="btn-group">
                   <select id="box-part" class="btn btn-dropdown btn-lg dropdown-toggle"  role="menu"  name="carpart">
-					<option>Part</option>
+          <option>Part</option>
                   </select>
                   <input type="hidden" id="partname" name="partname" />
                   </div>
@@ -127,7 +127,7 @@
     <div class="modal-content">
 
       <div class="modal-body center-block">
-      	<h3>Please wait while we search for inventory from our vendors..</h3>
+        <h3>Please wait while we search for inventory from our vendors..</h3>
         <div class="progress">
           <div class="progress-bar progress-bar-success bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
 

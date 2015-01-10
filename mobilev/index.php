@@ -9,7 +9,7 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
 <style>
 html {overflow-x:hidden !important;overflow-y:hidden !important;   -webkit-overflow-scrolling: touch;}
-body {{overflow-x:hidden !important;overflow-y:hidden !important;   -webkit-overflow-scrolling: touch;}
+body {overflow-x:hidden !important;overflow-y:hidden !important;   -webkit-overflow-scrolling: touch;}
 </style>
 </head>
 
@@ -25,10 +25,10 @@ body {{overflow-x:hidden !important;overflow-y:hidden !important;   -webkit-over
 <!--<iframe  src="mobile.php"></iframe>-->
 <?php
 session_start();
-$mdb_username = "rtanner2_38";
-$mdb_password = "BHeFVC7i";
-$mdb_database = "rtanner2_cpl";
-$mdb_host="localhost" ;
+$mdb_username = "iusedparts";
+$mdb_password = "5huYvRDH";
+$mdb_database = "iusedparts";
+$mdb_host="192.168.200.100" ;
 $mlink = mysql_connect($mdb_host,$mdb_username,$mdb_password);
 mysql_select_db("$mdb_database", $mlink);
 

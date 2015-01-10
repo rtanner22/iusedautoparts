@@ -35,8 +35,8 @@ body {
 }
 
 .container {
-	width: 1040px;
-	max-width: none !important;
+	//width: 1040px;
+	//max-width: none !important;
 }
 a {
 	color: #69b338;
@@ -54,7 +54,7 @@ h1 {
 h2 {
 	font-family: 'bariol_bold', sans-serif;
 	color: #69b338;
-	font-size: 24px;
+	font-size: 26px;
 	margin-top: 0;
 }
 
@@ -286,6 +286,7 @@ color: #FFF;
 	-webkit-box-shadow: 0px 5px 5px 0px rgba(199, 230, 239, 0.75);
 	-moz-box-shadow: 0px 5px 5px 0px rgba(199, 230, 239, 0.75);
 	box-shadow: 0px 5px 5px 0px rgba(199, 230, 239, 0.75);
+	height: 94px;
 }
 #header .logo {
 	padding: 30px 0;
@@ -297,8 +298,31 @@ color: #FFF;
 	font-family: 'Montserrat', sans-serif;
 	font-weight: 700;
 	color: #355f79;
+	text-transform: uppercase;
 }
-#header .nav>li>a:hover, #header .nav>li>a:focus {
+
+#header .nav>li>a:hover, 
+#header .nav>li>a:focus {
+	background: #f5f5f5;
+}
+#header .nav>li.active>a {
+	background: none;
+}
+
+#header .nav>li>a .caret {
+	margin-top: 32px;
+}
+
+#header .nav>li> .dropdown-menu>li>a {
+	font-weight: normal;
+	text-transform: inherit;
+}
+.dropdown-menu {
+	z-index: 1020;
+}
+.dropdown-menu>.active>a, 
+.dropdown-menu>.active>a:hover, 
+.dropdown-menu>.active>a:focus {
 	background: none;
 }
 /*==============================================
@@ -538,6 +562,7 @@ color: #FFF;
 	color: #FFF;
 	font-size: 12px;
 	line-height: 33px;
+	text-transform: uppercase;
 }
 .footer-links li:first-child {
 	padding-left: 0;
@@ -595,6 +620,9 @@ color: #FFF;
 body {
 	padding-top: 70px;
 }
+#banner {
+    padding-top: 10px;
+}
 .footer-copyright .copy {
 	text-align: center;
 }
@@ -641,3 +669,54 @@ body {
 }
 
 .padding-center {padding-top: 21px;}
+.modal-lg {
+	width: 450px;
+}
+@media (min-width: 992px) {
+    .modal-lg {
+            width: 450px;
+    }
+}
+@media (min-width: 768px) {
+    .modal-dialog {
+            width: 450px;
+            margin: 30px auto;
+    }
+}
+ng-form h2{
+	text-align:center;
+}
+#btn-show{     padding: 4px 18px;
+       background: #EE773D;
+       border-width: 0 1px 4px 1px;
+       border-color: #E65726;
+       color: #FFF;
+       font-family: 'bariol_bold', sans-serif;
+       font-size: 20px;
+       cursor: pointer;
+       border-radius: 3px;
+}
+#btn-hide{
+       padding: 4px 18px;
+       background: #EE773D;
+       border-width: 0 1px 4px 1px;
+       border-color: #E65726;
+       color: #FFF;
+       font-family: 'bariol_bold', sans-serif;
+       font-size: 20px;
+       cursor: pointer;
+       border-radius: 3px;
+}
+.vehicle{
+       color:green;text-align:center;cursor:pointer;text-decoration: underline;
+}
+.vehiclee{
+       color:green;text-align:center;
+}
+.text-tb{
+       text-align: center;
+       font-weight: bold;
+       font-size: 20px;
+       line-height: 9px;
+       color: black;
+}

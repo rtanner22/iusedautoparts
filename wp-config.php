@@ -16,16 +16,16 @@
 
 // ** MySQL settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
-define('DB_NAME', 'rtanner2_cpl');
+define('DB_NAME', 'iusedparts');
 
 /** MySQL database username */
-define('DB_USER', 'rtanner2_38');
+define('DB_USER', 'iusedparts');
 
 /** MySQL database password */
-define('DB_PASSWORD', 'e9!R7a03raa');
+define('DB_PASSWORD', '5huYvRDH');
 
 /** MySQL hostname */
-define('DB_HOST', 'qs3505.pair.com');
+define('DB_HOST', '192.168.200.100');
 
 /** Database Charset to use in creating database tables. */
 define('DB_CHARSET', 'utf8');
@@ -79,15 +79,23 @@ define('WPLANG', '');
  * in their development environments.
  */
 define('WP_DEBUG', false);
+//define('WP_ALLOW_MULTISITE', true);
+//define('MULTISITE', true);
+//define('SUBDOMAIN_INSTALL', true);
+//$base = '/';
+//define('DOMAIN_CURRENT_SITE', 'www.autorecyclersonline.com');
+//define('PATH_CURRENT_SITE', '/');
+//define('SITE_ID_CURRENT_SITE', 1);
+//define('BLOG_ID_CURRENT_SITE', 1);
 
 /* That's all, stop editing! Happy blogging. */
 
 /** Absolute path to the WordPress directory. */
 if ( !defined('ABSPATH') )
-	define('ABSPATH', dirname(__FILE__) . '/');
+  define('ABSPATH', dirname(__FILE__) . '/');
 
 /** Sets up WordPress vars and included files. */
 require_once(ABSPATH . 'wp-settings.php');
 define( 'FTP_USER', 'rtanner2' );
 define( 'FTP_PASS', 'DN4uAqHS' );
-define( 'FTP_HOST', 'iusedautoparts.com' );
+define( 'FTP_HOST', 'autorecyclersonline.com' );

@@ -1,8 +1,8 @@
 <?php
-$base = "rtanner2_cpl";
-$user = "rtanner2_38";
-$pass = "e9!R7a03raa";
-$mlink = mysql_connect("localhost", "$user", "$pass") or  die('NODATA1');
+$base = "iusedparts";
+$user = "iusedparts";
+$pass = "5huYvRDH";
+$mlink = mysql_connect("192.168.200.100", "$user", "$pass") or  die('NODATA1');
 //mysql_query("SET NAMES 'utf8'");
 mysql_select_db("$base", $mlink) or die('NODATA2');
 ?>

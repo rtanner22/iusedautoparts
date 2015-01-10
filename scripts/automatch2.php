@@ -19,10 +19,10 @@ if (isset($_GET[token]))
 		
 		//echo 'ok';	
 		
-		$base = "rtanner2_cpl";
-		$user = "rtanner2_38";
-		$pass = "BHeFVC7i";
-		$mlink = new mysqli("localhost", "$user", "$pass", "$base");
+		$base = "iusedparts";
+		$user = "iusedparts";
+		$pass = "5huYvRDH";
+		$mlink = new mysqli("192.168.200.100", "$user", "$pass", "$base");
 		
 		/* check connection */
 		if (mysqli_connect_errno()) {

@@ -21,7 +21,7 @@
           </div>
           <form action="/inventory" method="POST" name="searchform">
           <input type="hidden" name="reqid" id="reqid" value="" />
-          <input type="hidden" name="openyear" id="openyear" value="true" />
+          <input type="hidden" name="openyear" id="openyear" value="false" />
           <input type="hidden" name="preload-year" id="preload-year" value="<?php echo $_REQUEST[year]; ?>" />
           <input type="hidden" name="preload-make" id="preload-make" value="<?php echo $_REQUEST[make]; ?>" />
           <input type="hidden" name="preload-model" id="preload-model" value="<?php echo $_REQUEST[model]; ?>" />

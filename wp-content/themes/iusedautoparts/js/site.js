@@ -1,3 +1,45 @@
+$(document).on('click', '.jqx-item', function(){
+    $('input[name=zipcode]').focus();
+});
+$(document).on('keydown', '.form-control', function(event){
+  if(event.keyCode === 9){$('#btn-check').focus();}
+});
+$( document ).ready(function() {
+  if($('.bs-example-modal-lg').css('display','block')){
+    $('.form-control').focus();
+  }
+  if($('#getvalue').text().length > 0  ){
+    var el = $('#getvalue').text();
+    $('title').text(el);
+  }
+
+  // $('.table-hide').find('tr:not(:first)').hide();
+  // $("#btn-show").click(function () {
+  //   $('.table-hide').find('tr:not(:first)').show();
+  //   $("#btn-show").hide();
+  //   $("#btn-hide").show();
+  // });
+  // $('#btn-hide').click(function () {
+  //   $('.table-hide').find('tr:not(:first)').hide();
+  //   $("#btn-show").show();
+  //   $("#btn-hide").hide();
+  // });
+
+    $(".vehicle").click(function () { 
+        var req = $(this).data('request');
+        req['addres'] = 'addres';
+        req['yardid'] = $(this).data('id');
+//        var _self = $(this).parents('td').parent('tr');
+        $.post( "/testing/ajax/add_result.php", req, function( data ) {
+                var namevendor = $(data).find('.namevendor:first').text();
+                $('#data').find('.modal-body').html(data);
+                $('#data').find('#myModalLabel span').text(namevendor);
+                $('#data').modal('show');
+        });  
+    });        
+});
+
+
 $(function () {
     window.cars = {
         selectedManufacture: "",
@@ -242,7 +284,7 @@ $(function () {
             $.ajax({
                 async: false,
                 type: 'post',
-                url: "http://www.iusedautoparts.com/testing/ajax/index.php",
+                url: "/testing/ajax/index.php",
                 data: params,
                 success: function (resp) {
                     if (resp) {
@@ -326,13 +368,13 @@ $(function () {
 
             if (preloads[p] == "year") {
                 //create_yearbox();
-                //	if  (($('#preload-make').val()!=undefined&&$('#preload-make').val()!="")|| ($('#preload-model').val()!=undefined&&$('#preload-model').val()!="") )
-                //	{
-                //		preload_year();
-                //	}
-                //	else {
+                //  if  (($('#preload-make').val()!=undefined&&$('#preload-make').val()!="")|| ($('#preload-model').val()!=undefined&&$('#preload-model').val()!="") )
+                //  {
+                //    preload_year();
+                //  }
+                //  else {
                 cars.init();
-                //	}
+                //  }
             }
             if (preloads[p] == "make") {
                 create_makebox();
@@ -364,7 +406,7 @@ $(function () {
     cars.init();
     InitSecondarySearch();
     InitPrimarySearch();
-    ShowProgress();
+    ShowProgresss();
     ResetStates();
 
 });
@@ -520,15 +562,12 @@ function InitPrimarySearch() {
         if (document.getElementById('zip').value.length != 5) {
             alert("Please provide a five-digit zip code.");
         } else {
-            $('#modal-progress').modal({
-                backdrop: 'static',
-                show: true
-            });
+          ShowProgress();
         }
     });
     $("#btn-new-search").click(function (e) {
         e.preventDefault();
-        window.location = "http://www.iusedautoparts.com";
+        window.location = "/";
 
     });
 }
@@ -641,10 +680,10 @@ function preload_year() {
     else
         var params = {carYears: 1};
     var data = cars.getCarsData(params);
-//	if( data )
-//	{
-//		cars.carYears( data );
-//	}
+//  if( data )
+//  {
+//    cars.carYears( data );
+//  }
 
     cars.selectedCarYear = $("#preload-year").val();
     var newYears = JSON.parse(data);
@@ -756,7 +795,7 @@ function highlight_box(box) {
 
 
 function create_yearbox() {
-    $(".step1").append('<div id="group-year" class="form-group"><label for="year">	Your vehicle\'s model year:</label><div class="btn-group btn-group-justified"><div class="btn-group"><select class="btn btn-dropdown btn-lg dropdown-toggle" name="box-year" id="box-year" role="menu" ><option value="">Year</option> </select></div></div></div>');
+    $(".step1").append('<div id="group-year" class="form-group"><label for="year">  Your vehicle\'s model year:</label><div class="btn-group btn-group-justified"><div class="btn-group"><select class="btn btn-dropdown btn-lg dropdown-toggle" name="box-year" id="box-year" role="menu" ><option value="">Year</option> </select></div></div></div>');
     $("#box-year").select2({placeholder: "Year"});
     cars.carMakes();
     //cars.carYears();
@@ -789,12 +828,20 @@ function ShowStep2() {
 }
 
 function ShowProgress() {
+$.loader({
+        className:"blue-with-image-12",
+        content:'Please wait while we search for inventory from our vendors..'
+    });
 
-    $('#modal-progress').on('shown.bs.modal', function () {
+       LaunchProgressBar();
 
-        LaunchProgressBar();
+}
+function     ShowProgresss(){
+ // $('#modal-progress').on('shown.bs.modal', function () {
 
-    })
+ //        LaunchProgressBar();
+
+ //    })
 }
 
 
@@ -845,44 +892,19 @@ function LaunchProgressBar() {
         hollanderoption: hoption,
         zip: document.getElementById('zip').value
     };
-    var response;
     $.ajax({
         async: false,
         type: 'post',
-        url: "http://www.iusedautoparts.com/scripts/request.php",
+        url: "/scripts/request.php",
         data: params,
         success: function (resp) {
             if (resp) {
-                response = resp;
+                document.getElementById('reqid').value = resp;
+                window.searchform.submit();
+                $.loader('close');
             }
-            else
-                response = false;
         }
     });
-    var reqid = response;
-    document.getElementById('reqid').value = reqid;
-
-    var progress = setInterval(function () {
-        var $bar = $('.bar');
-
-        if ($bar.width() > 500) {
-
-            //window.location.href = "/inventory";
-
-            window.searchform.submit();
-            clearInterval(progress);
-            $('.progress').removeClass('active');
-            $('#modal-progress').modal('hide');
-            $bar.width(0);
-
-        } else {
-
-
-            $bar.width($bar.width() + 50);
-        }
-
-        $bar.text($bar.width() / 5 + "%");
-    }, 800);
 }
 
 function validateEmail(email) {
@@ -905,91 +927,6 @@ function updateRequestContactData() {
         alert("Please enter a valid phone number");
         return false;
     }
-
-//  
-//    var params;
-//
-//    var optvalue = $("#optionvalue").val();
-//    var hoption;
-//    if (optvalue) {
-//        hoption = optvalue.label;
-//        if (optvalue.parentElement) {
-//
-//            var parent = $('#optionvalue').jqxTree('getItem', optvalue.parentElement);
-//            hoption += "," + parent.label;
-//            if (parent.parentElement) {
-//                var grandparent = $('#optionvalue').jqxTree('getItem', parent.parentElement);
-//                hoption = grandparent.label + "," + hoption;
-//                if (grandparent.parentElement) {
-//                    var greatgrandparent = $('#optionvalue').jqxTree('getItem', grandparent.parentElement);
-//                    hoption = greatgrandparent.label + "," + hoption;
-//                }
-//            }
-//        }
-//    }
-//    else
-//        hoption = "";
-//
-//    var optvalue = document.getElementById("hollanderoption").value;
-//    if (document.getElementById('preload-partname'))
-//        carPartName = document.getElementById('preload-partname').value;
-//    else if (document.getElementById('partname').value != "")
-//        carPartName = document.getElementById('partname').value;
-//    else if (document.getElementById('preload-chpartname'))
-//        carPartName = document.getElementById('preload-chpartname').value;
-//    if (cars.selectedCarYear && cars.selectedManufacture && cars.selectedModel &&
-//            carPartName && optvalue && document.getElementById('zip').value) {
-//        //alert("submitting");
-//        //continue;
-//    } else
-//        return false;
-//    params = {
-//        year: cars.selectedCarYear,
-//        make: cars.selectedManufacture,
-//        model: cars.selectedModel,
-//        partname: carPartName,
-//        interchange: optvalue,
-//        hollanderoption: hoption,
-//        zip: document.getElementById('zip').value};
-//    var response;
-//    $.ajax({
-//        async: false,
-//        type: 'post',
-//        url: "http://www.iusedautoparts.com/scripts/request.php",
-//        data: params,
-//        success: function(resp) {
-//            if (resp)
-//            {
-//                response = resp;
-//            }
-//            else
-//                response = false;
-//        }
-//    });
-//    var reqid = response;
-//    document.getElementById('reqid').value = reqid;
-//
-//    var progress = setInterval(function() {
-//        var $bar = $('.bar');
-//
-//        if ($bar.width() > 500) {
-//
-//            //window.location.href = "/inventory";
-//
-//            window.searchform.submit();
-//            clearInterval(progress);
-//            $('.progress').removeClass('active');
-//            $('#modal-progress').modal('hide');
-//            $bar.width(0);
-//
-//        } else {
-//
-//
-//            $bar.width($bar.width() + 50);
-//        }
-//
-//        $bar.text($bar.width() / 5 + "%");
-//    }, 800);
 }
 
 window.onkeydown = function (e) {
@@ -1017,10 +954,12 @@ window.onkeydown = function (e) {
             if (document.getElementById('zip').value.length != 5) {
                 alert("Please provide a five-digit zip code.");
             } else {
-                $('#modal-progress').modal({
-                    backdrop: 'static',
-                    show: true
+                $.loader({
+                    className:"blue-with-image-12",
+                    content:'Please wait while we search for inventory from our vendors..'
                 });
+
+                   LaunchProgressBar();
             }
         } else
             return false;
@@ -1028,18 +967,7 @@ window.onkeydown = function (e) {
 
         return false;
 
-        /*		if(document.getElementById('zip').value.length != 5 || document.getElementById("group-button").style.display!="none") {
-         alert("Please provide a five-digit zip code.");
-         } else {
-         $('#modal-progress').modal({
-         backdrop: 'static',
-         show: true
-         });
-         }
-         */
         return false;
-        //alert("test");
-        //alert("again");
     }
 }
 

@@ -20,10 +20,10 @@ echo "Converted back: " . date("Y-m-d H:i:s",$u)
 /*testing holalnder options*/
 
 session_start();
-$mdb_username = "rtanner2_38";
-$mdb_password = "BHeFVC7i";
-$mdb_database = "rtanner2_cpl";
-$mdb_host="localhost" ;
+$mdb_username = "iusedparts";
+$mdb_password = "5huYvRDH";
+$mdb_database = "iusedparts";
+$mdb_host="192.168.200.100" ;
 $mlink = mysql_connect($mdb_host,$mdb_username,$mdb_password);
 mysql_select_db("$mdb_database", $mlink);
 echo "Connect ok!<br>";
@@ -49,7 +49,7 @@ if ($number != "")
 }else
 {
 
-	$html =
+
 
 }
 

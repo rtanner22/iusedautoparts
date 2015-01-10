@@ -1,9 +1,8 @@
-
 <section id="banner" class="home">
   <div class="container">
     <div class="row">
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-10 col-lg-offset-1">
-        <div class="steps">
+        <div class="steps hidden-xs hidden-sm">
           <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
               <div class="step">Step 1: Select Parts</div>
@@ -111,7 +110,7 @@
     <div class="modal-content">
 
       <div class="modal-body center-block">
-      	<h3>Please wait while we search for inventory from our vendor..</h3>
+      	<h3>Please wait while we search for inventory from our vendors..</h3>
         <div class="progress">
           <div class="progress-bar progress-bar-success bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
 

@@ -1,8 +1,8 @@
 <?php
-$mdb_username = "rtanner2_38";
-$mdb_password = "BHeFVC7i";
-$mdb_database = "rtanner2_cpl";
-$mdb_host="qs3505.pair.com" ;
+$mdb_username = "iusedparts";
+$mdb_password = "5huYvRDH";
+$mdb_database = "iusedparts";
+$mdb_host="192.168.200.100" ;
 $mlink = mysql_connect($mdb_host,$mdb_username,$mdb_password);
 mysql_select_db("$mdb_database", $mlink);
 
