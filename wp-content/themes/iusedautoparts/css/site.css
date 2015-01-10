@@ -35,8 +35,8 @@ body {
 }
 
 .container {
-	width: 1040px;
-	max-width: none !important;
+	//width: 1040px;
+	//max-width: none !important;
 }
 a {
 	color: #69b338;
@@ -619,6 +619,9 @@ color: #FFF;
 @media (max-width: 767px) {
 body {
 	padding-top: 70px;
+}
+#banner {
+    padding-top: 10px;
 }
 .footer-copyright .copy {
 	text-align: center;
