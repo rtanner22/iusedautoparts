@@ -220,7 +220,7 @@ display: none;
                             ?>
                         </td>
                         <td><?php echo $distance; ?></td>
-                        <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalRequestSave" data-yardid="<?= $row['yardid'] ?>">Save</button></td>
+                        <td class="text-center"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalRequestSave" data-yardid="<?= $row['yardid'] ?>">Save</button></td>
                     </tr>
     <?php } ?>
                             </tbody>
