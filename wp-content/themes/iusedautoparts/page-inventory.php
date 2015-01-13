@@ -147,6 +147,9 @@ display: none;
                                     <th>Distance<br/>
                                         (Miles)
                                     </th>
+                                    <th>
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalRequestSaveAll">Save All</button>
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody class="table-hide">
@@ -222,7 +225,6 @@ display: none;
     <?php } ?>
                             </tbody>
                         </table>
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalRequestSaveAll">Save</button>
                         <div class="row">
                             <div class="col-lg-4"><a
                                     href="?pg=<?php echo $pg - 1; ?>&reqid=<?php echo $_REQUEST['reqid']; ?>"
