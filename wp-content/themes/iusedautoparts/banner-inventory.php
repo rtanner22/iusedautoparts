@@ -106,6 +106,7 @@
             <button id="btn-check" type="submit" class="btn btn-orange">CHECK STOCK <i class="fa fa-arrow-right"></i></button>
 
           </div>
+          </form>
           </div>
           </div>
         </div>

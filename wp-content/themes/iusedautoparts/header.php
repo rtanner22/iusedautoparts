@@ -14,7 +14,7 @@
 <link href="<?php bloginfo('template_url'); ?>/css/select2.css" rel="stylesheet"/>
 <link href="<?php bloginfo('template_url'); ?>/css/select2-bootstrap.css" rel="stylesheet" type="text/css">
 <link href="<?php bloginfo('stylesheet_url'); ?>" rel="stylesheet" type="text/css" />
-<link href="http://www.iusedautoparts.golts.gbksoft.net/wp-content/themes/iusedautoparts/css/site.css" rel="stylesheet" type="text/css" >
+<link href="/wp-content/themes/iusedautoparts/css/site.css" rel="stylesheet" type="text/css" >
 <script src="<?php bloginfo('template_url'); ?>/js/detect.js"></script>
 <script>
 // SA.redirection_mobile ({

@@ -728,10 +728,6 @@ ng-form h2{
    ===================== RESPONSIVE ======================
    ======================================================= */
 
-.modal-dialog {
-    min-width:inherit !important;
-}
-
 @media (max-width:1024px) {
     
     #header .logo a img {

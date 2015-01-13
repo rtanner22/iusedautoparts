@@ -82,7 +82,6 @@ function getDistance($zip1, $zip2, $unit) {
 $result1 = R::getAll("select * from requests where id = '" . $_REQUEST['reqid'] . "' ");
 $zipcode = $result1[0]['zip'];
 $hnumber = $result1[0]['hnumber'];
-
 ############################ Paging variables ########################
 include("testing/inc/paging_admin.php");
 
@@ -97,7 +96,7 @@ $offset = ($pageNum - 1) * $rowsPerPage;
 $pagesql = "SELECT SQL_CALC_FOUND_ROWS
 COUNT(DISTINCT inventory.inventoryid) as c_count,
 GROUP_CONCAT(DISTINCT inventory.retailprice ORDER BY inventory.retailprice ASC SEPARATOR ',') AS c_price,
-yards.yardid,yards.yard,yards.warranty,yards.address,yards.city,yards.state,yards.phone,yards.directory,yards.zip,inventory.*
+yards.*,inventory.*
 FROM inventory
 INNER JOIN yards on yards.yardid = inventory.yardid
 WHERE inventory.inventorynumber = '" . $hnumber ."'
@@ -161,76 +160,70 @@ display: none;
         {
         $mileage = "(Mileage: " . number_format($mileage,0,'.',',').")";
         }else{$mileage="";}
-        //number_format($quote,2,'.',',');
-        if ($quote == 0)    { $quote='Call';  }   else { $quote = '$'.(float)$row['retailprice'];}
-        //echo $row[zip];
+        if ($quote == 0) { $quote='Call';} else { $quote = '$'.(float)$row['retailprice'];}
         ?>
                     <tr>
                         <td>
-                            <?php if($row[c_count] > 1){ ?>
+                            <?php if($row['c_count'] > 1){ ?>
                                 <p class="vehicle" data-request="<?= htmlspecialchars(json_encode($_REQUEST));?>" data-id="<?= $row['yardid'] ?>">View All</p>
                             <?php }else{ ?>
-                                <?php echo $row[modelyear]; ?> <?php echo $row[modelname]; ?>
+                                <?php echo $row['modelyear']; ?> <?php echo $row['modelname']; ?>
                             <?php } ?>
                         </td>
-                        <td><?php  echo $mainresult[0][part] ."<br>". $row[conditionsandoptions] . "<br>". $mileage ; ?></td>
+                        <td><?php  echo $mainresult[0]['part'] ."<br>". $row['conditionsandoptions'] . "<br>". $mileage ; ?></td>
                         <td>
-                            <?php if($row[c_count] > 1){ ?>
+                            <?php if($row['c_count'] > 1) { ?>
                                 <p class="vehicle" data-request="<?= htmlspecialchars(json_encode($_REQUEST));?>" data-id="<?= $row['yardid'] ?>">View All</p>
-                            <?php }else{ ?>
-                                <?php echo $row[stockticketnumber]; ?>
+                            <?php } else { ?>
+                                <?php echo $row['stockticketnumber']; ?>
                             <?php } ?>
                         </td>
-                        <td><?php echo $row[conditioncode]."-".$row[partrating]; ?></td>
+                        <td><?php echo $row['conditioncode']."-".$row['partrating']; ?></td>
                         <td class="green">
-                            <?php if($row[c_count] > 1){ ?>
+                            <?php if($row['c_count'] > 1) { ?>
 
 
-                                    <?php if(min_mod(explode(',',$row[c_price])) != null ){ ?>
+                                    <?php if(min_mod(explode(',',$row['c_price'])) != null ){ ?>
                                     <p class="vehiclee">From</p>
                                     <p class="text-tb">
-                                        $<?= min_mod(explode(',',$row[c_price])); ?>
+                                        $<?= min_mod(explode(',',$row['c_price'])); ?>
                                     </p>
                                     <?php }else{ echo '<p></p><p class="text-tb">Call</p>';} ?>
 
                                 <p class="vehicle" data-request="<?= htmlspecialchars(json_encode($_REQUEST));?>" data-id="<?= $row['yardid'] ?>">View All</p>
-                            <?php }else{ ?>
+                            <?php } else { ?>
                                 <p class="text-tb"><?php echo $quote ; ?></p>
                             <?php } ?>
                         </td>
                         <td>
-        <?php
-        if ($row[directory] != "") {
-            echo "<a href='$row[directory]' target=_BLANK>";
-        }
-        ?>
-                                            <?php echo "<font color=\"#55565B\">".$row[yard]."</font>"; ?>
-                                            <?php
-                                            if ($row[directory] != "") {
-                                                echo "</a>";
-                                            }
-                                            ?><br>
-                                            <?php echo $row[address]; ?>, <?php echo $row[city]; ?>
-                                            , <?php echo $row[state]; ?> <?php echo $row[zip]; ?>
-                                            <br><font color="red"><?php echo $row[phone]; ?></font>&nbsp;&nbsp;
-                                            <?php
-                                            if ($row[facebook] != "") {
-                                                echo '<a href="' . $row[facebook] . '" target="_blank"><img src="http://www.autorecyclersonline.com/images/facebook.png"></a>';
-                                            }
-                                            ?>
-
-                                        </td>
-                                        <td><?php echo $distance; ?></td>
-                                    </tr>
-
+                            <?php
+                            if ($row['directory'] != "") {
+                                echo "<a href='$row[directory]' target=_BLANK>";
+                            }
+                            ?>
+                            <?php echo "<font color=\"#55565B\">".$row['yard']."</font>"; ?>
+                            <?php
+                            if ($row['directory'] != "") {
+                                echo "</a>";
+                            }
+                            ?><br>
+                            <?php echo $row['address']; ?>, <?php echo $row['city']; ?>
+                            , <?php echo $row['state']; ?> <?php echo $row['zip']; ?>
+                            <br><font color="red"><?php echo $row['phone']; ?></font>&nbsp;&nbsp;
+                            <?php
+                            if ($row['facebook'] != "") {
+                                echo '<a href="' . $row[facebook] . '" target="_blank"><img src="/images/facebook.png"></a>';
+                            }
+                            ?>
+                        </td>
+                        <td><?php echo $distance; ?></td>
+                        <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalRequestSave" data-yardid="<?= $row['yardid'] ?>">Save</button></td>
+                    </tr>
     <?php } ?>
                             </tbody>
                         </table>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalRequestSaveAll">Save</button>
                         <div class="row">
-                      <!--   <div style="text-align:right;">
-                            <span id="btn-show">Show more</span>
-                            <span id="btn-hide" style="display:none;">Hide result</span>
-                        </div> -->
                             <div class="col-lg-4"><a
                                     href="?pg=<?php echo $pg - 1; ?>&reqid=<?php echo $_REQUEST['reqid']; ?>"
                                     class="btn btn-orange btn-sm" <?php
@@ -279,6 +272,67 @@ display: none;
                                         href="?pg=<?php echo $pg + 1; ?>&reqid=<?php echo $_REQUEST['reqid']; ?>"
                                         class="btn btn-orange btn-sm"> NEXT PAGE <i class="fa fa-arrow-right"></i></a></div>
                             </div>
+
+                            <!-- Large modal -->
+                            <div class="modal fade" tabindex="-1" role="dialog" id="modalRequestSave" aria-hidden="true">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                        <div class = "modal-body">
+                                            <h1 class="submitted hidden">Thanks!! We will contact you soon.<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button></h1>
+                                            <form class="css-form" action="/scripts/request_save.php" method="POST">
+                                                <h2>Please provide your email address to receive dealer information.</h2>
+                                                <input type="hidden" name="reqid" value="<?= $_REQUEST['reqid'] ?>" />
+                                                <input type="hidden" name="hnumber" value="<?= $hnumber ?>" />
+                                                <input type="hidden" name="yardid" value="" />
+
+                                                <div class="row">
+                                                    <div class="col-xs-12">
+                                                        <input type="email" class="form-control input-lg" name="email" placeholder="Enter a valid email address" required />
+                                                    </div>
+
+                                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 padding-center" style="text-align:center;">
+                                                        <button class="btn btn-orange" style="display: inline-block !important;">
+                                                            Submit <i class="fa fa-arrow-right"></i>
+                                                        </button>
+                                                    </div>
+
+                                                </div>
+                                                <div class="row mtop10 text-center"></div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Large modal -->
+                            <div class="modal fade" tabindex="-1" role="dialog" id="modalRequestSaveAll" aria-hidden="true">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                        <div class = "modal-body">
+                                            <h1 class="submitted hidden">Thanks!! We will contact you soon.<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button></h1>
+                                            <form class="css-form" action="/scripts/request_save.php" method="POST">
+                                                <h2>Please provide your email address to receive link to this page.</h2>
+                                                <input type="hidden" name="reqid" value="<?= $_REQUEST['reqid'] ?>" />
+                                                <input type="hidden" name="hnumber" value="<?= $hnumber ?>" />
+
+                                                <div class="row">
+                                                    <div class="col-xs-12">
+                                                        <input type="email" class="form-control input-lg" name="email" placeholder="Enter a valid email address" required />
+                                                    </div>
+
+                                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 padding-center" style="text-align:center;">
+                                                        <button class="btn btn-orange" style="display: inline-block !important;">
+                                                            Submit <i class="fa fa-arrow-right"></i>
+                                                        </button>
+                                                    </div>
+
+                                                </div>
+                                                <div class="row mtop10 text-center"></div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 <?php } else { ?>
                             <h1><a href="/">Back to Main Page</a></h1>
                             <button  style = "display: none;"id ="triggerModal" type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Large modal</button>
@@ -297,18 +351,10 @@ display: none;
                                         <h1 ng-show="submitted">Thanks!! We will contact you soon.<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button></h1>
                                         <ng-form  ng-show="!submitted" class="css-form" name="user_form">
                                             <!--<h1>Almost finished! Please provide your email address to receive your quote.</h1>-->
-                                            <h2>Almost finished! Please provide your email address to receive your quote.</h2>
+                                            <h2>We do not show your part in stock at this time, please enter you email and we will check stock daily for 2 weeks and let you know if something comes available.</h2>
                                             <input hidden ng-model="req.id" ng-init="req.id=<?php echo $_REQUEST['reqid']; ?>">
 
                                             <div class="row">
-<!--                                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                                                    <label>Phone</label>
-                                                    <input type="tel" class="form-control input-lg"
-                                                           ng-model="req.phone" required=""
-                                                           placeholder="Enter a phone number"/>
-                                                </div>-->
-                                                <div class="col-xs-12">
-                                                    <!--<label>E-mail</label>-->
                                                     <input type="email" class="form-control input-lg" ng-model="req.email"
                                                            placeholder="Enter a valid email address" required=""/>
                                                 </div>
