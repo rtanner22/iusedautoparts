@@ -28,13 +28,20 @@ $mdb_database = "iusedparts";
 $mdb_host = "192.168.200.100";
 $mlink = mysql_connect($mdb_host, $mdb_username, $mdb_password);
 mysql_select_db("$mdb_database", $mlink);
-$sql = "INSERT INTO `request_save` (`requestid`,`hnumber`,`email`,`created_at`) VALUES('{$reqid}','{$hnumber}','{$email}',NOW());";
 
-$que = mysql_query($sql) or die(mysql_error());
+$requestResult = mysql_query("SELECT * FROM requests WHERE id = '{$reqid}';");
+if(!$requestResult) {
+    echo json_encode($response);
+    return;
+}
+$request = mysql_fetch_assoc($requestResult);
+
+$que = mysql_query("INSERT INTO `request_save` (`requestid`,`hnumber`,`email`,`created_at`) VALUES('{$reqid}','{$hnumber}','{$email}',NOW());");
 if ($que) {
     $response['result'] = true;
     echo json_encode($response);
 
+    $subject = '';
     if($yardid) {
         $yardResult = mysql_query("SELECT * FROM yards WHERE yardid = '{$yardid}';");
         if (!$yardResult) {
@@ -49,12 +56,18 @@ if ($que) {
         if ($yard['directory'] != "") {
             $dealerInfo .=  "</a>";
         }
-        $dealerInfo .= "<br>";
+        $dealerInfo .= "<br/>";
         $dealerInfo .= "{$yard['address']}, {$yard['city']}, {$yard['state']}, {$yard['zip']}";
-        $dealerInfo .= "<br><font color=\"red\">{$yard['phone']}</font>&nbsp;&nbsp;";
+        $dealerInfo .= "<br/><font color=\"red\">{$yard['phone']}</font>&nbsp;&nbsp;";
         if ($yard['facebook'] != "") {
             $dealerInfo .= '<a href="' . $yard['facebook'] . '" target="_blank"><img src="' . $_SERVER['SERVER_NAME'] . '/images/facebook.png"></a>';
         }
+
+        $requestInfo = 'Year: ' . $request['year'] . '<br/>';
+        $requestInfo .= 'Make: ' . $request['make'] . '<br/>';
+        $requestInfo .= 'Model: ' . $request['model'] . '<br/>';
+        $requestInfo .= 'Part: ' . $request['part'] . '<br/>';
+        $requestInfo .= 'Options: ' . $request['hollanderoption'] . '<br/>';
 
         $results = mysql_query("SELECT inventory.*
         FROM inventory 
@@ -64,8 +77,8 @@ if ($que) {
             return;
         }
 
-        $body = 'Dealer Info<br/>' . $dealerInfo . '<br>' .
-            '<table style="min-width: 900px;background: #E7F9FD;margin-bottom: 20px;">
+        $body = 'Search info:<br/>' . $requestInfo . '<br/>Dealer Info<br/>' . $dealerInfo . '<br/>' .
+            '<table style="min-width: 900px;background: #E7F9FD;margin-bottom: 20px;border: 1px solid #ddd;border-collapse: collapse;border-spacing: 0;font-family: \'Open Sans\', sans-serif;font-weight: 600;font-size: 14px;color: #55565b;line-height: 1.5em;">
                 <tr>
                     <th style="height: 40px;border-top: 1px solid #ddd;line-height: 1.42857143;background: #355F79;color: #FFF;text-align: center;">Donor Vehicle</th>
                     <th style="height: 40px;border-top: 1px solid #ddd;line-height: 1.42857143;background: #355F79;color: #FFF;text-align: center;" width="60px">Part/Options</th>
@@ -86,6 +99,8 @@ if ($que) {
             $body .= "</tr>";
         }
         $body .= "</table>";
+
+        $subject = "Re: {$yard['yard']} current inventory for your {$request['year']},{$request['make']},{$request['model']},{$request['part']}";
     } else {
         $body = 'Your search result ' . $_SERVER['SERVER_NAME'] . '/inventory?reqid=' . $reqid . '';
     }
@@ -105,10 +120,10 @@ if ($que) {
     $message = Swift_Message::newInstance()
 
         // Give the message a subject
-        ->setSubject('')
+        ->setSubject($subject)
 
         // Set the From address with an associative array
-        ->setFrom(array('noreply@autorecyclersonline.com' => 'iUsedAutoParts'))
+        ->setFrom(array('noreply@autorecyclersonline.com' => 'AutoRecyclersOnline.com'))
 
         // Set the To addresses with an associative array
         ->setTo(array($email))

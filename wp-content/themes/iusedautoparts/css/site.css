@@ -722,7 +722,13 @@ ng-form h2{
        color: black;
 }
 
-
+.modal.no-results .modal-dialog {
+    width: 70%;
+    text-align: center;
+}
+.modal.no-results .modal-dialog .modal-content {
+    padding: 10px;
+}
 
 /* =======================================================
    ===================== RESPONSIVE ======================
