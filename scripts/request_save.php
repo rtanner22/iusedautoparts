@@ -54,7 +54,7 @@ if ($que) {
         }
         $dealerInfo .=  "<font color=\"#55565B\">".$yard['yard']."</font>";
         if ($yard['contactemail'] != "") {
-            $dealerInfo .= '<a href="mailto:' . $yard['contactemail'] . '"><img src="' . $_SERVER['SERVER_NAME'] . '/images/email.png"></a>';
+            $dealerInfo .= '<a href="mailto:' . $yard['contactemail'] . '"><img src="' . $_SERVER['SERVER_NAME'] . '/images/email.png" style="width: 20px;"></a>';
         }
         if ($yard['directory'] != "") {
             $dealerInfo .=  "</a>";
