@@ -439,7 +439,22 @@ $(function () {
         return false;
     });
 
-    $('#modalRequestSave').on('show.bs.modal', function (event) {
+    $('#modalRequestSend form').on('submit', function(e) {
+        e.preventDefault();
+
+        $.post($(this).attr('action'), $( this ).serializeArray(), function(rd) {
+            if(rd && rd.result) {
+                $('#modalRequestSend form').trigger('reset');
+            }
+
+            $('#modalRequestSend').modal('hide');
+        }, 'json');
+
+
+        return false;
+    });
+
+    $('#modalRequestSave, #modalRequestSend').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget); // Button that triggered the modal
         var yardid = button.data('yardid'); // Extract info from data-* attributes
         // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).

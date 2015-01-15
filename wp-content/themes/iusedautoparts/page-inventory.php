@@ -150,6 +150,9 @@ display: none;
                                     <th>
                                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalRequestSaveAll">Save All</button>
                                     </th>
+                                    <th>
+                                        Mail
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody class="table-hide">
@@ -221,6 +224,9 @@ display: none;
                         </td>
                         <td><?php echo $distance; ?></td>
                         <td class="text-center"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalRequestSave" data-yardid="<?= $row['yardid'] ?>">Save</button></td>
+                        <?php if($row['contactemail']): ?>
+                        <td class="text-center"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalRequestSend" data-yardid="<?= $row['yardid'] ?>"><img style="width: 20px;" src="/images/email.png"></button></td>
+                        <?php endif; ?>
                     </tr>
     <?php } ?>
                             </tbody>
@@ -290,6 +296,48 @@ display: none;
                                                 <div class="row">
                                                     <div class="col-xs-12">
                                                         <input type="email" class="form-control input-lg" name="email" placeholder="Enter a valid email address" required />
+                                                    </div>
+
+                                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 padding-center" style="text-align:center;">
+                                                        <button class="btn btn-orange" style="display: inline-block !important;">
+                                                            Submit <i class="fa fa-arrow-right"></i>
+                                                        </button>
+                                                    </div>
+
+                                                </div>
+                                                <div class="row mtop10 text-center"></div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Large modal -->
+                            <div class="modal fade" tabindex="-1" role="dialog" id="modalRequestSend" aria-hidden="true">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                        <div class = "modal-body">
+                                            <h1 class="submitted hidden">Thanks!! We will contact you soon.<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button></h1>
+                                            <form class="css-form" action="/scripts/request_send.php" method="POST">
+                                                <h2>Please provide information to send to dealer.</h2>
+                                                <input type="hidden" name="reqid" value="<?= $_REQUEST['reqid'] ?>" />
+                                                <input type="hidden" name="yardid" value="" />
+
+                                                <div class="row">
+                                                    <div class="form-group col-xs-12">
+                                                        <select class="form-control input-lg" name="type">
+                                                            <option value="1">General question about this item</option>
+                                                            <option value="2">Need a shipping quote</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group col-xs-12">
+                                                        <textarea class="form-control input-lg" name="text" rows="6" required></textarea>
+                                                    </div>
+                                                    <div class="form-group col-xs-12">
+                                                        <input type="email" class="form-control input-lg" name="email" placeholder="Enter a valid email address" required />
+                                                    </div>
+                                                    <div class="form-group col-xs-12">
+                                                        <input type="tel" class="form-control input-lg" name="phone" placeholder="Enter a valid phone number" required />
                                                     </div>
 
                                                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 padding-center" style="text-align:center;">
