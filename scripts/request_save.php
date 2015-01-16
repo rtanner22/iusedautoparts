@@ -151,7 +151,7 @@ if ($que) {
         ->setFrom(array('noreply@autorecyclersonline.com' => 'AutoRecyclersOnline.com'))
 
         // Copy to site holder
-        ->addBcc('admin@drivetrainleads.com')
+        ->addBcc('admin@autorecyclersonline.com')
 
         // Set the To addresses with an associative array
         ->setTo(array($email))
