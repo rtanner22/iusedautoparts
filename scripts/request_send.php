@@ -59,6 +59,8 @@ if(!$yardResult) {
     return;
 }
 
+mysql_query("INSERT INTO `request_send` (`requestid`,`yardid`,`email`,`phone`,`text`,`created_at`) VALUES('{$reqid}','{$yardid}','{$email}','{$phone}','{$text}',NOW());");
+
 $request = mysql_fetch_assoc($requestResult);
 $yard = mysql_fetch_assoc($yardResult);
 
@@ -127,6 +129,9 @@ $message = Swift_Message::newInstance()
 
     // Specifies the address where replies are sent to
     ->setReplyTo($email)
+
+    // Copy to site holder
+    //->addBcc('admin@autorecyclersonline.com')
 
     // Set the To addresses with an associative array
     ->setTo(array($yard['contactemail']))

@@ -385,48 +385,48 @@ display: none;
                             </div>
 <?php } else { ?>
                             <h1><a href="/">Back to Main Page</a></h1>
-                            <button  style = "display: none;"id ="triggerModal" type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Large modal</button>
-                            <script>
-                                document.addEventListener("DOMContentLoaded", function (event) {
-                                    var button = document.getElementById("triggerModal");
-                                    button.click();
-                                });
-                            </script>
-                            <!-- Large modal -->
-                            <div class="modal fade bs-example-modal-lg no-results" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                              <div class="modal-dialog modal-lg">
-                                <div class="modal-content">
-                                  <div ng-app="App">
-                                      <div class = "modal-body" ng-controller="Controller">
-                                        <h1 ng-show="submitted">Thanks!! We will contact you soon.<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button></h1>
-                                        <ng-form  ng-show="!submitted" class="css-form" name="user_form">
-                                            <!--<h1>Almost finished! Please provide your email address to receive your quote.</h1>-->
-                                            <h2>We do not show your part in stock at this time, please enter you email and we will check stock daily for 2 weeks and let you know if something comes available.</h2>
-                                            <input hidden ng-model="req.id" ng-init="req.id=<?php echo $_REQUEST['reqid']; ?>">
+<?php } ?>
+                        <button  style = "display: none;"id ="triggerModal" type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Large modal</button>
+                        <script>
+                            document.addEventListener("DOMContentLoaded", function (event) {
+                                var button = document.getElementById("triggerModal");
+                                button.click();
+                            });
+                        </script>
+                        <!-- Large modal -->
+                        <div class="modal fade bs-example-modal-lg no-results" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                          <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                              <div ng-app="App">
+                                  <div class = "modal-body" ng-controller="Controller">
+                                    <h1 ng-show="submitted">Thanks!! We will contact you soon.<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button></h1>
+                                    <ng-form  ng-show="!submitted" class="css-form" name="user_form">
+                                        <!--<h1>Almost finished! Please provide your email address to receive your quote.</h1>-->
+                                        <h2>Almost finished! Please provide your email address to receive your quote.</h2>
+                                        <input hidden ng-model="req.id" ng-init="req.id=<?php echo $_REQUEST['reqid']; ?>">
 
-                                            <div class="row">
-                                                    <input type="email" class="form-control input-lg" ng-model="req.email"
-                                                           placeholder="Enter a valid email address" required=""/>
-                                                </div>
-
-                                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 padding-center" style="text-align:center;">
-                                                        <div ng-show="user_form.$valid" ng-click="submit()" class="btn btn-orange" style="display: inline-block !important;">
-                                                            Submit <i class="fa fa-arrow-right"></i>
-                                                        </div>
-                                                </div>
-
-
+                                        <div class="row">
+                                                <input type="email" class="form-control input-lg" ng-model="req.email"
+                                                       placeholder="Enter a valid email address" required=""/>
                                             </div>
-                                            <div class="row mtop10 text-center">
+
+                                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 padding-center" style="text-align:center;">
+                                                    <div ng-show="user_form.$valid" ng-click="submit()" class="btn btn-orange" style="display: inline-block !important;">
+                                                        Submit <i class="fa fa-arrow-right"></i>
+                                                    </div>
+                                            </div>
+
+
+                                        </div>
+                                        <div class="row mtop10 text-center">
 <!--                                                <div ng-show="user_form.$valid" ng-click="submit()" class="btn btn-orange">
-                                                    Submit <i class="fa fa-arrow-right"></i>
-                                                </div>-->
-                                            </div>
+                                                Submit <i class="fa fa-arrow-right"></i>
+                                            </div>-->
                                         </div>
                                     </div>
                                 </div>
                             </div>
-<?php } ?>
+                        </div>
                     </div>
                 </div>
             </div>
