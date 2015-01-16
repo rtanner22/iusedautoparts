@@ -408,61 +408,6 @@ $(function () {
     InitPrimarySearch();
     ShowProgresss();
     ResetStates();
-
-    $('#modalRequestSaveAll form').on('submit', function(e) {
-        e.preventDefault();
-
-        $.post($(this).attr('action'), $( this ).serializeArray(), function(rd) {
-            if(rd && rd.result) {
-                $('#modalRequestSaveAll form').trigger('reset');
-            }
-
-            $('#modalRequestSaveAll').modal('hide');
-        }, 'json');
-
-
-        return false;
-    });
-
-    $('#modalRequestSave form').on('submit', function(e) {
-        e.preventDefault();
-
-        $.post($(this).attr('action'), $( this ).serializeArray(), function(rd) {
-            if(rd && rd.result) {
-                $('#modalRequestSave form').trigger('reset');
-            }
-
-            $('#modalRequestSave').modal('hide');
-        }, 'json');
-
-
-        return false;
-    });
-
-    $('#modalRequestSend form').on('submit', function(e) {
-        e.preventDefault();
-
-        $.post($(this).attr('action'), $( this ).serializeArray(), function(rd) {
-            if(rd && rd.result) {
-                $('#modalRequestSend form').trigger('reset');
-            }
-
-            $('#modalRequestSend').modal('hide');
-        }, 'json');
-
-
-        return false;
-    });
-
-    $('#modalRequestSave, #modalRequestSend').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget); // Button that triggered the modal
-        var yardid = button.data('yardid'); // Extract info from data-* attributes
-        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-        var modal = $(this);
-        //modal.find('.modal-title').text('New message to ' + recipient)
-        modal.find('.modal-body input[name="yardid"]').val(yardid);
-    });
 });
 
 function InitPrimarySearch() {
@@ -985,10 +930,10 @@ function updateRequestContactData() {
 
 window.onkeydown = function (e) {
 
-    if (e.keyCode == 9 || e.which == 9) {
-        e.preventDefault();
-        return false;
-    }
+//    if (e.keyCode == 9 || e.which == 9) {
+//        e.preventDefault();
+//        return false;
+//    }
     if (e.keyCode == 13 || e.which == 13) {
         e.preventDefault();
 
@@ -1039,6 +984,10 @@ app.controller('Controller', ['$scope', '$http', function ($scope, $http) {
             })
                 .success(function (data, status, headers, config) {
                     if (data) {
+                        if($scope.req.refresh) {
+                            location.reload();
+                            return;
+                        }
                         $scope.submitted = true;
                     }
                 });
@@ -1047,3 +996,58 @@ app.controller('Controller', ['$scope', '$http', function ($scope, $http) {
         }
     }
 }]);
+
+$('#modalRequestSaveAll form').on('submit', function(e) {
+    e.preventDefault();
+
+    $.post($(this).attr('action'), $( this ).serializeArray(), function(rd) {
+        if(rd && rd.result) {
+            $('#modalRequestSaveAll form').trigger('reset');
+        }
+
+        $('#modalRequestSaveAll').modal('hide');
+    }, 'json');
+
+
+    return false;
+});
+
+$('#modalRequestSave form').on('submit', function(e) {
+    e.preventDefault();
+
+    $.post($(this).attr('action'), $( this ).serializeArray(), function(rd) {
+        if(rd && rd.result) {
+            $('#modalRequestSave form').trigger('reset');
+        }
+
+        $('#modalRequestSave').modal('hide');
+    }, 'json');
+
+
+    return false;
+});
+
+$('#modalRequestSend form').on('submit', function(e) {
+    e.preventDefault();
+
+    $.post($(this).attr('action'), $( this ).serializeArray(), function(rd) {
+        if(rd && rd.result) {
+            $('#modalRequestSend form').trigger('reset');
+        }
+
+        $('#modalRequestSend').modal('hide');
+    }, 'json');
+
+
+    return false;
+});
+
+$('#modalRequestSave, #modalRequestSend').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget); // Button that triggered the modal
+    var yardid = button.data('yardid'); // Extract info from data-* attributes
+    // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+    // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+    var modal = $(this);
+    //modal.find('.modal-title').text('New message to ' + recipient)
+    modal.find('.modal-body input[name="yardid"]').val(yardid);
+});

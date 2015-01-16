@@ -3,6 +3,8 @@
   Template Name: Page Inventory
  */
 
+date_default_timezone_set('America/Chicago');
+
 if (file_exists('testing/inc/rb.phar')) {
     require 'testing/inc/rb.phar';
 }
@@ -82,6 +84,7 @@ function getDistance($zip1, $zip2, $unit) {
 $result1 = R::getAll("select * from requests where id = '" . $_REQUEST['reqid'] . "' ");
 $zipcode = $result1[0]['zip'];
 $hnumber = $result1[0]['hnumber'];
+$email = $result1[0]['email'];
 ############################ Paging variables ########################
 include("testing/inc/paging_admin.php");
 
@@ -113,6 +116,15 @@ $numofpages = ceil($page_row / $rowsPerPage);
 <style>.hide {
 display: none;
 }</style>
+<script type="text/javascript">
+//    $.loader({
+//        className: 'blue-with-image-12',
+//        content: 'Please wait while page loading...'
+//    });
+//    $(document).ready(function() {
+//        $.loader('close');
+//    });
+</script>
 <div class="modal fade" id="data">
   <div class="modal-dialog" style="min-width: 900px;">
     <div class="modal-content">
@@ -131,7 +143,7 @@ display: none;
         <div class="container">
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-<?php if ($result) { ?>
+<?php if ($result && !empty($email)) { ?>
                         <h1>You're in luck! </h1><h2>Select a recycler, call the number in <font color="red">red</font> and ask for your discounted offline price...<?php //echo $_REQUEST['reqid'];  ?></h2>
                         <!--<p>Click on a heading to re-sort the results.</p>-->
                         <table class="table table-bordered table-striped">
@@ -287,7 +299,7 @@ display: none;
                                     <div class="modal-content">
                                         <div class = "modal-body">
                                             <h1 class="submitted hidden">Thanks!! We will contact you soon.<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button></h1>
-                                            <form class="css-form" action="/scripts/request_save.php" method="POST">
+                                            <form class="css-form" action="/scripts/request_save.php" method="POST" onsubmit="return false;">
                                                 <h2>Please provide your email address to receive dealer information.</h2>
                                                 <input type="hidden" name="reqid" value="<?= $_REQUEST['reqid'] ?>" />
                                                 <input type="hidden" name="hnumber" value="<?= $hnumber ?>" />
@@ -318,30 +330,30 @@ display: none;
                                     <div class="modal-content">
                                         <div class = "modal-body">
                                             <h1 class="submitted hidden">Thanks!! We will contact you soon.<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button></h1>
-                                            <form class="css-form" action="/scripts/request_send.php" method="POST">
+                                            <form class="css-form" action="/scripts/request_send.php" method="POST" onsubmit="return false;">
                                                 <h2>Please provide information to send to dealer.</h2>
                                                 <input type="hidden" name="reqid" value="<?= $_REQUEST['reqid'] ?>" />
                                                 <input type="hidden" name="yardid" value="" />
 
                                                 <div class="row">
                                                     <div class="form-group col-xs-12">
-                                                        <select class="form-control input-lg" name="type">
+                                                        <select class="form-control input-lg" name="type" tabindex="1">
                                                             <option value="1">General question about this item</option>
                                                             <option value="2">Need a shipping quote</option>
                                                         </select>
                                                     </div>
                                                     <div class="form-group col-xs-12">
-                                                        <textarea class="form-control input-lg" name="text" rows="6" required></textarea>
+                                                        <textarea class="form-control input-lg" name="text" rows="6" tabindex="2" required></textarea>
                                                     </div>
                                                     <div class="form-group col-xs-12">
-                                                        <input type="email" class="form-control input-lg" name="email" placeholder="Enter a valid email address" required />
+                                                        <input type="email" class="form-control input-lg" name="email" placeholder="Enter a valid email address" tabindex="3" required />
                                                     </div>
                                                     <div class="form-group col-xs-12">
-                                                        <input type="tel" class="form-control input-lg" name="phone" placeholder="Enter a valid phone number" required />
+                                                        <input type="tel" class="form-control input-lg" name="phone" placeholder="Enter a valid phone number" tabindex="4" />
                                                     </div>
 
                                                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 padding-center" style="text-align:center;">
-                                                        <button class="btn btn-orange" style="display: inline-block !important;">
+                                                        <button class="btn btn-orange" style="display: inline-block !important;" tabindex="5">
                                                             Submit <i class="fa fa-arrow-right"></i>
                                                         </button>
                                                     </div>
@@ -360,7 +372,7 @@ display: none;
                                     <div class="modal-content">
                                         <div class = "modal-body">
                                             <h1 class="submitted hidden">Thanks!! We will contact you soon.<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button></h1>
-                                            <form class="css-form" action="/scripts/request_save.php" method="POST">
+                                            <form class="css-form" action="/scripts/request_save.php" method="POST" onsubmit="return false;">
                                                 <h2>Please provide your email address to receive link to this page.</h2>
                                                 <input type="hidden" name="reqid" value="<?= $_REQUEST['reqid'] ?>" />
                                                 <input type="hidden" name="hnumber" value="<?= $hnumber ?>" />
@@ -386,7 +398,8 @@ display: none;
 <?php } else { ?>
                             <h1><a href="/">Back to Main Page</a></h1>
 <?php } ?>
-                        <button  style = "display: none;"id ="triggerModal" type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Large modal</button>
+<?php if(!isset($_GET['reqid']) || empty($email)): ?>
+                        <button style="display: none;" id ="triggerModal" type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Large modal</button>
                         <script>
                             document.addEventListener("DOMContentLoaded", function (event) {
                                 var button = document.getElementById("triggerModal");
@@ -399,25 +412,22 @@ display: none;
                             <div class="modal-content">
                               <div ng-app="App">
                                   <div class = "modal-body" ng-controller="Controller">
-                                    <h1 ng-show="submitted">Thanks!! We will contact you soon.<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button></h1>
+                                    <h1 ng-show="submitted">Currently the part you requested is out of stock. If it becomes available we will let you know!<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button></h1>
                                     <ng-form  ng-show="!submitted" class="css-form" name="user_form">
-                                        <!--<h1>Almost finished! Please provide your email address to receive your quote.</h1>-->
                                         <h2>Almost finished! Please provide your email address to receive your quote.</h2>
                                         <input hidden ng-model="req.id" ng-init="req.id=<?php echo $_REQUEST['reqid']; ?>">
+                                        <input hidden ng-model="req.refresh" ng-init="req.refresh=<?= (($result && empty($email)) ? 1 : 0) ?>">
 
                                         <div class="row">
-                                                <input type="email" class="form-control input-lg" ng-model="req.email"
-                                                       placeholder="Enter a valid email address" required=""/>
-                                            </div>
-
-                                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 padding-center" style="text-align:center;">
-                                                    <div ng-show="user_form.$valid" ng-click="submit()" class="btn btn-orange" style="display: inline-block !important;">
-                                                        Submit <i class="fa fa-arrow-right"></i>
-                                                    </div>
-                                            </div>
-
-
+                                            <input type="email" class="form-control input-lg" ng-model="req.email" placeholder="Enter a valid email address" required />
                                         </div>
+
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 padding-center" style="text-align:center;">
+                                            <div ng-show="user_form.$valid" ng-click="submit()" class="btn btn-orange" style="display: inline-block !important;">
+                                                Submit <i class="fa fa-arrow-right"></i>
+                                            </div>
+                                        </div>
+                                    </div>
                                         <div class="row mtop10 text-center">
 <!--                                                <div ng-show="user_form.$valid" ng-click="submit()" class="btn btn-orange">
                                                 Submit <i class="fa fa-arrow-right"></i>
@@ -427,6 +437,7 @@ display: none;
                                 </div>
                             </div>
                         </div>
+<?php endif; ?> 
                     </div>
                 </div>
             </div>

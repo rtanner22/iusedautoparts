@@ -726,8 +726,20 @@ ng-form h2{
     width: 70%;
     text-align: center;
 }
-.modal.no-results .modal-dialog .modal-content {
+.modal.no-results .modal-dialog {
     padding: 10px;
+    width: 30%;
+}
+
+.modal-dialog {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  //margin-top: -60px
+}
+
+.modal-content {
+  margin: 0 auto;
 }
 
 /* =======================================================
@@ -786,7 +798,9 @@ ng-form h2{
     .nav>li>a {
         padding: 10px 5px;
     }
-    
+    .modal.no-results .modal-dialog {
+        width: 50%;
+    }
 }
 
 @media (max-width:640px) {
@@ -810,7 +824,9 @@ ng-form h2{
     .wrap.alt {
         overflow-x: auto;
     }
-    
+    .modal.no-results .modal-dialog {
+        width: 80%;
+    }
 }
 
 @media (max-width:360px) {

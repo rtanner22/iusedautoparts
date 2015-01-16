@@ -2,6 +2,17 @@
 session_start();
 error_reporting(0);
 
+date_default_timezone_set('America/Chicago');
+
+//Send mail
+require_once 'lib/swift_required.php';
+
+// Create the Transport
+$transport = Swift_MailTransport::newInstance();
+
+// Create the Mailer using your created Transport
+$mailer = Swift_Mailer::newInstance($transport);
+
 $response = array(
     'result' => false,
 );
@@ -36,7 +47,7 @@ if(!$requestResult) {
 }
 $request = mysql_fetch_assoc($requestResult);
 
-$que = mysql_query("INSERT INTO `request_save` (`requestid`,`hnumber`,`email`,`created_at`) VALUES('{$reqid}','{$hnumber}','{$email}',NOW());");
+$que = mysql_query("INSERT INTO `request_save` (`requestid`,`hnumber`,`yardid`,`email`,`created_at`) VALUES('{$reqid}','{$hnumber}','{$yardid}','{$email}',NOW());");
 if ($que) {
     $response['result'] = true;
     echo json_encode($response);
@@ -100,21 +111,35 @@ if ($que) {
         }
         $body .= "</table>";
 
-        $subject = "Re: {$yard['yard']} current inventory for your {$request['year']},{$request['make']},{$request['model']},{$request['part']}";
+        $subject = "Re: {$yard['yard']} {$yard['phone']} current inventory for your {$request['year']},{$request['make']},{$request['model']},{$request['part']}";
+
+        if(!empty($yard['contactemail'])) {
+            //sent to yard email
+            $message = Swift_Message::newInstance()
+
+                // Give the message a subject
+                ->setSubject('Re: Your inventory was saved by a visitor!')
+
+                // Set the From address with an associative array
+                ->setFrom(array('noreply@autorecyclersonline.com' => 'AutoRecyclersOnline.com'))
+
+                // Set the To addresses with an associative array
+                ->setTo(array($yard['contactemail']))
+
+                // Give it a body
+                ->setBody(
+                    '<html><head></head><body>Below are the details:<br/><br/>Contact email: ' . $email . '</body></html>',
+                    'text/html'
+                );
+
+            $mailer->send($message);
+        }
     } else {
+        $subject = "Re: Your Saved Part Search from AutoRecyclersOnline.com";
         $body = 'Your search result ' . $_SERVER['SERVER_NAME'] . '/inventory?reqid=' . $reqid . '';
     }
 
     $body = '<html><head></head><body>' . $body . '</body></html>';
-
-    //Send mail
-    require_once 'lib/swift_required.php';
-
-    // Create the Transport
-    $transport = Swift_MailTransport::newInstance();
-
-    // Create the Mailer using your created Transport
-    $mailer = Swift_Mailer::newInstance($transport);
 
     // Create the message
     $message = Swift_Message::newInstance()
@@ -124,6 +149,9 @@ if ($que) {
 
         // Set the From address with an associative array
         ->setFrom(array('noreply@autorecyclersonline.com' => 'AutoRecyclersOnline.com'))
+
+        // Copy to site holder
+        ->addBcc('admin@drivetrainleads.com')
 
         // Set the To addresses with an associative array
         ->setTo(array($email))

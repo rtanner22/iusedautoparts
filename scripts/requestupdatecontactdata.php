@@ -1,6 +1,9 @@
 <?php
 error_reporting(0);
 session_start();
+
+date_default_timezone_set('America/Chicago');
+
 $mdb_username = "iusedparts";
 $mdb_password = "5huYvRDH";
 $mdb_database = "iusedparts";
