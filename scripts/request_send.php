@@ -131,7 +131,7 @@ $message = Swift_Message::newInstance()
     ->setReplyTo($email)
 
     // Copy to site holder
-    //->addBcc('admin@autorecyclersonline.com')
+    ->addBcc('admin@autorecyclersonline.com')
 
     // Set the To addresses with an associative array
     ->setTo(array($yard['contactemail']))
