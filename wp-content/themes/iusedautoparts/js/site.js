@@ -985,7 +985,7 @@ app.controller('Controller', ['$scope', '$http', function ($scope, $http) {
                 .success(function (data, status, headers, config) {
                     if (data) {
                         if($scope.req.refresh) {
-                            location.reload();
+                            location.replace('/inventory?reqid=' + $scope.req.id);
                             return;
                         }
                         $scope.submitted = true;

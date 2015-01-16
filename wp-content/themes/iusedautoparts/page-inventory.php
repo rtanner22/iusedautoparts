@@ -398,7 +398,7 @@ display: none;
 <?php } else { ?>
                             <h1><a href="/">Back to Main Page</a></h1>
 <?php } ?>
-<?php if(!isset($_GET['reqid']) || empty($email)): ?>
+<?php if((!isset($_GET['reqid']) && empty($email)) || empty($email)): ?>
                         <button style="display: none;" id ="triggerModal" type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Large modal</button>
                         <script>
                             document.addEventListener("DOMContentLoaded", function (event) {
