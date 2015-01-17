@@ -40,7 +40,6 @@
     </section>
   </footer>
 </div>
-<script src="<?php bloginfo('template_url'); ?>/js/jqwidgets/scripts/jquery-2.0.2.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
     <script src="<?php bloginfo('template_url'); ?>/js/jqwidgets/jqwidgets/jqxcore.js"></script>
     <script src="<?php bloginfo('template_url'); ?>/js/jqwidgets/jqwidgets/jqxtree.js"></script>
@@ -70,7 +69,6 @@ $(document).ready(function(){
 });
 
 </script>
-<script src="<?php bloginfo('template_url'); ?>/js/bootstrap.min.js"></script>
 <script src="<?php bloginfo('template_url'); ?>/js/site.js"></script>
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

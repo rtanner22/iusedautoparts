@@ -136,8 +136,7 @@ $message = Swift_Message::newInstance()
     ->addBcc('admin@autorecyclersonline.com')
 
     // Set the To addresses with an associative array
-    //->setTo(array($yard['contactemail']))
-    ->setTo(array('litruk@gmail.com'))
+    ->setTo(array($yard['contactemail']))
 
     // Give it a body
     ->setBody(

@@ -143,7 +143,7 @@ display: none;
         <div class="container">
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-<?php if ($result && !empty($email)) { ?>
+<?php if ($result) { ?>
                         <h1>You're in luck! </h1><h2>Select a recycler, call the number in <font color="red">red</font> and ask for your discounted offline price...<?php //echo $_REQUEST['reqid'];  ?></h2>
                         <!--<p>Click on a heading to re-sort the results.</p>-->
                         <table class="table table-bordered table-striped">
@@ -398,16 +398,30 @@ display: none;
 <?php } else { ?>
                             <h1><a href="/">Back to Main Page</a></h1>
 <?php } ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 <?php if((!isset($_GET['reqid']) && empty($email)) || empty($email)): ?>
                         <button style="display: none;" id ="triggerModal" type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Large modal</button>
-                        <script>
+                        <script type="text/javascript">
                             document.addEventListener("DOMContentLoaded", function (event) {
                                 var button = document.getElementById("triggerModal");
                                 button.click();
                             });
+                            $(document).ready(function() {
+                                $('.bs-example-modal-lg').on('show.bs.modal', function (event) {
+                                    $(document.body).addClass('modalBlur');
+                                });
+                                $('.bs-example-modal-lg').on('hidden.bs.modal', function (event) {
+                                    $(document.body).removeClass('modalBlur');
+                                });
+                            });
                         </script>
                         <!-- Large modal -->
-                        <div class="modal fade bs-example-modal-lg no-results" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                        <div class="modal fade bs-example-modal-lg no-results" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
                           <div class="modal-dialog modal-lg">
                             <div class="modal-content">
                               <div ng-app="App">
@@ -437,11 +451,5 @@ display: none;
                                 </div>
                             </div>
                         </div>
-<?php endif; ?> 
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+<?php endif; ?>
 <?php get_footer(); ?>

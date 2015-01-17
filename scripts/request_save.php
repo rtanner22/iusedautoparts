@@ -124,7 +124,7 @@ if ($que) {
                 ->setFrom(array('noreply@autorecyclersonline.com' => 'AutoRecyclersOnline.com'))
 
                 // Set the To addresses with an associative array
-                ->setTo(array($yard['contactemail']))
+                ->setTo(array(trim($yard['contactemail'])))
 
                 // Give it a body
                 ->setBody(

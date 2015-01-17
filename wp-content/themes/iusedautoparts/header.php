@@ -16,6 +16,8 @@
 <link href="<?php bloginfo('stylesheet_url'); ?>" rel="stylesheet" type="text/css" />
 <link href="/wp-content/themes/iusedautoparts/css/site.css" rel="stylesheet" type="text/css" >
 <script src="<?php bloginfo('template_url'); ?>/js/detect.js"></script>
+<script src="<?php bloginfo('template_url'); ?>/js/jqwidgets/scripts/jquery-2.0.2.min.js"></script>
+<script src="<?php bloginfo('template_url'); ?>/js/bootstrap.min.js"></script>
 <script>
 // SA.redirection_mobile ({
 //    mobile_url : "m.autorecyclersonline.com",
