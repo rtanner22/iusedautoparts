@@ -44,7 +44,8 @@ function check_email($email) {
         $api_url	= 'http://api.verify-email.org/api.php?';
         $url		= $api_url . 'usr=' . $username . '&pwd=' . $password . '&check=' . $email;
         $object		= json_decode(remote_get_contents($url));
-
+        
+        //if(1 === 1){$_SESSION['email_data'] = $email; $_SESSION['countas'] = 0;}
         return (bool)$object->verify_status;
     }
 

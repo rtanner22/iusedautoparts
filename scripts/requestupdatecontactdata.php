@@ -22,9 +22,9 @@ $sql = "UPDATE `requests` SET `phone` = '$params->phone', `email` = '$params->em
 
 $que = mysql_query($sql) or die(mysql_error());
 if ($que) {
+    $_SESSION['email_data'] = $params->email;
     /*echo "<script>alert('Thanks!! We will contact you soon.')</script>";*/
     //echo "<script>window.location.href='thanks.php'</script>";
     echo 'true';
 }
 else {echo 'false';}
-?>

@@ -1,8 +1,8 @@
 <?php
+session_start();
 /*
   Template Name: Page Inventory
  */
-
 date_default_timezone_set('America/Chicago');
 
 if (file_exists('testing/inc/rb.phar')) {
@@ -84,7 +84,11 @@ function getDistance($zip1, $zip2, $unit) {
 $result1 = R::getAll("select * from requests where id = '" . $_REQUEST['reqid'] . "' ");
 $zipcode = $result1[0]['zip'];
 $hnumber = $result1[0]['hnumber'];
-$email = $result1[0]['email'];
+if(isset($_SESSION['email_data'])) {
+    $email = $_SESSION['email_data'];
+} else {
+    $email = $result1[0]['email'];
+}
 ############################ Paging variables ########################
 include("testing/inc/paging_admin.php");
 
@@ -396,8 +400,9 @@ display: none;
                                 </div>
                             </div>
 <?php } else { ?>
-                            <h1><a  href="/">Back to Main Page</a></h1>
-                            <p style="padding-bottom:560px;display: table;">Currently the part you requested is out of stock. If it becomes available we will let you know!</p>
+                            
+                            <p>Currently the part you requested is out of stock. If it becomes available we will let you know!</p>
+                            <p style="padding-bottom:463px;display: table">To search for another part, just use the form above</p>
 <?php } ?>
                     </div>
                 </div>
@@ -416,9 +421,6 @@ display: none;
                             $(document).ready(function() {
                                 $('.bs-example-modal-lg').on('show.bs.modal', function (event) {
                                     $(document.body).addClass('modalBlur');
-                                    if(typeof(Storage) !== "undefined") {
-                                        $('#email_isset').val(localStorage.email);
-                                    }
                                 });
                                 $('.bs-example-modal-lg').on('hidden.bs.modal', function (event) {
                                     $(document.body).removeClass('modalBlur');
@@ -439,7 +441,7 @@ display: none;
                                         <input hidden ng-model="req.refresh" ng-init="req.refresh=<?= (($result && empty($email)) ? 1 : 0) ?>">
 
                                         <div class="row" style="padding: 10px;">
-                                            <input type="email" class="form-control input-lg" ng-model="req.email" placeholder="Enter a valid email address" id="email_isset" required />
+                                            <input type="email" class="form-control input-lg" value="<?php echo $email; ?>" ng-model="req.email" placeholder="Enter a valid email address" id="email_isset" required />
                                             <p ng-show="error" class="error_email_valid">Invalid email address.</p>
                                         </div>
 
