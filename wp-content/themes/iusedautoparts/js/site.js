@@ -13,17 +13,6 @@ $( document ).ready(function() {
     $('title').text(el);
   }
 
-
-    $(document).on('click', '#email_valid', function(){
-        var email = $('#email_valid_text').val();
-        $.ajax({
-          type: "POST",
-          url: window.location.hostname + '/scripts/email_valid.php',
-          data: {check : email},
-          success: function(response){console.log(response)},
-          dataType: json
-        });
-    });
   // $('.table-hide').find('tr:not(:first)').hide();
   // $("#btn-show").click(function () {
   //   $('.table-hide').find('tr:not(:first)').show();
@@ -996,7 +985,12 @@ app.controller('Controller', ['$scope', '$http', function ($scope, $http) {
             })
                 .success(function (data, status, headers, config) {
                     if (data == 'true') {
+                        //save email adress on local storage
+                        if(typeof(Storage) !== "undefined") {
+                            localStorage.setItem("email", $scope.req.email);
+                        }
                         if($scope.req.refresh) {
+                            
                             location.replace('/inventory?reqid=' + $scope.req.id);
                             return;
                         } else {

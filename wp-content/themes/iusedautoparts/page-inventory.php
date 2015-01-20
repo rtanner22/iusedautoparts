@@ -411,10 +411,14 @@ display: none;
                             document.addEventListener("DOMContentLoaded", function (event) {
                                 var button = document.getElementById("triggerModal");
                                 button.click();
+                                
                             });
                             $(document).ready(function() {
                                 $('.bs-example-modal-lg').on('show.bs.modal', function (event) {
                                     $(document.body).addClass('modalBlur');
+                                    if(typeof(Storage) !== "undefined") {
+                                        $('#email_isset').val(localStorage.email);
+                                    }
                                 });
                                 $('.bs-example-modal-lg').on('hidden.bs.modal', function (event) {
                                     $(document.body).removeClass('modalBlur');
@@ -435,8 +439,8 @@ display: none;
                                         <input hidden ng-model="req.refresh" ng-init="req.refresh=<?= (($result && empty($email)) ? 1 : 0) ?>">
 
                                         <div class="row" style="padding: 10px;">
-                                            <input type="email" class="form-control input-lg" ng-model="req.email" placeholder="Enter a valid email address" required />
-                                            <p ng-show="error" class="error_email_valid">Error email address.</p>
+                                            <input type="email" class="form-control input-lg" ng-model="req.email" placeholder="Enter a valid email address" id="email_isset" required />
+                                            <p ng-show="error" class="error_email_valid">Invalid email address.</p>
                                         </div>
 
                                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 padding-center" style="text-align:center;">
