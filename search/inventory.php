@@ -215,19 +215,20 @@ $result = R::getAll($queryString);
                                   <div ng-app="App">
                                       <div class = "modal-body" ng-controller="Controller">
                                         <h1 ng-show="submitted">Thanks!! We will contact you soon.</h1>
+                                        <h1 ng-show="error">Error email address</h1>
                                         <ng-form  ng-show="!submitted" class="css-form" name="user_form">
                                             <h2>Almost finished! Please provide your email address to receive your quote.</h2>
-                                            <input hidden ng-model="req.id" ng-init="req.id=<?php echo $_REQUEST['response']; ?>">
+                                            <input type="hidden" ng-model="req.id" ng-init="req.id=<?= isset($_REQUEST['response']) ? $_REQUEST['response'] : '0'; ?>">
 
                                             <div class="row">
 
                                                 <div class="col-xs-12" style="text-align:center;">
                                                     <input type="email" class="form-control input-lg" ng-model="req.email"
-                                                           placeholder="Enter a valid email address" required=""/>
+                                                           placeholder="Enter a valid email address" id="email_valid_text" required=""/>
                                                 </div>
                                                 
                                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 padding-center" style="text-align:center;">
-                                                        <div ng-show="user_form.$valid" ng-click="submit()" class="btn btn-orange" style="display: inline-block !important;cursor:pointer;">
+                                                        <div ng-show="user_form.$valid" ng-click="submit()" id="email_valid" class="btn btn-orange" style="display: inline-block !important;cursor:pointer;">
                                                             Submit <i class="fa fa-arrow-right"></i>
                                                         </div>
                                                 </div>

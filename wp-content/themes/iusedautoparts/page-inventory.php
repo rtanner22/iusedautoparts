@@ -396,7 +396,8 @@ display: none;
                                 </div>
                             </div>
 <?php } else { ?>
-                            <h1><a href="/">Back to Main Page</a></h1>
+                            <h1><a  href="/">Back to Main Page</a></h1>
+                            <p style="padding-bottom:560px;display: table;">Currently the part you requested is out of stock. If it becomes available we will let you know!</p>
 <?php } ?>
                     </div>
                 </div>
@@ -426,14 +427,16 @@ display: none;
                             <div class="modal-content">
                               <div ng-app="App">
                                   <div class = "modal-body" ng-controller="Controller">
-                                    <h1 ng-show="submitted">Currently the part you requested is out of stock. If it becomes available we will let you know!<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button></h1>
+                                    <!--<h1 ng-show="submitted"><button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button></h1>-->
+                                    
                                     <ng-form  ng-show="!submitted" class="css-form" name="user_form">
-                                        <h2>Almost finished! Please provide your email address to receive your quote.</h2>
+                                        <h2 style="padding-bottom: 10px;">Almost finished! Please provide your email address to receive your quote.</h2>
                                         <input hidden ng-model="req.id" ng-init="req.id=<?php echo $_REQUEST['reqid']; ?>">
                                         <input hidden ng-model="req.refresh" ng-init="req.refresh=<?= (($result && empty($email)) ? 1 : 0) ?>">
 
-                                        <div class="row">
+                                        <div class="row" style="padding: 10px;">
                                             <input type="email" class="form-control input-lg" ng-model="req.email" placeholder="Enter a valid email address" required />
+                                            <p ng-show="error" class="error_email_valid">Error email address.</p>
                                         </div>
 
                                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 padding-center" style="text-align:center;">

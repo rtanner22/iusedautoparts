@@ -92,7 +92,7 @@ p {
 	color: #FFF;
 }
 .btn-orange {
-	padding: 10px 50px;
+	padding: 16px 70px;
 	background: #EE773D;
 	border-width: 0 1px 4px 1px;
 	border-color: #E65726;
@@ -669,7 +669,7 @@ body {
     margin-bottom: 15px;
 }
 
-.padding-center {padding-top: 21px;padding-bottom: 20px;}
+.padding-center {padding-top: 26px;padding-bottom: 20px;}
 .modal-lg {
 	width: 450px;
 }
@@ -728,7 +728,7 @@ ng-form h2{
 }
 .modal.no-results .modal-dialog {
     padding: 10px;
-    width: 30%;
+    width: 70%;
 }
 
 .modal-dialog {
@@ -740,6 +740,7 @@ ng-form h2{
 
 .modal-content {
   margin: 0 auto;
+  min-height: 240px;
 }
 
 .modalBlur > *:not(.modal) {
@@ -876,4 +877,11 @@ ng-form h2{
     }
     
     
+}
+.error_email_valid{
+    color: #FF4242;
+    font-size: 18px;
+    padding-top: 5px;
+    text-align: left;
+    margin-bottom:0;
 }

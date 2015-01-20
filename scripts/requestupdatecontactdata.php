@@ -12,6 +12,11 @@ $mlink = mysql_connect($mdb_host, $mdb_username, $mdb_password);
 mysql_select_db("$mdb_database", $mlink);
 
 $params = json_decode(file_get_contents('php://input'));
+include (__DIR__).'/email_valid.php';
+if(!check_email($params->email)) {
+    echo 'false';
+    return;
+}
 
 $sql = "UPDATE `requests` SET `phone` = '$params->phone', `email` = '$params->email' WHERE `id` = $params->reqid";
 
