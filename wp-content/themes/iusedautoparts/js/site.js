@@ -561,6 +561,7 @@ function InitPrimarySearch() {
         if (document.getElementById('zip').value.length != 5) {
             alert("Please provide a five-digit zip code.");
         } else {
+          $('#btn-check').attr("disabled", "disabled");
           ShowProgress();
         }
     });
@@ -1002,7 +1003,9 @@ app.controller('Controller', ['$scope', '$http', function ($scope, $http) {
                     }
                 });
         } else {
+            $scope.error = true;
             console.log("Form is not valid!");
+            
         }
     }
 }]);

@@ -884,4 +884,6 @@ ng-form h2{
     padding-top: 5px;
     text-align: left;
     margin-bottom:0;
+    width:65%;
+    margin: 0 auto;
 }
