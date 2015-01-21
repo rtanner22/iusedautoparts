@@ -311,7 +311,7 @@ display: none;
 
                                                 <div class="row">
                                                     <div class="col-xs-12">
-                                                        <input type="email" class="form-control input-lg" name="email" placeholder="Enter a valid email address" required />
+                                                        <input type="email" class="form-control input-lg" name="email" value="<?=$email;?>" placeholder="Enter a valid email address" required />
                                                     </div>
 
                                                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 padding-center" style="text-align:center;">
@@ -383,7 +383,7 @@ display: none;
 
                                                 <div class="row">
                                                     <div class="col-xs-12">
-                                                        <input type="email" class="form-control input-lg" name="email" placeholder="Enter a valid email address" required />
+                                                        <input type="email" class="form-control input-lg" name="email" value="<?=$email?>" placeholder="Enter a valid email address" required />
                                                     </div>
 
                                                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 padding-center" style="text-align:center;">
@@ -441,7 +441,7 @@ display: none;
                                         <input hidden ng-model="req.refresh" ng-init="req.refresh=<?= (($result && empty($email)) ? 1 : 0) ?>">
 
                                         <div class="row" style="padding: 10px;">
-                                            <input type="email" class="form-control input-lg" value="<?php echo $email; ?>" ng-model="req.email" placeholder="Enter a valid email address" id="email_isset" required />
+                                            <input type="email" style="width: 65%;margin: 0 auto;" class="form-control input-lg" value="<?php echo $email; ?>" ng-model="req.email" placeholder="Enter a valid email address" id="email_isset" required />
                                             <p ng-show="error" class="error_email_valid">Invalid email address.</p>
                                         </div>
 
