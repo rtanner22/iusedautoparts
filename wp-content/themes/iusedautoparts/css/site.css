@@ -681,7 +681,7 @@ body {
 @media (min-width: 768px) {
     .modal-dialog {
             width: 450px;
-            margin: 30px auto;
+            margin: 0 auto;
     }
 }
 ng-form h2{
@@ -732,15 +732,21 @@ ng-form h2{
 }
 
 .modal-dialog {
-  display: flex;
-  height: 100%;
-  align-items: center;
-  margin-top: -60px
+	display: flex;
+	display: -ms-flex;
+	display: -moz-flex;
+	display: -webkit-flex;
+	height: 100%;
+	-webkit-align-items: center;
+	-moz-align-items: center;
+	-ms-align-items: center;
+	align-items: center;
 }
 
 .modal-content {
   margin: 0 auto;
   min-height: 240px;
+  max-width: 810px;
 }
 
 .modalBlur > *:not(.modal) {
@@ -814,7 +820,7 @@ ng-form h2{
 @media (max-width:640px) {
     
     .modal-dialog {
-        margin:100px auto 10px;
+        margin:0 auto;
     }
     
     #banner.content {
