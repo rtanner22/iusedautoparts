@@ -684,7 +684,7 @@ body {
             margin: 0 auto;
     }
 }
-ng-form h2{
+.no-results form h2{
 	text-align:center;
 }
 #btn-show{     padding: 4px 18px;
@@ -892,4 +892,12 @@ ng-form h2{
     margin-bottom:0;
     width:65%;
     margin: 0 auto;
+}
+.email_tooltip {
+    color: gray;
+    font-size: 13px;
+    text-align: left;
+    width: 65%;
+    margin: 0 auto;
+    display: block;
 }

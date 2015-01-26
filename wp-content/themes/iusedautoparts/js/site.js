@@ -1,13 +1,13 @@
 $(document).on('click', '.jqx-item', function(){
     $('input[name=zipcode]').focus();
 });
-$(document).on('keydown', '.form-control', function(event){
-  if(event.keyCode === 9){$('#btn-check').focus();}
-});
+//$(document).on('keydown', '.form-control', function(event){
+//  if(event.keyCode === 9){$('#btn-check').focus();}
+//});
 $( document ).ready(function() {
-  if($('.bs-example-modal-lg').css('display','block')){
-    $('.form-control').focus();
-  }
+//  if($('.bs-example-modal-lg').css('display','block')){
+//    $('.form-control').focus();
+//  }
   if($('#getvalue').text().length > 0  ){
     var el = $('#getvalue').text();
     $('title').text(el);
@@ -929,7 +929,7 @@ function updateRequestContactData() {
     }
 }
 
-window.onkeydown = function (e) {
+$('#banner').on('keydown', function (e) {
 
 //    if (e.keyCode == 9 || e.which == 9) {
 //        e.preventDefault();
@@ -969,7 +969,7 @@ window.onkeydown = function (e) {
 
         return false;
     }
-}
+});
 
 ////////tairezzzz app
 var app = angular.module('App', []);

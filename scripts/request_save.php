@@ -88,7 +88,7 @@ if ($que) {
             return;
         }
 
-        $body = 'Search info:<br/>' . $requestInfo . '<br/>Dealer Info<br/>' . $dealerInfo . '<br/>' .
+        $body = 'Search info:<br/>Just press reply to ask any questions from this vendor or call them at the number below!<br/>' . $requestInfo . '<br/>Dealer Info<br/>' . $dealerInfo . '<br/>' .
             '<table style="min-width: 900px;background: #E7F9FD;margin-bottom: 20px;border: 1px solid #ddd;border-collapse: collapse;border-spacing: 0;font-family: \'Open Sans\', sans-serif;font-weight: 600;font-size: 14px;color: #55565b;line-height: 1.5em;">
                 <tr>
                     <th style="height: 40px;border-top: 1px solid #ddd;line-height: 1.42857143;background: #355F79;color: #FFF;text-align: center;">Donor Vehicle</th>
@@ -97,7 +97,9 @@ if ($que) {
                     <th style="height: 40px;border-top: 1px solid #ddd;line-height: 1.42857143;background: #355F79;color: #FFF;text-align: center;">Grade</th>
                     <th style="height: 40px;border-top: 1px solid #ddd;line-height: 1.42857143;background: #69b338;color: #FFF;text-align: center;">Price</th>
                 </tr>';
+        $priceArray = array();
         while ($row = mysql_fetch_assoc($results)) {
+            $priceArray[] = (float)$row['retailprice'];
             $quote = (float)$row['retailprice'];
             if ($quote == 0) { $quote='Call'; } else { $quote = '$'.(float)$row['retailprice']; }
 
@@ -111,6 +113,8 @@ if ($que) {
         }
         $body .= "</table>";
 
+        $priceArray = array_unique($priceArray);
+
         $subject = "Re: {$yard['yard']} {$yard['phone']} current inventory for your {$request['year']},{$request['make']},{$request['model']},{$request['part']}";
 
         if(!empty($yard['contactemail'])) {
@@ -118,17 +122,34 @@ if ($que) {
             $message = Swift_Message::newInstance()
 
                 // Give the message a subject
-                ->setSubject('Re: Your inventory was saved by a visitor!')
+                ->setSubject('A visitor saved your inventory - ' . $hnumber)
 
                 // Set the From address with an associative array
-                ->setFrom(array('noreply@autorecyclersonline.com' => 'AutoRecyclersOnline.com'))
+                ->setFrom(array('noreply@autorecyclersonline.com' => $email))
+
+                // Copy to site holder
+                ->addBcc('admin@autorecyclersonline.com')
+
+                // Specifies the address where replies are sent to
+                ->setReplyTo($email)
+
+                //Setting the Return-Path
+                ->setReturnPath($email)
 
                 // Set the To addresses with an associative array
                 ->setTo(array(trim($yard['contactemail'])))
 
                 // Give it a body
                 ->setBody(
-                    '<html><head></head><body>Below are the details:<br/><br/>Contact email: ' . $email . '</body></html>',
+                    '<html><head></head><body>Below are the details. You can reply to this email to contact customer:<br/><br/>'
+                        . 'Part: ' . $request['part'] . '<br/>'
+                        . (count($priceArray) ? 'Price: ' . ((count($priceArray) == 1) ? $priceArray[0] : min($priceArray) . ' - ' . max($priceArray)) : '')
+                        . '<br/><br/>'
+                        . 'Customer Zip: ' . $request['zip'] . '<br/>'
+                        . 'eMail: ' . $email . '<br/>'
+                        . '<br/><br/>'
+                        . 'AutoRecyclersOnline.com Team'
+                        . '</body></html>',
                     'text/html'
                 );
 
@@ -148,7 +169,7 @@ if ($que) {
         ->setSubject($subject)
 
         // Set the From address with an associative array
-        ->setFrom(array('noreply@autorecyclersonline.com' => 'AutoRecyclersOnline.com'))
+        ->setFrom(array('noreply@autorecyclersonline.com' => (!empty($yard['contactemail']) ? $yard['contactemail'] :'AutoRecyclersOnline.com')))
 
         // Copy to site holder
         ->addBcc('admin@autorecyclersonline.com')
@@ -161,6 +182,11 @@ if ($que) {
             $body,
             'text/html'
         );
+
+    if(!empty($yard['contactemail'])) {
+        // Specifies the address where replies are sent to
+        $message->setReplyTo($yard['contactemail'])->setReturnPath($yard['contactemail']);
+    }
 
     $resultSend = $mailer->send($message);
 } else {
