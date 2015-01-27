@@ -11,7 +11,7 @@ if (file_exists('testing/inc/rb.phar')) {
 ini_set('error_reporting', 'on');
 ini_set("allow_url_fopen", true);
 
-R::setup('mysql:host=qs3505.pair.com;dbname=rtanner2_cpl', 'rtanner2_38', 'e9!R7a03raa');
+R::setup('mysql:host=192.168.200.100;dbname=iusedparts', 'iusedparts', '5huYvRDH');
 
 //function min_mod () {
 //  $args = func_get_args();

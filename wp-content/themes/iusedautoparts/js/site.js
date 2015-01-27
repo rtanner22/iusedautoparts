@@ -929,47 +929,42 @@ function updateRequestContactData() {
     }
 }
 
-$('#banner').on('keydown', function (e) {
-
+//$(document).on('keydown', '#banner', function (e) {
 //    if (e.keyCode == 9 || e.which == 9) {
 //        e.preventDefault();
 //        return false;
 //    }
-    if (e.keyCode == 13 || e.which == 13) {
-        e.preventDefault();
-
-        var optvalue = $("#optionvalue").val();
-        var hoption;
-
-
-        var optvalue = document.getElementById("hollanderoption").value;
-        if (document.getElementById('preload-partname'))
-            carPartName = document.getElementById('preload-partname').value;
-        else if (document.getElementById('partname').value != "")
-            carPartName = document.getElementById('partname').value;
-        else if (document.getElementById('preload-chpartname'))
-            carPartName = document.getElementById('preload-chpartname').value;
-        if (cars.selectedCarYear && cars.selectedManufacture && cars.selectedModel &&
-            carPartName && optvalue && document.getElementById('zip').value) {
-            if (document.getElementById('zip').value.length != 5) {
-                alert("Please provide a five-digit zip code.");
-            } else {
-                $.loader({
-                    className:"blue-with-image-12",
-                    content:'Please wait while we search for inventory from our vendors..'
-                });
-
-                   LaunchProgressBar();
-            }
-        } else
-            return false;
-
-
-        return false;
-
-        return false;
-    }
-});
+//    if (e.keyCode == 13 || e.which == 13) {
+//        e.preventDefault();
+//
+//        var optvalue = $("#optionvalue").val();
+//        var hoption;
+//
+//
+//        var optvalue = document.getElementById("hollanderoption").value;
+//        if (document.getElementById('preload-partname'))
+//            carPartName = document.getElementById('preload-partname').value;
+//        else if (document.getElementById('partname').value != "")
+//            carPartName = document.getElementById('partname').value;
+//        else if (document.getElementById('preload-chpartname'))
+//            carPartName = document.getElementById('preload-chpartname').value;
+//        if (cars.selectedCarYear && cars.selectedManufacture && cars.selectedModel &&
+//            carPartName && optvalue && document.getElementById('zip').value) {
+//            if (document.getElementById('zip').value.length != 5) {
+//                alert("Please provide a five-digit zip code.");
+//            } else {
+//                $.loader({
+//                    className:"blue-with-image-12",
+//                    content:'Please wait while we search for inventory from our vendors..'
+//                });
+//
+//                   LaunchProgressBar();
+//            }
+//        }
+//
+//        return false;
+//    }
+//});
 
 ////////tairezzzz app
 var app = angular.module('App', []);
