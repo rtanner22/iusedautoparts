@@ -422,6 +422,9 @@ display: none;
                                 $('.bs-example-modal-lg').on('show.bs.modal', function (event) {
                                     $(document.body).addClass('modalBlur');
                                 });
+                                $('.bs-example-modal-lg').on('shown.bs.modal', function (event) {
+                                    $('#email_isset').focus();
+                                });
                                 $('.bs-example-modal-lg').on('hidden.bs.modal', function (event) {
                                     $(document.body).removeClass('modalBlur');
                                 });
@@ -435,21 +438,23 @@ display: none;
                                   <div class = "modal-body" ng-controller="Controller">
                                     <!--<h1 ng-show="submitted"><button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button></h1>-->
                                     
-                                    <ng-form  ng-show="!submitted" class="css-form" name="user_form">
+                                    <form ng-show="!submitted" ng-submit="submit()" class="css-form" name="user_form">
                                         <h2 style="padding-bottom: 10px;">Almost finished! Please provide your email address to receive your quote.</h2>
                                         <input hidden ng-model="req.id" ng-init="req.id=<?php echo $_REQUEST['reqid']; ?>">
                                         <input hidden ng-model="req.refresh" ng-init="req.refresh=<?= (($result && empty($email)) ? 1 : 0) ?>">
 
                                         <div class="row" style="padding: 10px;">
                                             <input type="email" style="width: 65%;margin: 0 auto;" class="form-control input-lg" value="<?php echo $email; ?>" ng-model="req.email" placeholder="Enter a valid email address" id="email_isset" required />
+                                            <span class="email_tooltip">Our service is free and your eMail is protected</span>
                                             <p ng-show="error" class="error_email_valid">Invalid email address.</p>
                                         </div>
 
                                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 padding-center" style="text-align:center;">
-                                            <div ng-show="user_form.$valid" ng-click="submit()" class="btn btn-orange" style="display: inline-block !important;">
+                                            <button ng-show="user_form.$valid" ng-click="submit()" class="btn btn-orange" style="display: inline-block !important;">
                                                 Submit <i class="fa fa-arrow-right"></i>
-                                            </div>
+                                            </button>
                                         </div>
+                                    </form>
                                     </div>
                                         <div class="row mtop10 text-center">
 <!--                                                <div ng-show="user_form.$valid" ng-click="submit()" class="btn btn-orange">

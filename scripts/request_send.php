@@ -132,6 +132,9 @@ $message = Swift_Message::newInstance()
     // Specifies the address where replies are sent to
     ->setReplyTo($email)
 
+    //Setting the Return-Path
+    ->setReturnPath($email)
+
     // Copy to site holder
     ->addBcc('admin@autorecyclersonline.com')
 

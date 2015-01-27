@@ -681,10 +681,10 @@ body {
 @media (min-width: 768px) {
     .modal-dialog {
             width: 450px;
-            margin: 30px auto;
+            margin: 0 auto;
     }
 }
-ng-form h2{
+.no-results form h2{
 	text-align:center;
 }
 #btn-show{     padding: 4px 18px;
@@ -732,14 +732,21 @@ ng-form h2{
 }
 
 .modal-dialog {
-  display: flex;
-  height: 100%;
-  align-items: center;
+	display: flex;
+	display: -ms-flex;
+	display: -moz-flex;
+	display: -webkit-flex;
+	height: 100%;
+	-webkit-align-items: center;
+	-moz-align-items: center;
+	-ms-align-items: center;
+	align-items: center;
 }
 
 .modal-content {
   margin: 0 auto;
   min-height: 240px;
+  max-width: 810px;
 }
 
 .modalBlur > *:not(.modal) {
@@ -813,7 +820,7 @@ ng-form h2{
 @media (max-width:640px) {
     
     .modal-dialog {
-        margin:100px auto 10px;
+        margin:0 auto;
     }
     
     #banner.content {
@@ -885,4 +892,12 @@ ng-form h2{
     margin-bottom:0;
     width:65%;
     margin: 0 auto;
+}
+.email_tooltip {
+    color: gray;
+    font-size: 13px;
+    text-align: left;
+    width: 65%;
+    margin: 0 auto;
+    display: block;
 }
