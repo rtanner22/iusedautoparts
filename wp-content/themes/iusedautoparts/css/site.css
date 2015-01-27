@@ -901,3 +901,13 @@ body {
     margin: 0 auto;
     display: block;
 }
+
+
+/* ======================================
+   ========= MODAL SCROLL ===============
+   ====================================== */
+
+#data .modal-body {
+    max-height: 500px;
+    overflow-y: auto;
+}
