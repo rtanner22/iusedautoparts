@@ -1,6 +1,7 @@
 <?php
 session_start();
 error_reporting(0);
+ini_set('display_errors', 0);
 
 date_default_timezone_set('America/Chicago');
 
@@ -59,6 +60,9 @@ if ($que) {
             return;
         }
         $yard = mysql_fetch_assoc($yardResult);
+        //Fix email address
+        $yard['contactemail'] = trim($yard['contactemail']);
+
         $dealerInfo = '';
         if ($yard['directory'] != "") {
             $dealerInfo .= "<a href='{$yard['directory']}' target=_BLANK>";
@@ -137,7 +141,7 @@ if ($que) {
                 ->setReturnPath($email)
 
                 // Set the To addresses with an associative array
-                ->setTo(array(trim($yard['contactemail'])))
+                ->setTo(array($yard['contactemail']))
 
                 // Give it a body
                 ->setBody(
