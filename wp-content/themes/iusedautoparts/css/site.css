@@ -896,11 +896,11 @@ body {
 .email_tooltip {
     color: gray;
     font-size: 13px;
-    text-align: left;
+    text-align: center;
     width: 65%;
     margin: 0 auto;
     display: block;
-    margin-top: 5px;
+    margin-top: 10px;
 }
 
 
