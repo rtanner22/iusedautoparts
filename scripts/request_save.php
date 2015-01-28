@@ -61,7 +61,7 @@ if ($que) {
         }
         $yard = mysql_fetch_assoc($yardResult);
         //Fix email address
-        $yard['contactemail'] = trim($yard['contactemail']);
+        $yard['partsemail'] = trim($yard['partsemail']);
 
         $dealerInfo = '';
         if ($yard['directory'] != "") {
@@ -121,7 +121,7 @@ if ($que) {
 
         $subject = "Re: {$yard['yard']} {$yard['phone']} current inventory for your {$request['year']},{$request['make']},{$request['model']},{$request['part']}";
 
-        if(!empty($yard['contactemail'])) {
+        if(!empty($yard['partsemail'])) {
             //sent to yard email
             $message = Swift_Message::newInstance()
 
@@ -141,7 +141,7 @@ if ($que) {
                 ->setReturnPath($email)
 
                 // Set the To addresses with an associative array
-                ->setTo(array($yard['contactemail']))
+                ->setTo(array($yard['partsemail']))
 
                 // Give it a body
                 ->setBody(
@@ -173,7 +173,7 @@ if ($que) {
         ->setSubject($subject)
 
         // Set the From address with an associative array
-        ->setFrom(array('noreply@autorecyclersonline.com' => (!empty($yard['contactemail']) ? $yard['contactemail'] :'AutoRecyclersOnline.com')))
+        ->setFrom(array('noreply@autorecyclersonline.com' => (!empty($yard['partsemail']) ? $yard['partsemail'] :'AutoRecyclersOnline.com')))
 
         // Copy to site holder
         ->addBcc('admin@autorecyclersonline.com')
@@ -187,9 +187,9 @@ if ($que) {
             'text/html'
         );
 
-    if(!empty($yard['contactemail'])) {
+    if(!empty($yard['partsemail'])) {
         // Specifies the address where replies are sent to
-        $message->setReplyTo($yard['contactemail'])->setReturnPath($yard['contactemail']);
+        $message->setReplyTo($yard['partsemail'])->setReturnPath($yard['partsemail']);
     }
 
     $resultSend = $mailer->send($message);
