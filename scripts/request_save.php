@@ -156,7 +156,7 @@ if ($que) {
                         . '<br/><br/>'
                         . $table
                         . '<br/>'
-                        . ' Hollander number ' . $request['hollanderoption']
+                        . ' Hollander number: ' . $hnumber
                         . '<br/>'
                         . 'AutoRecyclersOnline.com Team'
                         . '</body></html>',
