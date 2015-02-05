@@ -144,7 +144,7 @@ $(function(){
             $.ajax({
                 async:false,
                 type:'post',
-                url:"http://www.autorecyclersonline.com/testing/ajax/index.php",
+                url:"/testing/ajax/index.php",
                 data: params,
                 success:function(resp){
                     if(resp)
@@ -696,7 +696,7 @@ function preload_part() {
       $.ajax({
         async:false,
         type:'post',
-        url:"http://www.autorecyclersonline.com/testing/ajax/index.php",
+        url:"/testing/ajax/index.php",
         data: params,
         success:function(resp){
           if(resp)
@@ -822,7 +822,7 @@ function ShowProgress() {
     $.ajax({
       async:false,
       type:'post',
-      url:"http://www.autorecyclersonline.com/scripts/request.php",
+      url:"/scripts/request.php",
       data: params,
       success:function(resp){
         if(resp)

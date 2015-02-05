@@ -480,9 +480,14 @@ function InitPrimarySearch() {
         cars.selectedPart = document.getElementById('box-part').value.substring(0, 3);
         document.getElementById('partname').value = part;
         //$('#preload-option').val("");
+
+        $('#hollanderoption').val('');
+//        $('#optionvalue').val('');
+//        $('select#optionvalue option').removeAttr("selected");
+//        $('select#hollanderoption option').removeAttr("selected");
+//        cars.selectedOption = '';
+
         cars.getOptions();
-
-
     });
 
     //Select Options
@@ -881,8 +886,11 @@ function LaunchProgressBar() {
         carPartName && optvalue && document.getElementById('zip').value) {
         //alert("submitting");
         //continue;
-    } else
+    } else {
+        $('#btn-check').attrRemove("disabled");
+        $.loader('close');
         return false;
+    }
     params = {
         year: cars.selectedCarYear,
         make: cars.selectedManufacture,
