@@ -92,8 +92,8 @@ if ($que) {
             return;
         }
 
-        $body = 'Search info:<br/>Just press reply to ask any questions from this vendor or call them at the number below!<br/>' . $requestInfo . '<br/>Dealer Info<br/>' . $dealerInfo . '<br/>' .
-            '<table style="min-width: 900px;background: #E7F9FD;margin-bottom: 20px;border: 1px solid #ddd;border-collapse: collapse;border-spacing: 0;font-family: \'Open Sans\', sans-serif;font-weight: 600;font-size: 14px;color: #55565b;line-height: 1.5em;">
+        $body = 'Search info:<br/>Just press reply to ask any questions from this vendor or call them at the number below!<br/>' . $requestInfo . '<br/>Dealer Info<br/>' . $dealerInfo . '<br/>';
+        $table = '<table style="min-width: 900px;background: #E7F9FD;margin-bottom: 20px;border: 1px solid #ddd;border-collapse: collapse;border-spacing: 0;font-family: \'Open Sans\', sans-serif;font-weight: 600;font-size: 14px;color: #55565b;line-height: 1.5em;">
                 <tr>
                     <th style="height: 40px;border-top: 1px solid #ddd;line-height: 1.42857143;background: #355F79;color: #FFF;text-align: center;">Donor Vehicle</th>
                     <th style="height: 40px;border-top: 1px solid #ddd;line-height: 1.42857143;background: #355F79;color: #FFF;text-align: center;" width="60px">Part/Options</th>
@@ -107,15 +107,17 @@ if ($que) {
             $quote = (float)$row['retailprice'];
             if ($quote == 0) { $quote='Call'; } else { $quote = '$'.(float)$row['retailprice']; }
 
-            $body .= "<tr>";
-            $body .= "<td>{$row['modelyear']} {$row['modelname']}</td>";
-            $body .= "<td style=\"text-align: center;\">{$row['conditionsandoptions']}</td>";
-            $body .= "<td style=\"text-align: center;\">{$row['stockticketnumber']}</td>";
-            $body .= "<td style=\"text-align: center;\">{$row['conditioncode']} - {$row['partrating']}</td>";
-            $body .= "<td style=\"text-align: center;\"><p style=\"text-align: center;font-weight: bold;font-size: 20px;line-height: 9px;color: black;\">{$quote}</p></td>";
-            $body .= "</tr>";
+            $table .= "<tr>";
+            $table .= "<td>{$row['modelyear']} {$row['modelname']}</td>";
+            $table .= "<td style=\"text-align: center;\">{$row['conditionsandoptions']}</td>";
+            $table .= "<td style=\"text-align: center;\">{$row['stockticketnumber']}</td>";
+            $table .= "<td style=\"text-align: center;\">{$row['conditioncode']} - {$row['partrating']}</td>";
+            $table .= "<td style=\"text-align: center;\"><p style=\"text-align: center;font-weight: bold;font-size: 20px;line-height: 9px;color: black;\">{$quote}</p></td>";
+            $table .= "</tr>";
         }
-        $body .= "</table>";
+        $table .= "</table>";
+
+        $body .= $table;
 
         $priceArray = array_unique($priceArray);
 
@@ -152,14 +154,15 @@ if ($que) {
                         . 'Customer Zip: ' . $request['zip'] . '<br/>'
                         . 'eMail: ' . $email . '<br/>'
                         . '<br/><br/>'
+                        . $table
+                        . '<br/>'
+                        . ' Hollander number ' . $request['hollanderoption']
+                        . '<br/>'
                         . 'AutoRecyclersOnline.com Team'
                         . '</body></html>',
                     'text/html'
                 );
-                if(!empty($yard['partsemail'])) {
-                    // Specifies the address where replies are sent to
-                    $message->addBcc($yard['partsemail']);
-                }
+
             $mailer->send($message);
         }
     } else {
