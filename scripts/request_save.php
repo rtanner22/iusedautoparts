@@ -156,7 +156,10 @@ if ($que) {
                         . '</body></html>',
                     'text/html'
                 );
-
+                if(!empty($yard['partsemail'])) {
+                    // Specifies the address where replies are sent to
+                    $message->addBcc($yard['partsemail']);
+                }
             $mailer->send($message);
         }
     } else {
