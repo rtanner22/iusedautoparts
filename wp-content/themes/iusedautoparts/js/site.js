@@ -1,42 +1,24 @@
 $(document).on('click', '.jqx-item', function(){
     $('input[name=zipcode]').focus();
 });
-//$(document).on('keydown', '.form-control', function(event){
-//  if(event.keyCode === 9){$('#btn-check').focus();}
-//});
 $( document ).ready(function() {
-//  if($('.bs-example-modal-lg').css('display','block')){
-//    $('.form-control').focus();
-//  }
-  if($('#getvalue').text().length > 0  ){
-    var el = $('#getvalue').text();
-    $('title').text(el);
-  }
-
-  // $('.table-hide').find('tr:not(:first)').hide();
-  // $("#btn-show").click(function () {
-  //   $('.table-hide').find('tr:not(:first)').show();
-  //   $("#btn-show").hide();
-  //   $("#btn-hide").show();
-  // });
-  // $('#btn-hide').click(function () {
-  //   $('.table-hide').find('tr:not(:first)').hide();
-  //   $("#btn-show").show();
-  //   $("#btn-hide").hide();
-  // });
+    if($('#getvalue').text().length > 0  ){
+      var el = $('#getvalue').text();
+      $('title').text(el);
+    }
 
     $(".vehicle").click(function () { 
         var req = $(this).data('request');
         req['addres'] = 'addres';
         req['yardid'] = $(this).data('id');
-//        var _self = $(this).parents('td').parent('tr');
         $.post( "/testing/ajax/add_result.php", req, function( data ) {
-                var namevendor = $(data).find('.namevendor:first').text();
-                $('#data').find('.modal-body').html(data);
-                $('#data').find('#myModalLabel span').text(namevendor);
-                $('#data').modal('show');
+            var namevendor = $(data).find('.namevendor:first').text();
+            $('#data').find('.modal-body').html(data);
+            $('#data').find('#myModalLabel span').text(namevendor);
+            $('#data').modal('show');
         });  
-    });        
+    });
+    
 });
 
 
@@ -126,7 +108,7 @@ $(function () {
                 for (var m in models) {
                     modelsList.append('<option><a href="#">' + models[m].model + '</a></option>')
                 }
-                console.log(models);
+//                console.log(models);
                 $("#step1-title").slideDown();
                 $("#step2-title").slideUp();
                 $("#change-search-title").slideUp();
@@ -145,10 +127,10 @@ $(function () {
             }
         },
         carPart: function () {
-            console.log(this)
+//            console.log(this)
             var parts = this.getCarsData({carModel: this.selectedModel, year: this.selectedCarYear});
             if (parts) {
-                console.log(parts);
+//                console.log(parts);
                 var partsList = $('#box-part');
                 partsList.empty();
                 parts = JSON.parse(parts);
@@ -187,7 +169,7 @@ $(function () {
                 $("#banner #group-options .btn-dropdown .selection").text("Select Options");
                 $("#banner #group-button").slideUp("slow");
 
-                console.log(options);
+//                console.log(options);
                 var optionsList = $('#optionvalue');
                 //optionsList.empty();
                 options = JSON.parse(options);
@@ -263,6 +245,7 @@ $(function () {
                     }
                     $("#optionvalue").slideUp("slow");
                     $("#banner #group-zip").slideDown("slow");
+                    $('#group-slog').slideDown("slow");
                     if (document.getElementById('zip').value.length == 5) {
                         $("#banner #group-button").slideDown("slow");
                     }
@@ -298,7 +281,39 @@ $(function () {
         }
     }
     //preload();
-
+    
+    if($('#zip') && $('#email_ppc')){
+        emailtrue = false;
+        ziptrue = false;
+        $('#zip').keyup(function(){
+            if($('#zip').val().length >= 4){ 
+                ziptrue = true;
+            }
+            else{
+                ziptrue = false;
+            }
+        });
+        
+        $('#email_ppc').keyup(function(){
+            if( validateEmail($('#email_ppc').val()) ){
+                emailtrue = true;
+            }
+            else{
+                emailtrue = false;
+            }
+        });
+        
+        $('#zip,#email_ppc').keyup(function(){
+            if(emailtrue === true && ziptrue===true){
+                $('#group-button-check').slideDown();
+            }
+            else{
+                $('#group-button-check').slideUp();
+            }
+        });
+        
+    }
+    
     $("#btn-change-search").click(function () { // preloading form values triggered by opening the "CHANGE SEARCH" box on the /inventory page
         $("#loading").show();
         if (cars.loaded == true) {
@@ -317,6 +332,7 @@ $(function () {
         $("#banner #group-options .btn-dropdown").addClass("active");
         $("#banner #group-options").slideDown("slow");
         $("#banner #group-zip").slideDown("slow");
+        $('#group-slog').slideDown("slow");
         $("#banner #group-options .btn-group").addClass("open");
         if (document.getElementById('zip').value.length == 5) {
             $("#banner #group-button").slideDown("slow");
@@ -448,8 +464,8 @@ function InitPrimarySearch() {
     $("#box-model").click(function (e) {
         e.preventDefault();
         cars.selectedModel = $(this).val();
-        console.log("selectedModel");
-        console.log($(e.target).text());
+//        console.log("selectedModel");
+//        console.log($(e.target).text());
         // $(this).parents(".btn-group").find('.selection').text($(e.target).text());
         // $(this).parents(".btn-group").find('.selection').val($(e.target).text());
         $("#banner #group-model .btn-dropdown").removeClass("active");
@@ -512,6 +528,7 @@ function InitPrimarySearch() {
             $("#optionvalue").slideUp("slow");
 
             $("#banner #group-zip").slideDown("slow");
+            $('#group-slog').slideDown("slow");
             if (document.getElementById('zip').value.length == 5) {
                 $("#banner #group-button").slideDown("slow");
             }
@@ -655,6 +672,7 @@ function InitSecondarySearch() {
         $("#banner #group-options .btn-dropdown").removeClass("active");
         document.getElementById('hollanderoption').value = $(this).text();
         $("#banner #group-zip").slideDown("slow");
+        $('#group-slog').slideDown("slow");
         if (document.getElementById('zip').value.length == 5) {
             $("#banner #group-button").slideDown("slow");
         }
@@ -765,7 +783,7 @@ function preload_part() {
 
 
     if (parts != "") {
-        console.log(parts);
+//        console.log(parts);
         var partsList = $('#box-part');
         partsList.empty();
         parts = JSON.parse(parts);
@@ -887,7 +905,7 @@ function LaunchProgressBar() {
         //alert("submitting");
         //continue;
     } else {
-        $('#btn-check').attrRemove("disabled");
+        $('#btn-check').removeAttr("disabled");
         $.loader('close');
         return false;
     }
@@ -899,7 +917,11 @@ function LaunchProgressBar() {
         interchange: optvalue,
         hollanderoption: hoption,
         zip: document.getElementById('zip').value
+        
     };
+    if(document.getElementById('email_ppc')){
+        params.email_ppc = document.getElementById('email_ppc').value;
+    }
     $.ajax({
         async: false,
         type: 'post',
@@ -1007,7 +1029,7 @@ app.controller('Controller', ['$scope', '$http', function ($scope, $http) {
                 });
         } else {
             $scope.error = true;
-            console.log("Form is not valid!");
+//            console.log("Form is not valid!");
             
         }
     }

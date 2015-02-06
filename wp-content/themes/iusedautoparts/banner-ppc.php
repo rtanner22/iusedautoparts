@@ -36,6 +36,11 @@
           <div id="step2-title" style="display: none;">
             <h2></h2>
           </div>
+            <div id="group-slog">
+                <div>Almost finished...</div>
+                <div>Only two steps away to parts utopia!</div>
+                <div class="little">(if we have the part in stock of course)</div>
+            </div>
           <form action="/inventory" method="POST" name="searchform">
          <input type="hidden" name="reqid" id="reqid" value="" />
           <input type="hidden" name="openyear" id="openyear" value="true" />
@@ -44,7 +49,7 @@
           <input type="hidden" name="preload-make" id="preload-make" value="<?php echo $_REQUEST[make]; ?>" />
           <input type="hidden" name="preload-model" id="preload-model" value="<?php echo $_REQUEST[model]; ?>" />
           <input type="hidden" name="preload-part" id="preload-part" value="<?php echo $_REQUEST[part]; ?>" />
-          <input type="hidden" name="preload-partname" id="preload-partname" value="<?php echo $partdesc; ?>" />
+<!--          <input type="hidden" name="preload-partname" id="preload-partname" value="<?php echo $partdesc; ?>" />-->
           <input type="hidden" name="showStep2" id="showStep2" value="true" />
             <div class="step1">
           <div id="group-year" class="form-group">
@@ -106,9 +111,11 @@
               </div>
               <div id="group-zip" class="form-group" style="display: none;">
                 <label>Enter your Zip Code so we can find stock near you:</label>
-                <input id="zip" type="text" class="form-control input-lg" placeholder="e.g. 10003" />
+                <input id="zip" type="text" class="form-control input-lg" placeholder="Enter Zip Code" />
+                <label>(For quotes near your area)</label>
+                <input id="email_ppc" type="email" class="form-control input-lg" placeholder="Enter your email to receive your quote" />
               </div>
-              <div  id="group-button" class="form-group text-center" style="display: none;">
+              <div  id="group-button-check" class="form-group text-center" style="display: none;">
                 <button id="btn-check" type="submit" class="btn btn-orange">CHECK STOCK <i class="fa fa-arrow-right"></i></button>
               </div>
 

@@ -912,3 +912,14 @@ body {
     max-height: 500px;
     overflow-y: auto;
 }
+
+#group-slog {
+    color: #22B14C;
+    font-size: 21px;
+    font-weight: 600;
+    line-height: 29px;
+    display: none;
+}
+.little{
+    font-size: 16px;
+}
