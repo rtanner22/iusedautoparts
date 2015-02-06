@@ -110,9 +110,9 @@
                 </div>
               </div>
               <div id="group-zip" class="form-group" style="display: none;">
-                <label>Enter your Zip Code so we can find stock near you:</label>
-                <input id="zip" type="text" class="form-control input-lg" placeholder="Enter Zip Code" />
-                <label>(For quotes near your area)</label>
+                <input style="width: 50%;float:left;" id="zip" type="text" class="form-control input-lg" placeholder="Enter Zip Code" />
+                <label class="label-ppc">(For quotes near your area)</label>
+                
                 <input id="email_ppc" type="email" class="form-control input-lg" placeholder="Enter your email to receive your quote" />
               </div>
               <div  id="group-button-check" class="form-group text-center" style="display: none;">

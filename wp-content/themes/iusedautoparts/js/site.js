@@ -485,7 +485,7 @@ function InitPrimarySearch() {
 
         var part = $("#box-part option:selected").html().toUpperCase();
 
-        $("#step2-title").html("<h2><span class='text-orange'>" + part + "</span> for a <span class='text-orange'>" + year + "</span> <span class='text-orange'>" + make + "</span> <span class='text-orange'>" + model + "</span></h2>");
+        $("#step2-title").html("<h2><span class='text-blue-h2'>" + year + "</span> <span class='text-blue-h2'>" + make + "</span> <span class='text-blue-h2'>" + model + "</span><span class='text-blue-span'> Engine Assembly</span></h2>");
         $("#step2-title").slideDown("slow");
 
         //Indicator
