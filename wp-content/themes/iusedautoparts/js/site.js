@@ -245,6 +245,7 @@ $(function () {
                     }
                     $("#optionvalue").slideUp("slow");
                     $("#banner #group-zip").slideDown("slow");
+//                    $('#group-options').slideUp("slow");
                     $('#group-slog').slideDown("slow");
                     if (document.getElementById('zip').value.length == 5) {
                         $("#banner #group-button").slideDown("slow");
@@ -303,6 +304,26 @@ $(function () {
             }
         });
         
+        
+        $('#zip').blur(function(){
+            if($('#zip').val().length >= 4){ 
+                ziptrue = true;
+            }
+            else{
+                ziptrue = false;
+            }
+        });
+        
+        $('#email_ppc').blur(function(){
+            if( validateEmail($('#email_ppc').val()) ){
+                emailtrue = true;
+            }
+            else{
+                emailtrue = false;
+            }
+        });
+        
+        
         $('#zip,#email_ppc').keyup(function(){
             if(emailtrue === true && ziptrue===true){
                 $('#group-button-check').slideDown();
@@ -312,6 +333,14 @@ $(function () {
             }
         });
         
+        $('#zip,#email_ppc').blur(function(){
+            if(emailtrue === true && ziptrue===true){
+                $('#group-button-check').slideDown();
+            }
+            else{
+                $('#group-button-check').slideUp();
+            }
+        });
     }
     
     $("#btn-change-search").click(function () { // preloading form values triggered by opening the "CHANGE SEARCH" box on the /inventory page
@@ -332,6 +361,7 @@ $(function () {
         $("#banner #group-options .btn-dropdown").addClass("active");
         $("#banner #group-options").slideDown("slow");
         $("#banner #group-zip").slideDown("slow");
+//        $('#group-options').slideUp("slow");
         $('#group-slog').slideDown("slow");
         $("#banner #group-options .btn-group").addClass("open");
         if (document.getElementById('zip').value.length == 5) {
@@ -526,7 +556,7 @@ function InitPrimarySearch() {
             e.preventDefault();
             $("#banner #group-options .btn-dropdown").removeClass("active");
             $("#optionvalue").slideUp("slow");
-
+//            $('#group-options').slideUp("slow");
             $("#banner #group-zip").slideDown("slow");
             $('#group-slog').slideDown("slow");
             if (document.getElementById('zip').value.length == 5) {
@@ -640,7 +670,7 @@ function InitSecondarySearch() {
         $(this).parents(".btn-group").find('.selection').text($(this).text());
         $(this).parents(".btn-group").find('.selection').val($(this).text());
         $("#banner.content #group-part .btn-dropdown").removeClass("active");
-        $(".step1").slideUp("slow");
+//        $(".step1").slideUp("slow");
         $(".step2").slideDown("slow");
         return;
     });
@@ -649,7 +679,7 @@ function InitSecondarySearch() {
     $("#btn-choose").click(function (e) {
 
         e.preventDefault();
-        $(".step1").slideUp("slow");
+//        $(".step1").slideUp("slow");
         $(".step2").slideDown("slow");
         cars.getOptions();
         $("#optionvalue").slideDown("slow");
@@ -658,7 +688,7 @@ function InitSecondarySearch() {
     $("#btn-go-back").click(function (e) {
 
         e.preventDefault();
-        $(".step2").slideUp("slow");
+//        $(".step2").slideUp("slow");
         $(".step1").slideDown("slow");
         //cars.getOptions();
         //$("#optionvalue").slideDown("slow");
@@ -673,6 +703,7 @@ function InitSecondarySearch() {
         document.getElementById('hollanderoption').value = $(this).text();
         $("#banner #group-zip").slideDown("slow");
         $('#group-slog').slideDown("slow");
+//        $('#group-options').slideUp("slow");
         if (document.getElementById('zip').value.length == 5) {
             $("#banner #group-button").slideDown("slow");
         }

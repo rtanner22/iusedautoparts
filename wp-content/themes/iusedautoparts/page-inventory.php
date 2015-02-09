@@ -86,6 +86,8 @@ $zipcode = $result1[0]['zip'];
 $hnumber = $result1[0]['hnumber'];
 if(isset($_SESSION['email_data'])) {
     $email = $_SESSION['email_data'];
+} else if(isset($_POST['email_ppc'])) {
+    $email = $_POST['email_ppc'];
 } else {
     $email = $result1[0]['email'];
 }
