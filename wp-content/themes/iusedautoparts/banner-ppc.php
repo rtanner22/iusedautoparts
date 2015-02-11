@@ -113,7 +113,9 @@
                 <input style="width: 50%;float:left;" id="zip" type="text" class="form-control input-lg" placeholder="Enter Zip Code" />
                 <label class="label-ppc">(For quotes near your area)</label>
                 
-                <input id="email_ppc" type="email" name="email_ppc" class="form-control input-lg" placeholder="Enter your email to receive your quote" />
+                <input id="email_ppc" style="margin-bottom: 15px;" type="email" name="email_ppc" class="form-control input-lg" placeholder="Enter your email to receive your quote" />
+                <input id="firstname" style="margin-bottom: 15px;" type="text" class="form-control input-lg" placeholder="Enter your First Name" name="firstname" />
+                <input id="phonenumber" style="margin-bottom: 15px;" type="text" name="phonenumber" class="form-control input-lg" placeholder="Enter your Phone Number" />
               </div>
               <div  id="group-button-check" class="form-group text-center" style="display: none;">
                 <button id="btn-check" type="submit" class="btn btn-orange">CHECK STOCK <i class="fa fa-arrow-right"></i></button>

@@ -24,7 +24,7 @@ if (isset($_POST['mechanics'])) {
 }
 
 $partname = mb_convert_case($partname, MB_CASE_TITLE, "UTF-8");
-$sql = "insert into requests (date,udate,year,make,model,part,hnumber,hollanderoption,phone,zip,email,source,referrer,kw,se,ip,wantsrepair) values('$date',unix_timestamp(),'$year','$make','$model','$partname','$interchange[2]','" . mysql_real_escape_string($hollanderoption) . "','$phone','$zip','$email','$source','$_SESSION[referrer]','$_SESSION[kw]','$_SESSION[se]','$ip','$wantsrepair')";
+$sql = "insert into requests (date,udate,year,make,model,part,hnumber,hollanderoption,phone,zip,email,source,referrer,kw,se,ip,wantsrepair,firstname) values('$date',unix_timestamp(),'$year','$make','$model','$partname','$interchange[2]','" . mysql_real_escape_string($hollanderoption) . "','$phonenumber','$zip','$email','$source','$_SESSION[referrer]','$_SESSION[kw]','$_SESSION[se]','$ip','$wantsrepair', '$firstname')";
 $que = mysql_query($sql) or die(mysql_error());
 if ($que) {
     $requestid = mysql_insert_id();

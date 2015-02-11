@@ -84,14 +84,28 @@
                   <input type="hidden" name="hollanderoption" id="hollanderoption" />
               </div>
             </div>
-            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" id="zipbox">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="zipbox">
               <div id="group-zip" style="display: none;">
-                <label>Enter your Zip Code so we can find stock near you:</label>
-                <input id="zip" type="text" class="form-control input-lg" placeholder="e.g. 10003" name="zipcode" />
+                <div class="row" style="margin-top: 15px;">
+                    <div class="col-xs-6">
+                        <input id="zip" type="text" class="form-control input-lg" placeholder="Enter Zip Code" name="zipcode" />
+                    </div>
+                    <div class="col-xs-6">
+                        <input id="email_ppc" type="email" name="email_ppc" class="form-control input-lg" placeholder="Enter your email to receive your quote" />
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom: 15px;">
+                    <div class="col-xs-6">
+                        <input id="firstname" type="text" class="form-control input-lg" placeholder="Enter your First Name" name="firstname" />
+                    </div>
+                    <div class="col-xs-6">
+                        <input id="phonenumber" type="text" name="phonenumber" class="form-control input-lg" placeholder="Enter your Phone Number" />
+                    </div>
+                </div>  
               </div>
             </div>
           </div>
-          <div  id="group-button" class="form-group text-center" style="display: none;">
+          <div  id="group-button-check" class="form-group text-center" style="display: none;">
             <button id="btn-check" type="submit" class="btn btn-orange">CHECK STOCK <i class="fa fa-arrow-right"></i></button>
           </div>
           <ol class="indicators">

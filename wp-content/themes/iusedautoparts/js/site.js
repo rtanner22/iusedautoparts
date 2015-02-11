@@ -953,6 +953,12 @@ function LaunchProgressBar() {
     if(document.getElementById('email_ppc')){
         params.email_ppc = document.getElementById('email_ppc').value;
     }
+    if(document.getElementById('firstname')){
+        params.firstname = document.getElementById('firstname').value;
+    }
+    if(document.getElementById('phonenumber')){
+        params.phonenumber = document.getElementById('phonenumber').value;
+    }
     $.ajax({
         async: false,
         type: 'post',

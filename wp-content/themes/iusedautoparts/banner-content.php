@@ -19,6 +19,11 @@
           <div id="step2-title" style="display: none;">
             <h2></h2>
           </div>
+            <div id="group-slog">
+                  <div>Almost finished...</div>
+                  <div>Only two steps away to parts utopia!</div>
+                  <div class="little">(if we have the part in stock of course)</div>
+            </div>
           <form action="/inventory" method="POST" name="searchform">
           <input type="hidden" name="reqid" id="reqid" value="" />
           <input type="hidden" name="openyear" id="openyear" value="false" />
@@ -73,13 +78,11 @@
             </div>
             <div class="step2" style="display: none;">
 			  <div id="group-go-back" class="form-group">
-					<a id="btn-go-back"> <span class="selection"> GO BACK</span> </a>
+					<!--<a id="btn-go-back"> <span class="selection"> GO BACK</span> </a>-->
 			  </div>
               <div id="group-options" class="form-group">
                 <div class="btn-group btn-group-justified" id="optionsbox">
                 <label>Choose your option from the list below:</label>
-
-
                   <div class="btn-group">
                     <button type="button" class="btn btn-dropdown btn-lg dropdown-toggle active" data-toggle="dropdown"> <span class="selection">Select Options</span> <span class="caret"></span> </button>
                     <div class="dropdown-menu" size="10" role="menu" name="optionvalue" id="optionvalue" style="background-color:#ffffff" ></div>
@@ -88,16 +91,16 @@
                 </div>
               </div>
               <div id="group-zip" class="form-group" style="display: none;">
-                <label>Enter your Zip Code so we can find stock near you:</label>
-                <input id="zip" type="text" class="form-control input-lg" placeholder="e.g. 10003" />
+                <input style="width: 50%;float:left;" id="zip" type="text" class="form-control input-lg" placeholder="Enter Zip Code" />
+                <label class="label-ppc">(For quotes near your area)</label>
+                <input id="email_ppc" style="margin-bottom: 15px;" type="email" name="email_ppc" class="form-control input-lg" placeholder="Enter your email to receive your quote" />
+                <input id="firstname" style="margin-bottom: 15px;" type="text" class="form-control input-lg" placeholder="Enter your First Name" name="firstname" />
+                <input id="phonenumber" style="margin-bottom: 15px;" type="text" name="phonenumber" class="form-control input-lg" placeholder="Enter your Phone Number" />
               </div>
-              <div  id="group-button" class="form-group text-center" style="display: none;">
+              <div  id="group-button-check" class="form-group text-center" style="display: none;">
                 <button id="btn-check" type="submit" class="btn btn-orange">CHECK STOCK <i class="fa fa-arrow-right"></i></button>
               </div>
             </div>
-
-
-
           </form>
         </div>
       </div>
@@ -107,7 +110,6 @@
 <div class="modal fade" id="modal-progress" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-
       <div class="modal-body center-block">
       	<h3>Please wait while we search for inventory from our vendor..</h3>
         <div class="progress">
@@ -116,7 +118,6 @@
           </div>
         </div>
       </div>
-
     </div>
   </div>
 </div>
