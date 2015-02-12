@@ -18,6 +18,7 @@
 <script src="<?php bloginfo('template_url'); ?>/js/detect.js"></script>
 <script src="<?php bloginfo('template_url'); ?>/js/jqwidgets/scripts/jquery-2.0.2.min.js"></script>
 <script src="<?php bloginfo('template_url'); ?>/js/bootstrap.min.js"></script>
+<script src="<?php bloginfo('template_url'); ?>/js/jquery.maskedinput.min.js"></script>
 <script>
 // SA.redirection_mobile ({
 //    mobile_url : "m.autorecyclersonline.com",

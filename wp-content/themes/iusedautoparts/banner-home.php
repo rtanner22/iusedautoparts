@@ -86,20 +86,20 @@
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="zipbox">
               <div id="group-zip" style="display: none;">
-                <div class="row" style="margin-top: 15px;">
-                    <div class="col-xs-6">
-                        <input id="zip" type="text" class="form-control input-lg" placeholder="Enter Zip Code" name="zipcode" />
-                    </div>
-                    <div class="col-xs-6">
-                        <input id="email_ppc" type="email" name="email_ppc" class="form-control input-lg" placeholder="Enter your email to receive your quote" />
-                    </div>
-                </div>
                 <div class="row" style="margin-bottom: 15px;">
                     <div class="col-xs-6">
                         <input id="firstname" type="text" class="form-control input-lg" placeholder="Enter your First Name" name="firstname" />
                     </div>
                     <div class="col-xs-6">
                         <input id="phonenumber" type="text" name="phonenumber" class="form-control input-lg" placeholder="Enter your Phone Number" />
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 15px;">
+                    <div class="col-xs-6">
+                        <input id="email_ppc" type="email" name="email_ppc" class="form-control input-lg" placeholder="Enter your email to receive your quote" />
+                    </div>
+                    <div class="col-xs-6">
+                        <input id="zip" type="text" class="form-control input-lg" placeholder="Enter Zip Code" name="zipcode" />
                     </div>
                 </div>  
               </div>

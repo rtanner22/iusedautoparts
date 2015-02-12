@@ -23,6 +23,16 @@ if (isset($_POST['mechanics'])) {
     $wantsrepair = 0;
 }
 
+if (strlen($firstname) > 25){
+   $firstname = substr($firstname, 0, 25);
+}
+$phonenumber = preg_replace('/\D/', '', $phonenumber);
+$phonenumber = substr($phonenumber, 0, 16);
+if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+   $email = ''; 
+}
+
+
 $partname = mb_convert_case($partname, MB_CASE_TITLE, "UTF-8");
 $sql = "insert into requests (date,udate,year,make,model,part,hnumber,hollanderoption,phone,zip,email,source,referrer,kw,se,ip,wantsrepair,firstname) values('$date',unix_timestamp(),'$year','$make','$model','$partname','$interchange[2]','" . mysql_real_escape_string($hollanderoption) . "','$phonenumber','$zip','$email','$source','$_SESSION[referrer]','$_SESSION[kw]','$_SESSION[se]','$ip','$wantsrepair', '$firstname')";
 $que = mysql_query($sql) or die(mysql_error());

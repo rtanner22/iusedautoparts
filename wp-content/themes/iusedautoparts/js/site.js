@@ -1,5 +1,5 @@
 $(document).on('click', '.jqx-item', function(){
-    $('input[name=zipcode]').focus();
+    $('input[name=firstname]').focus();
 });
 $( document ).ready(function() {
     if($('#getvalue').text().length > 0  ){
@@ -283,14 +283,39 @@ $(function () {
     }
     //preload();
     
-    if($('#zip') && $('#email_ppc')){
+    $("#phonenumber").mask("+999-99-999-9999",{completed:function(){
+            phonetrue =  true;
+        }
+    });
+    
+    if($('#zip') && $('#email_ppc') && $('#firstname') && $('#phonenumber')){
         emailtrue = false;
         ziptrue = false;
-        $('#zip').keyup(function(){
-            if($('#zip').val().length >= 4){ 
-                ziptrue = true;
+        nametrue = false;
+        phonetrue = false;
+        
+        
+        
+        $('#firstname').keyup(function(){
+            if($('#firstname').val().length > 2){ 
+                nametrue = true;
+            } else {
+                nametrue = false;
             }
-            else{
+        });
+        
+//        $('#phonenumber').keyup(function(){
+//            if($('#phonenumber').val().length === 16){ 
+//                phonetrue = true;
+//            } else {
+//                phonetrue = false;
+//            }
+//        });
+        
+        $('#zip').keyup(function(){
+            if($('#zip').val().length === 5){ 
+                ziptrue = true;
+            } else {
                 ziptrue = false;
             }
         });
@@ -298,18 +323,31 @@ $(function () {
         $('#email_ppc').keyup(function(){
             if( validateEmail($('#email_ppc').val()) ){
                 emailtrue = true;
-            }
-            else{
+            } else {
                 emailtrue = false;
             }
         });
         
+//        $('#phonenumber').blur(function(){
+//            if($('#phonenumber').val().length === 16){ 
+//                phonetrue = true;
+//            } else {
+//                phonetrue = false;
+//            }
+//        });
+        
+        $('#firstname').blur(function(){
+            if($('#firstname').val().length > 2){ 
+                nametrue = true;
+            } else {
+                nametrue = false;
+            }
+        });
         
         $('#zip').blur(function(){
-            if($('#zip').val().length >= 4){ 
+            if($('#zip').val().length === 5){ 
                 ziptrue = true;
-            }
-            else{
+            } else {
                 ziptrue = false;
             }
         });
@@ -317,27 +355,24 @@ $(function () {
         $('#email_ppc').blur(function(){
             if( validateEmail($('#email_ppc').val()) ){
                 emailtrue = true;
-            }
-            else{
+            } else {
                 emailtrue = false;
             }
         });
         
         
-        $('#zip,#email_ppc').keyup(function(){
-            if(emailtrue === true && ziptrue===true){
+        $('#zip,#email_ppc,#phonenumber,#firstname').keyup(function(){
+            if(emailtrue === true && ziptrue===true && phonetrue===true && nametrue===true){
                 $('#group-button-check').slideDown();
-            }
-            else{
+            } else {
                 $('#group-button-check').slideUp();
             }
         });
         
-        $('#zip,#email_ppc').blur(function(){
-            if(emailtrue === true && ziptrue===true){
+        $('#zip,#email_ppc,#phonenumber,#firstname').blur(function(){
+            if(emailtrue === true && ziptrue===true && phonetrue===true && nametrue===true){
                 $('#group-button-check').slideDown();
-            }
-            else{
+            } else {
                 $('#group-button-check').slideUp();
             }
         });
@@ -517,6 +552,7 @@ function InitPrimarySearch() {
 
         $("#step2-title").html("<h2><span class='text-blue-h2'>" + year + "</span> <span class='text-blue-h2'>" + make + "</span> <span class='text-blue-h2'>" + model + "</span><span class='text-blue-span'> Engine Assembly</span></h2>");
         $("#step2-title").slideDown("slow");
+        $(".step1").slideUp("slow");
 
         //Indicator
         $(".line-indicator").removeClass("step1").addClass("step2");
@@ -612,8 +648,16 @@ function InitPrimarySearch() {
         e.preventDefault();
         if (document.getElementById('zip').value.length != 5) {
             alert("Please provide a five-digit zip code.");
+        } else if(document.getElementById('firstname').value.length < 2) {
+            alert("Please enter your name.");
+        } else if(document.getElementById('phonenumber').value.length < 6) {
+            alert("Please enter your phone number.");    
+            validateEmail($('#email_ppc'));
+         } else if( validateEmail($('#email_ppc').val()) === false) {
+            alert("Please enter valid email."); 
         } else {
           $('#btn-check').attr("disabled", "disabled");
+          alltrue = true;
           ShowProgress();
         }
     });
