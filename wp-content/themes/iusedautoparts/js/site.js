@@ -22,6 +22,10 @@ $( document ).ready(function() {
 });
 
 
+//$(document).on('click', '.select2-result-label', function(){
+//    $('#group-make').show('600');
+//});
+
 $(function () {
     window.cars = {
         selectedManufacture: "",
@@ -108,7 +112,6 @@ $(function () {
                 for (var m in models) {
                     modelsList.append('<option><a href="#">' + models[m].model + '</a></option>')
                 }
-//                console.log(models);
                 $("#step1-title").slideDown();
                 $("#step2-title").slideUp();
                 $("#change-search-title").slideUp();
@@ -127,10 +130,8 @@ $(function () {
             }
         },
         carPart: function () {
-//            console.log(this)
             var parts = this.getCarsData({carModel: this.selectedModel, year: this.selectedCarYear});
             if (parts) {
-//                console.log(parts);
                 var partsList = $('#box-part');
                 partsList.empty();
                 parts = JSON.parse(parts);
@@ -169,12 +170,10 @@ $(function () {
                 $("#banner #group-options .btn-dropdown .selection").text("Select Options");
                 $("#banner #group-button").slideUp("slow");
 
-//                console.log(options);
                 var optionsList = $('#optionvalue');
                 //optionsList.empty();
                 options = JSON.parse(options);
 
-                //alert(options.length);
                 if (options.length > 1) {
                     // show the options tree
                     // prepare the data
@@ -219,15 +218,12 @@ $(function () {
                     if ($("#preload-option") && $("#preload-option").val() != undefined && $("#preload-option").val() != "" && $("#preload-part").val() == this.selectedPart) {
                         $("#banner #group-options .btn-dropdown .selection").text($("#preload-option").val());
                         var selectedNode = $('#optionvalue').jqxTree("getItem", $('li.1')[0]);
-                        //alert($("#preload-option").val());
                         $('#optionvalue').jqxTree("selectItem", selectedNode);
                         var noshow = true;
-                        //alert("noshow");
                     } else {
                         $("#optionvalue").slideDown("slow");
                     }
                 } else if (options.length <= 1) {
-                    //alert(options[0].value + " " + options[0].parentid + " " + options[0].text);
                     //$(this).parents(".btn-group").find('.selection').text("");
 
                     if (options[0]) {
@@ -283,7 +279,7 @@ $(function () {
     }
     //preload();
     
-    $("#phonenumber").mask("+999-99-999-9999",{completed:function(){
+    $("#phonenumber").mask("999-999-9999",{completed:function(){
             phonetrue =  true;
         }
     });
@@ -304,14 +300,6 @@ $(function () {
             }
         });
         
-//        $('#phonenumber').keyup(function(){
-//            if($('#phonenumber').val().length === 16){ 
-//                phonetrue = true;
-//            } else {
-//                phonetrue = false;
-//            }
-//        });
-        
         $('#zip').keyup(function(){
             if($('#zip').val().length === 5){ 
                 ziptrue = true;
@@ -327,14 +315,6 @@ $(function () {
                 emailtrue = false;
             }
         });
-        
-//        $('#phonenumber').blur(function(){
-//            if($('#phonenumber').val().length === 16){ 
-//                phonetrue = true;
-//            } else {
-//                phonetrue = false;
-//            }
-//        });
         
         $('#firstname').blur(function(){
             if($('#firstname').val().length > 2){ 
@@ -529,8 +509,6 @@ function InitPrimarySearch() {
     $("#box-model").click(function (e) {
         e.preventDefault();
         cars.selectedModel = $(this).val();
-//        console.log("selectedModel");
-//        console.log($(e.target).text());
         // $(this).parents(".btn-group").find('.selection').text($(e.target).text());
         // $(this).parents(".btn-group").find('.selection').val($(e.target).text());
         $("#banner #group-model .btn-dropdown").removeClass("active");
@@ -550,7 +528,7 @@ function InitPrimarySearch() {
 
         var part = $("#box-part option:selected").html().toUpperCase();
 
-        $("#step2-title").html("<h2><span class='text-blue-h2'>" + year + "</span> <span class='text-blue-h2'>" + make + "</span> <span class='text-blue-h2'>" + model + "</span><span class='text-blue-span'> Engine Assembly</span></h2>");
+        $("#step2-title").html("<h2><span class='text-blue-h2'>" + year + "</span> <span class='text-blue-h2'>" + make + "</span> <span class='text-blue-h2'>" + model + "</span><span class='text-blue-span'> " + part  + "</span></h2>");
         $("#step2-title").slideDown("slow");
         $(".step1").slideUp("slow");
 
@@ -643,24 +621,46 @@ function InitPrimarySearch() {
     $("#zip").focus(function () {
         $("#banner #group-button").slideDown("slow");
     });
-
-    $("#btn-check").click(function (e) {
+    
+//    $('.formsubmit-partslist').bind('keypress', function(e) {
+//	if(e.keyCode==13){
+//            $('.formsubmit-partslist').submit();
+//	}
+//    });
+    
+    $('.formsubmit, .formsubmit-partslist').on('submit', function(e){
         e.preventDefault();
-        if (document.getElementById('zip').value.length != 5) {
-            alert("Please provide a five-digit zip code.");
-        } else if(document.getElementById('firstname').value.length < 2) {
+        if(document.getElementById('firstname').value.length < 2) {
             alert("Please enter your name.");
         } else if(document.getElementById('phonenumber').value.length < 6) {
             alert("Please enter your phone number.");    
-            validateEmail($('#email_ppc'));
-         } else if( validateEmail($('#email_ppc').val()) === false) {
+        } else if( validateEmail($('#email_ppc').val()) === false) {
             alert("Please enter valid email."); 
+        }else if (document.getElementById('zip').value.length != 5) {
+            alert("Please provide a five-digit zip code.");
         } else {
           $('#btn-check').attr("disabled", "disabled");
-          alltrue = true;
           ShowProgress();
         }
     });
+    
+//    $('.formsubmit-partslist').on('submit', function(e){
+//        e.preventDefault();
+//        if(document.getElementById('firstname').value.length < 2) {
+//            alert("Please enter your name.");
+//        } else if(document.getElementById('phonenumber').value.length < 6) {
+//            alert("Please enter your phone number.");    
+//        } else if( validateEmail($('#email_ppc').val()) === false) {
+//            alert("Please enter valid email."); 
+//        }else if (document.getElementById('zip').value.length != 5) {
+//            alert("Please provide a five-digit zip code.");
+//        } else {
+//          $('#btn-check').attr("disabled", "disabled");
+//          ShowProgress();
+//        }
+//    });
+    
+    
     $("#btn-new-search").click(function (e) {
         e.preventDefault();
         window.location = "/";
@@ -688,7 +688,7 @@ function InitSecondarySearch() {
     });
 
     //Select Make
-    $("#box-make").click(function (e) {
+    $("#box-make").click(function (e) { 
 
         $(this).parents(".btn-group").find('.selection').text($(this).text());
         $(this).parents(".btn-group").find('.selection').val($(this).text());
@@ -1039,43 +1039,6 @@ function updateRequestContactData() {
         return false;
     }
 }
-
-//$(document).on('keydown', '#banner', function (e) {
-//    if (e.keyCode == 9 || e.which == 9) {
-//        e.preventDefault();
-//        return false;
-//    }
-//    if (e.keyCode == 13 || e.which == 13) {
-//        e.preventDefault();
-//
-//        var optvalue = $("#optionvalue").val();
-//        var hoption;
-//
-//
-//        var optvalue = document.getElementById("hollanderoption").value;
-//        if (document.getElementById('preload-partname'))
-//            carPartName = document.getElementById('preload-partname').value;
-//        else if (document.getElementById('partname').value != "")
-//            carPartName = document.getElementById('partname').value;
-//        else if (document.getElementById('preload-chpartname'))
-//            carPartName = document.getElementById('preload-chpartname').value;
-//        if (cars.selectedCarYear && cars.selectedManufacture && cars.selectedModel &&
-//            carPartName && optvalue && document.getElementById('zip').value) {
-//            if (document.getElementById('zip').value.length != 5) {
-//                alert("Please provide a five-digit zip code.");
-//            } else {
-//                $.loader({
-//                    className:"blue-with-image-12",
-//                    content:'Please wait while we search for inventory from our vendors..'
-//                });
-//
-//                   LaunchProgressBar();
-//            }
-//        }
-//
-//        return false;
-//    }
-//});
 
 ////////tairezzzz app
 var app = angular.module('App', []);

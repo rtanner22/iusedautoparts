@@ -32,7 +32,7 @@
           <div id="step2-title" style="display: none;">
             <h2></h2>
           </div>
-          <form action="/inventory" method="POST" name="searchform">
+          <form action="/inventory" method="POST" name="searchform" class="formsubmit">
           <input type="hidden" name="reqid" id="reqid" value="" />
           <input type="hidden" name="openyear" id="openyear" value="false" />
           <div id="group-form" class="row">
