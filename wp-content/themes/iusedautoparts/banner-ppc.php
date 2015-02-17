@@ -41,7 +41,7 @@
                 <div>Only two steps away to parts utopia!</div>
                 <div class="little">(if we have the part in stock of course)</div>
             </div>
-          <form action="/inventory" method="POST" name="searchform" class="formsubmit">
+        <form action="/inventory" method="POST" name="searchform" class="formsubmit">
          <input type="hidden" name="reqid" id="reqid" value="" />
           <input type="hidden" name="openyear" id="openyear" value="true" />
           <input type="hidden" name="preload-ppc" id="preload-ppc" value="true" />

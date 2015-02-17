@@ -21,7 +21,16 @@ $( document ).ready(function() {
     
 });
 
+$( document ).ready(function() {
+    $(function (){
+       if($('form').is(".formsubmit-content")){
+           $('#group-make').hide();
+           $('#group-model').hide();
+           $('#group-part').hide();
 
+       } 
+    });
+});
 //$(document).on('click', '.select2-result-label', function(){
 //    $('#group-make').show('600');
 //});

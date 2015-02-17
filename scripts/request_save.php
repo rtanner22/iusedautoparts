@@ -128,7 +128,7 @@ if ($que) {
             $message = Swift_Message::newInstance()
 
                 // Give the message a subject
-                ->setSubject('A visitor saved your inventory - ' . $hnumber)
+                ->setSubject('Re: Question about Stock # ' . $hnumber. ' - ' .$a. ' ' .$request['year']. ' ' .$request['make']. ' ' .$request['model']. ' ' . $request['part'])
 
                 // Set the From address with an associative array
                 ->setFrom(array('noreply@autorecyclersonline.com' => $email))

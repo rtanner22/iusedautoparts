@@ -41,11 +41,9 @@
   </footer>
 </div>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
-    <script src="<?php bloginfo('template_url'); ?>/js/jqwidgets/jqwidgets/jqxcore.js"></script>
-    <script src="<?php bloginfo('template_url'); ?>/js/jqwidgets/jqwidgets/jqxtree.js"></script>
     <link rel="stylesheet" href="<?php bloginfo('template_url'); ?>/js/jqwidgets/jqwidgets/styles/jqx.base.css" type="text/css" />
-<script src="<?php bloginfo('template_url'); ?>/js/jquery.loader.js"></script>
-<link href="<?php bloginfo('template_url'); ?>/js/jquery.loader.css" rel="stylesheet" />
+    <script src="<?php bloginfo('template_url'); ?>/js/jquery.loader.js"></script>
+    <link href="<?php bloginfo('template_url'); ?>/js/jquery.loader.css" rel="stylesheet" />
     <script type="text/javascript" src="<?php bloginfo('template_url'); ?>/js/jqwidgets/scripts/demos.js"></script>
     <script type="text/javascript" src="<?php bloginfo('template_url'); ?>/js/jqwidgets/jqwidgets/jqxcore.js"></script>
     <script type="text/javascript" src="<?php bloginfo('template_url'); ?>/js/jqwidgets/jqwidgets/jqxdata.js"></script>

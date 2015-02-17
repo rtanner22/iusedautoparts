@@ -95,10 +95,24 @@
                 </div>
               </div>-->
             </div>
-            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" id="zipbox">
-              <div id="group-zip" style="display: none;">
-                <label>Enter your Zip Code so we can find stock near you:</label>
-                <input id="zip" type="text" class="form-control input-lg" placeholder="e.g. 10003" name="zipcode" value="<?php echo $mainresult[0][zip]; ?>" />
+            <div class="col-xs-12 " id="zipbox">
+                <div id="group-zip" style="display: none;">
+                <div class="row" style="margin-bottom: 15px;">
+                    <div class="col-xs-6">
+                        <input id="firstname" type="text" class="form-control input-lg" placeholder="Enter your First Name" name="firstname" value="<?php echo $_POST['firstname']; ?>"/>
+                    </div>
+                    <div class="col-xs-6">
+                        <input id="phonenumber" type="text" name="phonenumber" class="form-control input-lg" placeholder="Enter your Phone Number" value="<?php echo $_POST['phonenumber']; ?>" />
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 15px;">
+                    <div class="col-xs-6">
+                        <input id="email_ppc" type="email" name="email_ppc" class="form-control input-lg" placeholder="Enter your email to receive your quote" value="<?php echo $_POST['email_ppc']; ?>"/>
+                    </div>
+                    <div class="col-xs-6">
+                        <input id="zip" type="text" class="form-control input-lg" placeholder="Enter Zip Code" name="zipcode" value="<?php echo $mainresult[0][zip]; ?>"/>
+                    </div>
+                </div>  
               </div>
             </div>
           </div>

@@ -938,3 +938,6 @@ body {
     font-size: 12px;
 }
 
+.modal-dialog {
+    z-index: 1080;
+}
