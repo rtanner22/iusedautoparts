@@ -22,7 +22,7 @@
             <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">  <a id="btn-change-search" href="#" class="btn btn-orange btn-block btn-sm" data-toggle="collapse" data-target="#search-form"><span id="loading" style="display:none"><img src="<?php bloginfo('template_url'); ?>/images/SpinningWheel2.gif" width='18px' height='18px'></span> CHANGE SEARCH <i class="fa fa-chevron-down"></i></a> </div>
           </div>
           <div id="search-form" class="collapse">
-          <form action="/inventory" method="POST" name="searchform">
+          <form action="/inventory" method="POST" name="searchform" class="formsubmit">
           <input type="hidden" name="reqid" id="reqid" value="<?php echo $_REQUEST['reqid']; ?>" />
           <input type="hidden" name="openyear" id="openyear" value="false" />
 
