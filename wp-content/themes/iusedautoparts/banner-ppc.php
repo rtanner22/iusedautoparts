@@ -49,7 +49,7 @@
           <input type="hidden" name="preload-make" id="preload-make" value="<?php echo $_REQUEST[make]; ?>" />
           <input type="hidden" name="preload-model" id="preload-model" value="<?php echo $_REQUEST[model]; ?>" />
           <input type="hidden" name="preload-part" id="preload-part" value="<?php echo $_REQUEST[part]; ?>" />
-<!--          <input type="hidden" name="preload-partname" id="preload-partname" value="<?php echo $partdesc; ?>" />-->
+          <input type="hidden" name="preload-partname" id="preload-partname" value="<?php echo $partdesc; ?>" />
           <input type="hidden" name="showStep2" id="showStep2" value="true" />
         <div class="step1">
             <div id="group-year" class="form-group">
