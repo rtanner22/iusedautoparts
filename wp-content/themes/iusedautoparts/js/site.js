@@ -931,6 +931,11 @@ function ShowStep2() {
     $(".step1").slideUp("slow");
     $(".step2").slideDown("slow");
     cars.getOptions();
+    $('#step1-title').hide();
+    $('#yearInfo').text(cars.selectedCarYear);
+    $('#modelInfo').text(cars.selectedManufacture);
+    $('#makeInfo').text(cars.selectedModel);
+    $('#step2-title').show();
     $("#optionvalue").slideDown("slow");
 }
 

@@ -34,15 +34,15 @@
             <p>Please provide the year of your vehicle so we can get you a price for your <? echo $partdesc;?> or <a href="http://www.autorecyclersonline.com">start a new search.</a></p>
           </div>
           <div id="step2-title" style="display: none;">
-            <h2></h2>
+              <h2><span class="text-blue-h2" id="yearInfo"></span> <span class="text-blue-h2" id="modelInfo"></span> <span class="text-blue-h2" id="makeInfo"></span><span class="text-blue-span" id="partInfo"> <?php echo $partdesc; ?></span></h2>
           </div>
             <div id="group-slog">
                 <div>Almost finished...</div>
                 <div>Only two steps away to parts utopia!</div>
                 <div class="little">(if we have the part in stock of course)</div>
             </div>
-        <form action="/inventory" method="POST" name="searchform" class="formsubmit">
-         <input type="hidden" name="reqid" id="reqid" value="" />
+         <form action="/inventory" method="POST" name="searchform" class="formsubmit formsubmit-content">
+          <input type="hidden" name="reqid" id="reqid" value="" />
           <input type="hidden" name="openyear" id="openyear" value="true" />
           <input type="hidden" name="preload-ppc" id="preload-ppc" value="true" />
           <input type="hidden" name="preload-year" id="preload-year" value="<?php echo $_REQUEST[myear]; ?>" />
