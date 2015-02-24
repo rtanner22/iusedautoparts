@@ -352,17 +352,33 @@ $(function () {
         
         $('#zip,#email_ppc,#phonenumber,#firstname').keyup(function(){
             if(emailtrue === true && ziptrue===true && phonetrue===true && nametrue===true){
-                $('#group-button-check').slideDown();
+                if($('#group-button-check').hasClass('task')){
+                    $('#group-button-check #btn-check').removeAttr('disabled');
+                }else{
+                    $('#group-button-check').slideDown();
+                }
             } else {
-                $('#group-button-check').slideUp();
+                if($('#group-button-check').hasClass('task')){
+                    $('#group-button-check #btn-check').attr('disabled','disabled');
+                }else{
+                    $('#group-button-check').slideUp();
+                }
             }
         });
         
         $('#zip,#email_ppc,#phonenumber,#firstname').blur(function(){
             if(emailtrue === true && ziptrue===true && phonetrue===true && nametrue===true){
-                $('#group-button-check').slideDown();
+                if($('#group-button-check').hasClass('task')){
+                    $('#group-button-check #btn-check').removeAttr('disabled');
+                }else{
+                    $('#group-button-check').slideDown();
+                }
             } else {
-                $('#group-button-check').slideUp();
+                if($('#group-button-check').hasClass('task')){
+                    $('#group-button-check #btn-check').attr('disabled','disabled');
+                }else{
+                    $('#group-button-check').slideUp();
+                }
             }
         });
     }
@@ -937,6 +953,8 @@ function ShowStep2() {
     $('#makeInfo').text(cars.selectedModel);
     $('#step2-title').show();
     $("#optionvalue").slideDown("slow");
+    
+    $('#firstname').focus();
 }
 
 function ShowProgress() {

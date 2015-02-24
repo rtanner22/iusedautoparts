@@ -81,7 +81,7 @@
                 <input style="width: 50%;float:left;" id="zip" type="text" class="form-control input-lg" placeholder="Enter Zip Code" />
                 <label class="label-ppc">(For quotes near your area)</label>
               </div>
-              <div  id="group-button-check" class="form-group text-center" style="display: none;">
+              <div  id="group-button-check" class="form-group text-center task">
                 <button id="btn-check" type="submit" class="btn btn-orange">CHECK STOCK <i class="fa fa-arrow-right"></i></button>
               </div>
             </div>

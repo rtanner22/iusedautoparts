@@ -52,13 +52,13 @@
                 </div>
               </div>
               <div id="group-zip" class="form-group" style="display: none;">
-                <input id="firstname" style="margin-bottom: 15px;" type="text" class="form-control input-lg" placeholder="Enter your First Name" name="firstname" />
+                <input id="firstname" style="margin-bottom: 15px;" type="text" class="form-control input-lg" placeholder="Enter your First Name" name="firstname" autofocus="autofocus"/>
                 <input id="phonenumber" style="margin-bottom: 15px;" type="text" name="phonenumber" class="form-control input-lg" placeholder="Enter your Phone Number" />
                 <input id="email_ppc" style="margin-bottom: 15px;display: inline;" type="email" name="email_ppc" class="form-control input-lg" placeholder="Enter your email to receive your quote" />
                 <input style="width: 50%;float:left;" id="zip" type="text" class="form-control input-lg" placeholder="Enter Zip Code" />
                 <label class="label-ppc">(For quotes near your area)</label>
               </div>
-              <div  id="group-button-check" class="form-group text-center" style="display: none;">
+              <div  id="group-button-check" class="form-group text-center task">
                 <button id="btn-check" type="submit" class="btn btn-orange">CHECK STOCK <i class="fa fa-arrow-right"></i></button>
               </div>
             </div>
