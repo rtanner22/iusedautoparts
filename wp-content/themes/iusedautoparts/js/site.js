@@ -259,6 +259,7 @@ $(function () {
                 if (!noshow) {
                     $("#banner #group-options .btn-dropdown").addClass("active");
                     $("#banner #group-options").slideDown("slow");
+                    $('#firstname').focus();
                     $("#banner #group-options .btn-group").addClass("open");
                 }
                 if (document.getElementById('zip').value.length != 5) {

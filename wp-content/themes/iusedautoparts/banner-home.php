@@ -104,9 +104,9 @@
                 </div>  
               </div>
             </div>
-          </div>
-          <div  id="group-button-check" class="form-group text-center" style="display: none;">
-            <button id="btn-check" type="submit" class="btn btn-orange">CHECK STOCK <i class="fa fa-arrow-right"></i></button>
+              <div  id="group-button-check" class="form-group text-center task">
+                <button id="btn-check" type="submit" class="btn btn-orange">CHECK STOCK <i class="fa fa-arrow-right"></i></button>
+              </div>
           </div>
           <ol class="indicators">
             <li class="active"></li>
