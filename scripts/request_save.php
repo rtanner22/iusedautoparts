@@ -107,6 +107,9 @@ if ($que) {
             $quote = (float)$row['retailprice'];
             if ($quote == 0) { $quote='Call'; } else { $quote = '$'.(float)$row['retailprice']; }
 
+            //Stock number for mail subject
+            $sNumber = $row['stockticketnumber'];
+            
             $table .= "<tr>";
             $table .= "<td>{$row['modelyear']} {$row['modelname']}</td>";
             $table .= "<td style=\"text-align: center;\">{$row['conditionsandoptions']}</td>";
@@ -128,7 +131,7 @@ if ($que) {
             $message = Swift_Message::newInstance()
 
                 // Give the message a subject
-                ->setSubject('Re: Item was saved # ' . $hnumber. ' - ' .$a. ' ' .$request['year']. ' ' .$request['make']. ' ' .$request['model']. ' ' . $request['part'])
+                ->setSubject('Re: Item was saved # ' . $sNumber. ' - ' .$a. ' ' .$request['year']. ' ' .$request['make']. ' ' .$request['model']. ' ' . $request['part'])
 
                 // Set the From address with an associative array
                 ->setFrom(array('noreply@autorecyclersonline.com' => $email))
