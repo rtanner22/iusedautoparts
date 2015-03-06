@@ -335,7 +335,7 @@ $(function () {
         });
         
         $('#zip').blur(function(){
-            if($('#zip').val().length === 5){ 
+            if($('#zip').val().length > 2){ 
                 ziptrue = true;
             } else {
                 ziptrue = false;
@@ -662,8 +662,8 @@ function InitPrimarySearch() {
 //            alert("Please enter your phone number.");    
         } else if( validateEmail($('#email_ppc').val()) === false) {
             alert("Please enter valid email."); 
-        }else if (document.getElementById('zip').value.length != 5) {
-            alert("Please provide a five-digit zip code.");
+        }else if (document.getElementById('zip').value.length < 3) {
+            alert("Please provide valid zip code.");
         } else {
           $('#btn-check').attr("disabled", "disabled");
           ShowProgress();
