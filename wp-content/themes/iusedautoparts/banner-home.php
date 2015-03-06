@@ -104,7 +104,11 @@
                 </div>  
               </div>
             </div>
-              <div  id="group-button-check" class="form-group text-center task">
+              <div  id="group-button-check" class="form-group text-center task" style="
+                    float: left;
+                    padding-left: 50%;
+                    margin-left: -144px;
+                ">
                 <button id="btn-check" type="submit" class="btn btn-orange">CHECK STOCK <i class="fa fa-arrow-right"></i></button>
               </div>
           </div>
