@@ -91,7 +91,7 @@
                         <input id="firstname" type="text" class="form-control input-lg" placeholder="Enter your First Name" name="firstname" />
                     </div>
                     <div class="col-xs-6">
-                        <input id="phonenumber" type="text" name="phonenumber" class="form-control input-lg" placeholder="Enter your Phone Number" />
+                        <input id="phonenumber" type="text" name="phonenumber" class="form-control input-lg" placeholder="Enter your Phone Number (Optional)" />
                     </div>
                 </div>
                 <div class="row" style="margin-top: 15px;">

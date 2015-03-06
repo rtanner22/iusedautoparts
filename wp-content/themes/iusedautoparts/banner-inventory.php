@@ -102,7 +102,7 @@
                         <input id="firstname" type="text" class="form-control input-lg" placeholder="Enter your First Name" name="firstname" value="<?php echo $_POST['firstname']; ?>"/>
                     </div>
                     <div class="col-xs-6">
-                        <input id="phonenumber" type="text" name="phonenumber" class="form-control input-lg" placeholder="Enter your Phone Number" value="<?php echo $_POST['phonenumber']; ?>" />
+                        <input id="phonenumber" type="text" name="phonenumber" class="form-control input-lg" placeholder="Enter your Phone Number (Optional)" value="<?php echo array_key_exists('phonenumber', $_POST) ? $_POST['phonenumber']: ''; ?>" />
                     </div>
                 </div>
                 <div class="row" style="margin-top: 15px;">

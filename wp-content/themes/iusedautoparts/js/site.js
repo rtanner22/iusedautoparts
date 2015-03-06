@@ -298,7 +298,7 @@ $(function () {
         emailtrue = false;
         ziptrue = false;
         nametrue = false;
-        phonetrue = false;
+        phonetrue = true;
         
         
         
@@ -658,8 +658,8 @@ function InitPrimarySearch() {
         e.preventDefault();
         if(document.getElementById('firstname').value.length < 2) {
             alert("Please enter your name.");
-        } else if(document.getElementById('phonenumber').value.length < 6) {
-            alert("Please enter your phone number.");    
+//        } else if(document.getElementById('phonenumber').value.length < 6) {
+//            alert("Please enter your phone number.");    
         } else if( validateEmail($('#email_ppc').val()) === false) {
             alert("Please enter valid email."); 
         }else if (document.getElementById('zip').value.length != 5) {
